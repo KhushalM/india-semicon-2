@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#dfe8f3"></stop>
+      <stop offset="0.55" stop-color="#eaf0f7"></stop>
+      <stop offset="1" stop-color="#f4f6f9"></stop>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.78" cy="0.28" r="0.6">
+      <stop offset="0" stop-color="#bfd4ee" stop-opacity="0.55"></stop>
+      <stop offset="1" stop-color="#bfd4ee" stop-opacity="0"></stop>
+    </radialGradient>
+    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
+      <path d="M44 0 L0 0 0 44" fill="none" stroke="rgba(30,58,95,.05)" stroke-width="1"></path>
+    </pattern>
+    <radialGradient id="wafer" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#2b4e7a" stop-opacity="0.18"></stop>
+      <stop offset="0.55" stop-color="#2b4e7a" stop-opacity="0.09"></stop>
+      <stop offset="0.98" stop-color="#2b4e7a" stop-opacity="0.22"></stop>
+      <stop offset="1" stop-color="#2b4e7a" stop-opacity="0"></stop>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)"></rect>
+  <rect width="1600" height="900" fill="url(#grid)"></rect>
+  <rect width="1600" height="900" fill="url(#glow)"></rect>
+
+  
+  <g transform="translate(1180 260)" opacity="0.95">
+    <circle r="310" fill="url(#wafer)"></circle>
+    <circle r="310" fill="none" stroke="rgba(30,58,95,.18)" stroke-width="1.2"></circle>
+    <circle r="260" fill="none" stroke="rgba(30,58,95,.09)" stroke-width="1"></circle>
+    <circle r="200" fill="none" stroke="rgba(30,58,95,.07)" stroke-width="1"></circle>
+    
+    <g stroke="rgba(30,58,95,.14)" stroke-width="0.8" fill="none">
+      <line x1="-310" y1="-260" x2="310" y2="-260"></line>
+      <line x1="-310" y1="-208" x2="310" y2="-208"></line>
+      <line x1="-310" y1="-156" x2="310" y2="-156"></line>
+      <line x1="-310" y1="-104" x2="310" y2="-104"></line>
+      <line x1="-310" y1="-52" x2="310" y2="-52"></line>
+      <line x1="-310" y1="0" x2="310" y2="0"></line>
+      <line x1="-310" y1="52" x2="310" y2="52"></line>
+      <line x1="-310" y1="104" x2="310" y2="104"></line>
+      <line x1="-310" y1="156" x2="310" y2="156"></line>
+      <line x1="-310" y1="208" x2="310" y2="208"></line>
+      <line x1="-310" y1="260" x2="310" y2="260"></line>
+      <line x1="-260" y1="-310" x2="-260" y2="310"></line>
+      <line x1="-208" y1="-310" x2="-208" y2="310"></line>
+      <line x1="-156" y1="-310" x2="-156" y2="310"></line>
+      <line x1="-104" y1="-310" x2="-104" y2="310"></line>
+      <line x1="-52" y1="-310" x2="-52" y2="310"></line>
+      <line x1="0" y1="-310" x2="0" y2="310"></line>
+      <line x1="52" y1="-310" x2="52" y2="310"></line>
+      <line x1="104" y1="-310" x2="104" y2="310"></line>
+      <line x1="156" y1="-310" x2="156" y2="310"></line>
+      <line x1="208" y1="-310" x2="208" y2="310"></line>
+      <line x1="260" y1="-310" x2="260" y2="310"></line>
+    </g>
+    
+    <path d="M -12 310 L 0 296 L 12 310 Z" fill="rgba(30,58,95,.3)"></path>
+    
+    <rect x="-52" y="-52" width="52" height="52" fill="rgba(37,99,235,.12)"></rect>
+    <rect x="0" y="-104" width="52" height="52" fill="rgba(37,99,235,.08)"></rect>
+    <rect x="52" y="0" width="52" height="52" fill="rgba(37,99,235,.05)"></rect>
+    <rect x="-104" y="52" width="52" height="52" fill="rgba(37,99,235,.06)"></rect>
+  </g>
+
+  
+  <g transform="translate(860 600)" opacity="0.5">
+    <rect x="0" y="60" width="220" height="160" fill="rgba(30,58,95,.12)"></rect>
+    <rect x="220" y="20" width="160" height="200" fill="rgba(30,58,95,.16)"></rect>
+    <rect x="380" y="90" width="120" height="130" fill="rgba(30,58,95,.1)"></rect>
+    
+    <g fill="rgba(255,255,255,.5)">
+      <rect x="18" y="90" width="14" height="14"></rect>
+      <rect x="42" y="90" width="14" height="14"></rect>
+      <rect x="66" y="90" width="14" height="14"></rect>
+      <rect x="90" y="90" width="14" height="14"></rect>
+      <rect x="114" y="90" width="14" height="14"></rect>
+      <rect x="18" y="130" width="14" height="14"></rect>
+      <rect x="42" y="130" width="14" height="14"></rect>
+      <rect x="66" y="130" width="14" height="14"></rect>
+      <rect x="90" y="130" width="14" height="14"></rect>
+      <rect x="114" y="130" width="14" height="14"></rect>
+    </g>
+    
+    <rect x="248" y="-20" width="12" height="40" fill="rgba(30,58,95,.22)"></rect>
+    <rect x="274" y="-30" width="12" height="50" fill="rgba(30,58,95,.22)"></rect>
+    <rect x="300" y="-10" width="12" height="30" fill="rgba(30,58,95,.22)"></rect>
+  </g>
+
+  
+  <g stroke="rgba(37,99,235,.25)" stroke-width="1.2" fill="none">
+    <path d="M 0 720 L 220 720 L 260 680 L 420 680 L 460 720 L 640 720"></path>
+    <circle cx="220" cy="720" r="3" fill="rgba(37,99,235,.5)"></circle>
+    <circle cx="460" cy="720" r="3" fill="rgba(37,99,235,.5)"></circle>
+    <path d="M 80 820 L 240 820 L 280 780 L 380 780"></path>
+    <circle cx="240" cy="820" r="2.5" fill="rgba(37,99,235,.5)"></circle>
+  </g>
+</svg>

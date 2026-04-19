@@ -1,0 +1,7 @@
+.DS_Store
+.remember/
+_check/
+uploads/
+shots/
+*.log
+node_modules/
