@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light" data-accent="blue">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
@@ -8,23 +8,29 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
 <style>
+/* ============================================================
+   BASE — design tokens (exact copy of main dashboard)
+   ============================================================ */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 :root{
   --bg:#edf2f7;
   --bg-2:#e6ecf3;
+  --bg-contrast:#ffffff;
   --text:#0f172a;
   --text-2:#475569;
   --text-3:#94a3b8;
   --border:rgba(15,23,42,.08);
+  --border-strong:rgba(15,23,42,.12);
   --accent:#2563eb;
   --accent-soft:rgba(37,99,235,.08);
   --accent-ink:#1d4ed8;
-  --card-bg:linear-gradient(145deg,#1e293b 0%,#0f172a 50%,#1e3a5f 100%);
+  --accent-glow:96,165,250;
+  --card-bg:#0a0f1a;
   --card-border:rgba(255,255,255,.08);
-  --card-shadow:0 8px 32px rgba(15,22,41,.28);
-  --card-shadow-hover:0 14px 44px rgba(15,22,41,.4);
-  --r:16px;
+  --card-shadow:0 8px 32px rgba(0,0,0,.35);
+  --card-shadow-hover:0 20px 60px rgba(0,0,0,.5);
+  --r:20px;
   --r-sm:10px;
   --sec-pad:4.5rem;
   --card-pad:1.5rem;
@@ -34,340 +40,579 @@ html{scroll-behavior:smooth}
 }
 body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased;font-feature-settings:'ss01','cv11'}
 
-/* ─── Header ─── */
-.site-header{background:var(--bg);border-bottom:1px solid var(--border);padding:1.25rem 2rem;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);background:rgba(237,242,247,.85)}
-.site-header-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap}
-.brand{font-family:var(--serif);font-weight:500;font-size:1.05rem;color:var(--text);letter-spacing:-.01em;display:flex;align-items:center;gap:.6rem}
-.brand .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
-.nav{display:flex;gap:1.5rem;font-size:.85rem;color:var(--text-2);flex-wrap:wrap}
-.nav a{color:var(--text-2);text-decoration:none;transition:color .2s}
-.nav a:hover{color:var(--accent)}
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav-wrap{position:sticky;top:0;z-index:100;-webkit-backdrop-filter:saturate(180%) blur(14px);backdrop-filter:saturate(180%) blur(14px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1320px;margin:0 auto;padding:.85rem 2rem;display:flex;align-items:center;gap:1.25rem}
+.nav-brand{display:flex;align-items:center;gap:.6rem;font-weight:800;letter-spacing:-.01em;font-size:.95rem;color:var(--text);text-decoration:none}
+.nav-brand-mark{width:30px;height:30px;border-radius:50%;background:transparent;display:grid;place-items:center;box-shadow:0 2px 10px rgba(15,22,41,.22);flex-shrink:0;overflow:hidden}
+.nav-brand-mark svg{display:block}
+.nav-links{display:flex;gap:.15rem;flex:1;overflow:visible;margin:0 .5rem;min-width:0}
+.nav-link{font-family:var(--sans);font-size:.82rem;font-weight:500;color:var(--text-2);padding:.45rem .85rem;border-radius:999px;white-space:nowrap;cursor:pointer;transition:all .15s;position:relative;background:transparent;border:none;letter-spacing:-.005em;text-decoration:none}
+.nav-link:hover{color:var(--text);background:var(--accent-soft)}
+.nav-link.active{color:var(--accent);background:var(--accent-soft);font-weight:600}
+.nav-link .num{font-family:var(--mono);font-size:.6rem;color:var(--text-3);margin-right:.4rem;font-weight:500;letter-spacing:.05em;vertical-align:.1em}
+.nav-link.active .num{color:var(--accent)}
+.nav-actions{display:flex;gap:.4rem;align-items:center;flex-shrink:0}
+.nav-btn.primary{background:#0a0a0a;color:#fff;border:1px solid #0a0a0a;padding:0 1.1rem;font-size:.8rem;font-weight:600;height:38px;gap:.4rem;white-space:nowrap;flex-shrink:0;border-radius:999px;font-family:var(--sans);letter-spacing:-.005em;display:grid;place-items:center;text-decoration:none;transition:all .2s}
+.nav-btn.primary:hover{background:#1a1a1a}
 
-/* ─── Hero ─── */
-.hero{max-width:1200px;margin:0 auto;padding:4rem 2rem 2rem}
-.eyebrow{font-family:var(--mono);font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);margin-bottom:1rem}
-.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.4rem,5.2vw,4rem);letter-spacing:-.03em;line-height:1.02;color:var(--text);max-width:900px}
-.hero h1 em{font-style:italic;color:var(--accent-ink)}
-.hero-sub{font-size:1.05rem;color:var(--text-2);max-width:700px;margin-top:1.5rem;line-height:1.75}
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{position:relative;min-height:100vh;padding:7rem 2rem 5rem;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;isolation:isolate;background:#dbeaf7}
+.hero-bg{position:absolute;inset:0;z-index:-2;background:url('assets/hero-bg.webp') center 40%/cover no-repeat;will-change:transform;filter:saturate(1.1) contrast(1.03) brightness(1.02)}
+.hero-tint{position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(110% 70% at 75% 15%, rgba(255,255,255,.32) 0%, rgba(210,230,250,.08) 45%, transparent 70%),linear-gradient(180deg, rgba(120,170,220,.15) 0%, rgba(180,210,240,.2) 40%, rgba(200,222,244,.6) 75%, var(--bg) 100%),linear-gradient(90deg, rgba(40,80,130,.45) 0%, rgba(80,130,180,.2) 40%, transparent 65%)}
+.hero-fade{position:absolute;left:0;right:0;bottom:0;height:30%;background:linear-gradient(180deg,transparent 0%,var(--bg) 100%);z-index:-1;pointer-events:none}
+.hero-inner{max-width:1320px;margin:0 auto;width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3rem;align-items:end}
+.hero-meta{display:flex;align-items:center;gap:.75rem;margin-bottom:1.2rem}
+.hero-label{font-family:var(--mono);font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:.16em;color:var(--accent)}
+.hero-label-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft);animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero-title{font-family:var(--sans);font-weight:500;font-size:clamp(2.75rem,7.5vw,5.75rem);letter-spacing:-.04em;line-height:.98;color:#0b1e3a;max-width:16ch;text-wrap:balance;text-shadow:0 2px 30px rgba(255,255,255,.35)}
+.hero-title em{font-family:var(--serif);font-style:italic;font-weight:400;color:#1e3a5f}
+.hero-sub{font-size:clamp(1rem,1.2vw,1.1rem);color:#2e4a6e;max-width:58ch;margin-top:1.75rem;font-weight:450;line-height:1.6;text-wrap:pretty;text-shadow:0 1px 16px rgba(255,255,255,.4)}
+.hero-footline{display:flex;gap:.85rem;align-items:center;margin-top:2rem;font-family:var(--mono);font-size:.72rem;color:#4a6687;letter-spacing:.02em;flex-wrap:wrap}
+.hero-footline>span{white-space:nowrap}
+.hero-footline .dot{color:#8aa5c4;opacity:.6}
+.hero-meta-side{display:flex;flex-direction:column;gap:1rem;font-size:.72rem;color:var(--text-3);text-align:right;font-family:var(--mono);min-width:200px}
+.hero-meta-side .item{display:flex;flex-direction:column;gap:.2rem}
+.hero-meta-side .k{font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:#6b87a9}
+.hero-meta-side .v{font-size:.85rem;color:#0b1e3a;font-weight:500;font-family:var(--sans)}
+.scroll-cue{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#4a6687;display:flex;flex-direction:column;align-items:center;gap:.5rem;animation:bob 2.5s ease-in-out infinite;font-family:var(--mono)}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,6px)}}
 
-/* ─── Container & Section ─── */
-.container{max-width:1200px;margin:0 auto;padding:0 2rem}
-.sec{padding:3rem 0}
-.sec-head{margin-bottom:2rem;max-width:800px}
-.sec-num{font-family:var(--mono);font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);margin-bottom:.75rem}
-.sec-title{font-family:var(--serif);font-weight:500;font-size:clamp(1.6rem,3.2vw,2.4rem);letter-spacing:-.02em;line-height:1.1;color:var(--text)}
-.sec-title em{font-style:italic;color:var(--accent-ink)}
-.sec-sub{font-size:.98rem;color:var(--text-2);margin-top:1rem;line-height:1.75;max-width:720px}
+/* ============================================================
+   CONTAINER + SECTION
+   ============================================================ */
+.container{max-width:1320px;margin:0 auto;padding:0 2rem}
+.section{padding:var(--sec-pad) 0;position:relative;scroll-margin-top:70px}
+.section-alt{background:var(--bg-2)}
+.section-head{margin-bottom:2.5rem;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:end}
+.section-label{font-family:var(--mono);font-size:.68rem;font-weight:600;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:.7rem}
+.section-title{font-family:var(--serif);font-weight:500;font-size:clamp(1.8rem,3.5vw,2.75rem);letter-spacing:-.025em;line-height:1.05;color:var(--text);text-wrap:balance}
+.section-title em{font-style:italic;color:var(--accent-ink)}
+.section-sub{font-size:.92rem;color:var(--text);max-width:64ch;margin-top:.75rem;line-height:1.6;text-wrap:pretty;opacity:.92}
+.section-rule{height:1px;background:var(--border);margin-top:2rem}
 
-/* ─── Card (matches main page) ─── */
-.card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--r);padding:var(--card-pad);box-shadow:var(--card-shadow);color:#fff;transition:box-shadow .3s,transform .3s;position:relative;overflow:hidden}
-.card:hover{box-shadow:var(--card-shadow-hover);transform:translateY(-2px)}
-.card-title{font-family:var(--serif);font-weight:500;font-size:1.25rem;letter-spacing:-.01em;color:#fff;margin-bottom:.5rem}
-.card-sub{font-size:.82rem;color:rgba(255,255,255,.55);font-family:var(--mono);font-weight:400;text-transform:uppercase;letter-spacing:.08em;margin-bottom:1rem}
-.card-body{font-size:.93rem;color:rgba(255,255,255,.75);line-height:1.75}
-.card-body p{margin-bottom:1em}
-.card-body p:last-child{margin-bottom:0}
-.card-body strong{color:#fff;font-weight:600}
-.card-body a{color:#93c5fd;text-decoration:underline;text-decoration-color:rgba(147,197,253,.3);text-underline-offset:3px;transition:text-decoration-color .2s}
-.card-body a:hover{text-decoration-color:#93c5fd}
+/* ============================================================
+   PORTRAIT CARD (.p-card) — exact copy
+   ============================================================ */
+.p-card{position:relative;display:flex;flex-direction:column;background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--r);color:#fff;overflow:hidden;box-shadow:var(--card-shadow);transition:transform .25s,box-shadow .25s,border-color .25s;min-height:280px}
+.p-card::before{content:'';position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:radial-gradient(600px circle at var(--mx,50%) var(--my,0%),rgba(var(--accent-glow),.1),transparent 40%);opacity:0;transition:opacity .3s}
+.p-card:hover{transform:translateY(-3px);box-shadow:var(--card-shadow-hover);border-color:rgba(255,255,255,.14)}
+.p-card:hover::before{opacity:1}
+.p-card .p-head{padding:1.75rem 1.75rem 0;display:flex;flex-direction:column;gap:.85rem;flex-shrink:0}
+.p-card .p-kicker{font-family:var(--mono);font-size:.66rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);margin:0}
+.p-card .p-title{font-family:var(--serif);font-size:1.85rem;font-weight:500;line-height:1.1;letter-spacing:-.02em;color:#fff;margin:0;text-wrap:balance}
+.p-card .p-title em{font-style:italic;color:rgb(var(--accent-glow))}
+.p-card .p-title .dim{color:rgba(255,255,255,.4)}
+.p-card .p-body{font-size:.88rem;line-height:1.6;color:rgba(255,255,255,.75);max-width:60ch;margin:0}
+.p-card .p-badge{position:absolute;top:1.4rem;right:1.4rem;z-index:2;font-family:var(--mono);font-size:.58rem;font-weight:600;letter-spacing:.1em;padding:.3rem .6rem;border-radius:999px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.1);text-transform:uppercase}
+.p-card .p-content{padding:1.25rem 1.75rem 0;flex:1;min-width:0}
+.p-card .p-content:last-child{padding-bottom:1.75rem}
+.p-card .p-foot{padding:1rem 1.75rem 1.25rem;margin-top:auto;font-size:.78rem;color:rgba(255,255,255,.55);font-style:italic;line-height:1.5;border-top:1px solid rgba(255,255,255,.06)}
 
-/* ─── Map card (for iframe containers) ─── */
-.map-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:0 4px 16px rgba(15,22,41,.08);margin-bottom:1.5rem}
-.map-card-header{padding:1.1rem 1.4rem;border-bottom:1px solid var(--border);background:#fff}
-.map-card-title{font-family:var(--serif);font-weight:500;font-size:1.1rem;color:var(--text);letter-spacing:-.01em}
-.map-card-sub{font-family:var(--mono);font-size:.72rem;font-weight:500;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:.35rem}
-.map-card-caption{font-size:.85rem;color:var(--text-2);margin-top:.4rem;line-height:1.6}
-.map-frame{width:100%;height:640px;border:0;display:block;background:#edf2f7}
+/* Tones */
+.p-card.p-tone-lead{background:radial-gradient(800px 400px at 0% 0%,rgba(74,222,128,.08),transparent 50%),#0a0f1a;border-color:rgba(74,222,128,.18)}
+.p-card.p-tone-warn{background:radial-gradient(800px 400px at 0% 0%,rgba(251,191,36,.08),transparent 50%),#0a0f1a;border-color:rgba(251,191,36,.18)}
+.p-card.p-tone-critical{background:radial-gradient(800px 400px at 0% 0%,rgba(248,113,113,.08),transparent 50%),#0a0f1a;border-color:rgba(248,113,113,.2)}
+.p-card.p-tone-accent{background:radial-gradient(800px 400px at 0% 0%,rgba(96,165,250,.08),transparent 50%),#0a0f1a;border-color:rgba(96,165,250,.2)}
+.p-card.p-tone-violet{background:radial-gradient(800px 400px at 0% 0%,rgba(167,139,250,.08),transparent 50%),#0a0f1a;border-color:rgba(167,139,250,.2)}
+.p-card.p-tone-lead .p-badge{background:rgba(74,222,128,.15);border-color:rgba(74,222,128,.3);color:#86efac}
+.p-card.p-tone-warn .p-badge{background:rgba(251,191,36,.15);border-color:rgba(251,191,36,.3);color:#fcd34d}
+.p-card.p-tone-critical .p-badge{background:rgba(248,113,113,.15);border-color:rgba(248,113,113,.3);color:#fca5a5}
+.p-card.p-tone-accent .p-badge{background:rgba(96,165,250,.15);border-color:rgba(96,165,250,.3);color:#93c5fd}
+.p-card.p-tone-violet .p-badge{background:rgba(167,139,250,.15);border-color:rgba(167,139,250,.3);color:#c4b5fd}
 
-/* ─── Tier legend (static, above map) ─── */
-.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:1.5rem}
-.tier-pill{background:#fff;border:1px solid var(--border);border-radius:var(--r-sm);padding:.85rem 1rem;font-size:.85rem;display:flex;align-items:flex-start;gap:.7rem}
-.tier-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;margin-top:.2rem}
-.tier-pill strong{color:var(--text);display:block;margin-bottom:.15rem}
-.tier-pill span{color:var(--text-2);font-size:.78rem;line-height:1.5}
+/* Variants */
+.p-card.p-hero{min-height:500px}
+.p-card.p-data{min-height:auto}
+.p-card.p-compact{min-height:220px}
+.p-card.p-compact .p-head{padding:1.25rem 1.25rem 0;gap:.6rem}
+.p-card.p-compact .p-title{font-size:1.35rem}
+.p-card.p-compact .p-content{padding:1rem 1.25rem 0}
+.p-card.p-compact .p-content:last-child{padding-bottom:1.25rem}
 
-/* ─── Prose / bottleneck section ─── */
-.prose{max-width:780px}
-.prose h3{font-family:var(--serif);font-weight:500;font-size:1.5rem;letter-spacing:-.015em;line-height:1.15;color:var(--text);margin:2.5rem 0 .8rem;padding-top:2rem;border-top:1px solid var(--border)}
-.prose h3:first-child{padding-top:0;border-top:none;margin-top:0}
-.prose h3 em{font-style:italic;color:var(--accent-ink)}
-.prose h4{font-family:var(--sans);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin:1.25rem 0 .4rem}
-.prose p{font-size:1rem;color:var(--text);line-height:1.85;margin-bottom:1.1em}
-.prose p.lede{font-size:1.08rem;color:var(--text);line-height:1.7;font-weight:400}
-.prose strong{font-weight:600;color:var(--text)}
-.prose em{font-style:italic}
-.prose a{color:var(--accent-ink);text-decoration:underline;text-decoration-color:rgba(29,78,216,.3);text-underline-offset:3px;transition:text-decoration-color .2s}
-.prose a:hover{text-decoration-color:var(--accent-ink)}
-.asterisk{color:#d97706;font-weight:600}
+/* Prose card — dark card with flowing long-form text */
+.p-card.p-prose .p-content{padding:1.25rem 2rem 2rem}
+.p-card.p-prose{min-height:0}
+.p-card.p-prose p{font-size:.95rem;line-height:1.78;color:rgba(255,255,255,.82);margin-bottom:1em}
+.p-card.p-prose p:last-child{margin-bottom:0}
+.p-card.p-prose p.lede{font-family:var(--serif);font-size:1.1rem;line-height:1.55;color:#fff;font-weight:400;margin-bottom:1.2em;font-style:italic}
+.p-card.p-prose strong{color:#fff;font-weight:600}
+.p-card.p-prose a{color:rgb(var(--accent-glow));text-decoration:underline;text-decoration-color:rgba(var(--accent-glow),.35);text-underline-offset:3px;transition:text-decoration-color .2s}
+.p-card.p-prose a:hover{text-decoration-color:rgb(var(--accent-glow))}
+.p-card.p-prose h4{font-family:var(--mono);font-size:.66rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:rgb(var(--accent-glow));margin:1.2rem 0 .5rem}
+.p-card.p-prose .asterisk{color:#fcd34d;font-weight:700}
 
-.callout{background:#fff;border-left:4px solid var(--accent);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:1.1rem 1.3rem;margin:1.5rem 0;box-shadow:0 1px 3px rgba(15,22,41,.04)}
-.callout-title{font-family:var(--mono);font-size:.72rem;font-weight:500;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:.5rem}
-.callout p{font-size:.94rem;line-height:1.7;color:var(--text-2);margin-bottom:0}
-.callout p + p{margin-top:.6em}
+/* Grids */
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
 
-.synthesis{background:var(--card-bg);color:#fff;border-radius:var(--r);padding:2rem 2.2rem;margin-top:2.5rem;border:1px solid var(--card-border);box-shadow:var(--card-shadow)}
-.synthesis h3{color:#fff;border-top:none;padding-top:0;margin-top:0;font-family:var(--serif);font-weight:500;font-size:1.5rem}
-.synthesis h3 em{color:#93c5fd;font-style:italic}
-.synthesis p{color:rgba(255,255,255,.8);line-height:1.85}
-.synthesis strong{color:#fff}
+/* Taxonomy tier cards (compact) */
+.tier-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:1.1rem 1.15rem;color:#fff;display:flex;flex-direction:column;gap:.55rem;position:relative;overflow:hidden;transition:transform .2s,border-color .2s}
+.tier-card:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.16)}
+.tier-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--tier-c,var(--accent))}
+.tier-card .tier-id{font-family:var(--mono);font-size:.58rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--tier-c,rgb(var(--accent-glow)))}
+.tier-card .tier-name{font-family:var(--serif);font-size:1.05rem;font-weight:500;letter-spacing:-.01em;color:#fff;line-height:1.2}
+.tier-card .tier-desc{font-size:.78rem;color:rgba(255,255,255,.68);line-height:1.55}
+
+/* Map frame inside p-content */
+.map-frame{width:100%;height:640px;border:0;display:block;background:#edf2f7;border-radius:12px}
+
+/* Stats inline — matches main dashboard style */
+.stat-inline{background:var(--card-bg);border:1px solid var(--card-border);border-radius:14px;padding:1rem 1.1rem;color:#fff;display:flex;flex-direction:column;gap:.45rem}
+.stat-inline .k{font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.stat-inline .v{font-family:var(--serif);font-size:1.7rem;font-weight:500;letter-spacing:-.02em;line-height:1;color:#fff}
+.stat-inline .v .dim{font-weight:400;color:rgba(255,255,255,.4)}
+.stat-inline .d{font-size:.75rem;color:rgba(255,255,255,.6);line-height:1.45}
+
+/* Synthesis prose card — light reversed */
+.synthesis p{font-size:.98rem;line-height:1.85;color:rgba(255,255,255,.82);margin-bottom:1em}
+.synthesis p:last-child{margin-bottom:0}
+.synthesis strong{color:#fff;font-weight:600}
 
 /* Footnotes */
-.footnotes{border-top:1px solid var(--border);padding-top:1.5rem;margin-top:3rem;font-size:.82rem;color:var(--text-2);line-height:1.7}
-.footnotes h4{font-family:var(--mono);font-size:.72rem;font-weight:500;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:.75rem}
-.footnotes ol{padding-left:1.2rem;margin-top:.5rem}
-.footnotes li{margin-bottom:.4em}
-.footnotes a{color:var(--accent-ink);text-decoration:underline;text-decoration-color:rgba(29,78,216,.3);text-underline-offset:3px}
+.footnotes-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.75rem 2rem;color:var(--text-2);font-size:.85rem;line-height:1.7;box-shadow:0 4px 16px rgba(15,22,41,.06)}
+.footnotes-card h4{font-family:var(--mono);font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--accent);margin-bottom:.9rem}
+.footnotes-card ol{padding-left:1.3rem;margin-top:.5rem}
+.footnotes-card li{margin-bottom:.55em}
+.footnotes-card a{color:var(--accent-ink);text-decoration:underline;text-decoration-color:rgba(29,78,216,.3);text-underline-offset:3px}
+.footnotes-card a:hover{text-decoration-color:var(--accent-ink)}
+.footnotes-card .asterisk{color:#d97706;font-weight:700}
 
-.footer{padding:2.5rem 2rem;text-align:center;color:var(--text-3);font-size:.8rem;border-top:1px solid var(--border);margin-top:3rem;background:var(--bg-2)}
-.footer a{color:var(--accent-ink);text-decoration:none}
+/* Footer */
+.footer{padding:3rem 0 2.5rem;color:var(--text-3);font-size:.78rem;border-top:1px solid var(--border);margin-top:3rem}
+.footer-inner{max-width:1320px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.footer a{color:var(--accent);text-decoration:none}
+.footer a:hover{color:var(--accent-ink)}
+.footer-update{display:inline-flex;align-items:center;gap:.45rem;padding:.3rem .65rem;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:.7rem;font-weight:600}
+.footer-update .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);animation:pulse 2.2s ease-in-out infinite}
 
+/* Responsive */
+@media(max-width:1100px){.nav-links{overflow-x:auto}}
 @media(max-width:900px){
-  .tier-grid{grid-template-columns:1fr}
-  .map-frame{height:540px}
-  .hero{padding:2.5rem 1.25rem 1.5rem}
-  .site-header{padding:1rem 1.25rem}
+  .hero{padding:6rem 1.25rem 3rem;min-height:auto}
+  .hero-inner{grid-template-columns:1fr;gap:2rem}
+  .hero-meta-side{text-align:left}
+  .section-head{grid-template-columns:1fr;gap:1rem}
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .map-frame{height:560px}
   .container{padding:0 1.25rem}
+  .nav-inner{padding:.75rem 1.25rem}
 }
+
+/* Card glow-follow (mouse-tracked) */
+.p-card[data-track="true"]::before{opacity:1}
 </style>
 </head>
 <body>
 
-<header class="site-header">
-  <div class="site-header-inner">
-    <div class="brand"><span class="dot"></span> India Semicon 2.0</div>
-    <nav class="nav">
-      <a href="index.html">← Main dashboard</a>
-      <a href="#tsmc-map">TSMC global map</a>
-      <a href="#india-map">India map</a>
-      <a href="#bottlenecks">Bottleneck analysis</a>
+<!-- ── NAV ── -->
+<div class="nav-wrap">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">
+      <span class="nav-brand-mark">
+        <svg width="30" height="30" viewBox="0 0 30 30" aria-label="India Semicon 2.0 wafer mark">
+          <defs>
+            <linearGradient id="waferGradNav" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#60a5fa"/>
+              <stop offset="100%" stop-color="#2563eb"/>
+            </linearGradient>
+          </defs>
+          <circle cx="15" cy="15" r="13" fill="url(#waferGradNav)"/>
+          <rect x="11" y="11" width="8" height="8" fill="#0b1e3a" opacity=".5"/>
+        </svg>
+      </span>
+      <span>India Semicon 2.0</span>
+    </a>
+    <nav class="nav-links">
+      <a class="nav-link" href="index.html"><span class="num">←</span>Main dashboard</a>
+      <a class="nav-link active" href="#s0"><span class="num">00</span>Overview</a>
+      <a class="nav-link" href="#s1"><span class="num">01</span>Taxonomy</a>
+      <a class="nav-link" href="#s2"><span class="num">02</span>TSMC map</a>
+      <a class="nav-link" href="#s3"><span class="num">03</span>India map</a>
+      <a class="nav-link" href="#s4"><span class="num">04</span>Bottlenecks</a>
+      <a class="nav-link" href="#s5"><span class="num">05</span>Synthesis</a>
     </nav>
-  </div>
-</header>
-
-<section class="hero">
-  <div class="eyebrow">Supply chain · Bottlenecks · 2026</div>
-  <h1>A chip is <em>patterned silicon.</em> <br>Tracing who makes what, and where India fits in.</h1>
-  <p class="hero-sub">
-    To understand the semiconductor industry, you don't start with market caps — you start with physics. A chip begins as a disc of pure silicon and ends as billions of switches that a computer can run. Between those two states sit six tiers of suppliers, each of which must work flawlessly or the whole chain stops. This page walks through each tier, maps the geography of the global dependency, then compares it to India's actual capability in 2026.
-  </p>
-</section>
-
-<section class="sec container" id="taxonomy">
-  <div class="sec-head">
-    <div class="sec-num">01 — Taxonomy</div>
-    <h2 class="sec-title">The six tiers, <em>in plain English</em></h2>
-    <p class="sec-sub">Every chip passes through these stages in order. Skip any one and the rest becomes impossible.</p>
-  </div>
-
-  <div class="tier-grid">
-    <div class="tier-pill"><span class="tier-dot" style="background:#8b5a2b"></span><div><strong>T0 · Raw Materials</strong><span>Quartz sand, rare gases (neon, xenon, krypton), chemical precursors. The atoms everything else is made from.</span></div></div>
-    <div class="tier-pill"><span class="tier-dot" style="background:#0d9488"></span><div><strong>T1 · Refined Inputs</strong><span>Polished silicon wafers, ultra-pure gases, photoresist (light-sensitive liquid), specialty chemicals. The consumables a fab burns every day.</span></div></div>
-    <div class="tier-pill"><span class="tier-dot" style="background:#7c3aed"></span><div><strong>T2 · Equipment</strong><span>Lithography (ASML), deposition, etch, ion-implant, metrology. The million-dollar machines that carve circuits.</span></div></div>
-    <div class="tier-pill"><span class="tier-dot" style="background:#2563eb"></span><div><strong>T3 · Front-End Fabs</strong><span>The cleanrooms where wafers are patterned into working circuits. TSMC, Samsung, Intel. 3–4 months per wafer.</span></div></div>
-    <div class="tier-pill"><span class="tier-dot" style="background:#d97706"></span><div><strong>T4 · OSAT / Back-End</strong><span>Dicing, packaging, testing. ASE, Amkor, JCET. Turns a patterned wafer into a finished chip you can solder.</span></div></div>
-    <div class="tier-pill"><span class="tier-dot" style="background:#db2777"></span><div><strong>T5 · Design & Customers</strong><span>Fabless firms (Apple, Nvidia), EDA tools (Synopsys, Cadence), IP cores (Arm). The brains behind the silicon.</span></div></div>
-  </div>
-
-  <div class="callout">
-    <div class="callout-title">Why tiers matter</div>
-    <p>Each tier is dominated by 2–5 firms. The closer to the top (T0, T1, T2), the more geographic concentration: Japan in wafers and photoresist, Netherlands in EUV, US in equipment and EDA. India currently has <strong>no production in T0–T2 at scale</strong>, a small foothold in T3, growing strength in T4, and existing world-class capability in T5 design.</p>
-  </div>
-</section>
-
-<section class="sec container" id="tsmc-map">
-  <div class="sec-head">
-    <div class="sec-num">02 — Global</div>
-    <h2 class="sec-title">TSMC's <em>supply chain</em>, mapped</h2>
-    <p class="sec-sub">
-      A chip is patterned silicon. To pattern silicon you need wafers, made from quartz refined in North Carolina; photoresist made in Kawasaki; lithography machines from Veldhoven built with optics from Oberkochen and lasers from Ditzingen; gases from France, Japan, and — until 2022 — Ukraine. TSMC's fabs in Hsinchu, Tainan, and now Kaohsiung sit at the end of this chain. Every node, every capex round, every geopolitical headline ripples back through these markers.
-    </p>
-  </div>
-
-  <div class="map-card">
-    <div class="map-card-header">
-      <div class="map-card-sub">Interactive · 6 tiers · drag to pan · click markers for explainers</div>
-      <div class="map-card-title">TSMC Global Supply Chain — end-to-end</div>
-      <div class="map-card-caption">Red-to-blue dashed flows show directional supply: wafers (teal) feeding fabs (blue), equipment (violet) feeding fabs, fabs feeding OSATs (amber), OSATs feeding customers (pink). Toggle any tier via the top-right control.</div>
+    <div class="nav-actions">
+      <a class="nav-btn primary" href="https://github.com/KhushalM/india-semicon-2" target="_blank" rel="noreferrer">Source ↗</a>
     </div>
-    <iframe class="map-frame" src="maps/tsmc-supply-chain.html" title="TSMC global supply chain interactive map" loading="lazy"></iframe>
   </div>
+</div>
 
-  <div class="callout">
-    <div class="callout-title">Reading the map</div>
-    <p>Notice the geography of the first three tiers. Raw materials (T0) are few and remote — a single town in North Carolina supplies 90% of the world's semiconductor-grade quartz. Refined inputs (T1) are a near-total Japanese monopoly on photoresist and a 51% Japanese share on silicon wafers. Equipment (T2) is split between one Dutch company (ASML, the only EUV supplier on Earth) and four US firms (Applied Materials, Lam, KLA, and Japan's Tokyo Electron).</p>
-    <p>TSMC itself (T3) is concentrated almost entirely on a 400-km strip of Taiwan's west coast — Hsinchu, Tainan, Kaohsiung. This is not an accident of market forces; it is the outcome of 40 years of deliberate clustering. The Arizona, Kumamoto, and Dresden fabs are the first serious attempts to decluster, and they are expensive, slow, and incomplete.</p>
-  </div>
-</section>
-
-<section class="sec container" id="india-map">
-  <div class="sec-head">
-    <div class="sec-num">03 — India 2026</div>
-    <h2 class="sec-title">India's <em>live ecosystem</em>, today</h2>
-    <p class="sec-sub">
-      India has two operational semiconductor facilities as of March 2026, three more ramping, and one under construction — ten approved projects totaling ₹1.60 lakh crore under the India Semiconductor Mission. The map below shows every live and under-construction facility. The red dashed lines show the imports those facilities depend on — every wafer, every photoresist, every lithography machine currently comes from abroad. Now compare this to the TSMC map above: notice what's missing.
-    </p>
-  </div>
-
-  <div class="map-card">
-    <div class="map-card-header">
-      <div class="map-card-sub">Interactive · operational, ramping, under construction · red lines show imports</div>
-      <div class="map-card-title">India Semiconductor Ecosystem — 2026 state</div>
-      <div class="map-card-caption">Gujarat cluster (Dholera + Sanand) outlined in blue. Import arrows from Japan, Germany, Netherlands, US, France demonstrate full upstream dependency. Design ecosystem (Bangalore, Hyderabad, IIT Madras) shown in pink.</div>
+<!-- ── HERO ── -->
+<section class="hero" id="s0">
+  <div class="hero-bg"></div>
+  <div class="hero-tint"></div>
+  <div class="hero-fade"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-meta">
+        <span class="hero-label-dot"></span>
+        <span class="hero-label">Supply chain · Bottlenecks · 2026</span>
+      </div>
+      <h1 class="hero-title">A chip is <em>patterned silicon.</em><br>Trace who makes what, and where India fits in.</h1>
+      <p class="hero-sub">
+        Six tiers of suppliers separate quartz sand from a finished chip. Each one is dominated by two to five firms, and the closer to the top of the stack, the more geographically concentrated they are. This page walks through every tier in plain English, maps the global dependency, then compares it to India's actual capability in 2026.
+      </p>
+      <div class="hero-footline">
+        <span>Updated April 2026</span>
+        <span class="dot">·</span>
+        <span>Two Folium maps</span>
+        <span class="dot">·</span>
+        <span>Nine bottleneck deep-dives</span>
+        <span class="dot">·</span>
+        <span>Research brief attached</span>
+      </div>
     </div>
-    <iframe class="map-frame" src="maps/india-semicon.html" title="India 2026 semiconductor ecosystem interactive map" loading="lazy"></iframe>
+    <aside class="hero-meta-side">
+      <div class="item"><span class="k">Tiers mapped</span><span class="v">T0 — T5</span></div>
+      <div class="item"><span class="k">Global entities</span><span class="v">38 across 7 countries</span></div>
+      <div class="item"><span class="k">India entities</span><span class="v">11 live + design clusters</span></div>
+      <div class="item"><span class="k">Import arrows</span><span class="v">8 upstream routes</span></div>
+    </aside>
   </div>
-
-  <div class="callout">
-    <div class="callout-title">What the India map tells us</div>
-    <p>India in 2026 is overwhelmingly a <strong>T4 and T5 story</strong>. The operational facilities (Micron, Kaynes) are OSATs — back-end. The two front-end fabs (Tata-PSMC Dholera, SCL Mohali) sit at 28nm and 180nm respectively — roughly 5–8 technology generations behind TSMC's 2nm. Design (T5) is the one area where India is already world-class: ~125,000 engineers, ~20% of the global chip design workforce, and all the major MNCs (Qualcomm, Intel, Nvidia, AMD, Arm) run significant centers in Bangalore and Hyderabad.</p>
-    <p>The red arrows are what the TSMC map makes visible as a one-sided dependency. Every wafer that Tata Dholera will pattern will come from Shin-Etsu, SUMCO, or GlobalWafers. Every lithography machine will come from ASML, Applied Materials, or Tokyo Electron. Every photoresist will come from TOK, JSR, or Shin-Etsu. Every specialty gas will come from Air Liquide, Linde, or Taiyo Nippon Sanso. India is entering the game at T3 and T4; T0, T1, and T2 remain unbuilt.</p>
+  <div class="scroll-cue">
+    <span>Scroll</span>
+    <svg width="10" height="14" viewBox="0 0 10 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 1v12M1 9l4 4 4-4"/></svg>
   </div>
 </section>
 
-<section class="sec container" id="bottlenecks">
-  <div class="sec-head">
-    <div class="sec-num">04 — Bottleneck analysis</div>
-    <h2 class="sec-title">What India doesn't have, and <em>what it would take</em> to build.</h2>
-    <p class="sec-sub">
-      Each of the sections below walks through one structural gap: what's missing, why it matters, who owns it globally, what it would take for India to build, and what paths forward exist. Written as a briefing memo — read from the top, or jump to a specific gap.
-    </p>
+<!-- ── 01 TAXONOMY ── -->
+<section class="section" id="s1">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-label">01 — Taxonomy</div>
+      </div>
+      <div>
+        <h2 class="section-title">The six tiers, <em>in plain English</em></h2>
+        <p class="section-sub">Every chip passes through these stages in order. Skip any one and the rest becomes impossible. The closer to T0 you go, the more geographic and corporate concentration you find.</p>
+      </div>
+    </div>
+
+    <div class="g3" style="gap:.85rem">
+      <div class="tier-card" style="--tier-c:#a78358"><div class="tier-id">T0 · Raw Materials</div><div class="tier-name">Quartz, rare gases, precursors</div><div class="tier-desc">Silicon sand (quartzite), neon, xenon, krypton, trichlorosilane. The atoms everything else is made from.</div></div>
+      <div class="tier-card" style="--tier-c:#2dd4bf"><div class="tier-id">T1 · Refined Inputs</div><div class="tier-name">Wafers, photoresist, gases</div><div class="tier-desc">Polished 300mm silicon wafers, ultra-pure gases, light-sensitive photoresist, specialty chemicals. The consumables a fab burns every day.</div></div>
+      <div class="tier-card" style="--tier-c:#a78bfa"><div class="tier-id">T2 · Equipment</div><div class="tier-name">Lithography + deposition + etch</div><div class="tier-desc">ASML's EUV scanners, Applied Materials deposition, Lam etch, KLA metrology, TEL coat/develop. $180M–$380M machines that carve circuits.</div></div>
+      <div class="tier-card" style="--tier-c:#60a5fa"><div class="tier-id">T3 · Front-End Fabs</div><div class="tier-name">TSMC, Samsung, Intel</div><div class="tier-desc">The cleanrooms where wafers are patterned into working circuits. 1,000+ process steps over 3–4 months per wafer.</div></div>
+      <div class="tier-card" style="--tier-c:#fbbf24"><div class="tier-id">T4 · OSAT / Back-End</div><div class="tier-name">ASE, Amkor, JCET</div><div class="tier-desc">Dicing, packaging, testing. Turns a patterned wafer into a finished chip you can solder to a circuit board.</div></div>
+      <div class="tier-card" style="--tier-c:#f472b6"><div class="tier-id">T5 · Design & Customers</div><div class="tier-name">Apple, Nvidia, Arm, Synopsys</div><div class="tier-desc">Fabless firms, EDA tools, IP cores. The brains behind the silicon — and where India already has world-class capability.</div></div>
+    </div>
   </div>
-
-  <div class="prose">
-
-    <h3>Silicon wafer manufacturing — <em>the blank canvas</em></h3>
-    <p class="lede">A silicon wafer is the disc of ultra-pure crystalline silicon that every chip begins as. Today, India imports essentially 100% of semiconductor-grade wafers. To pattern a single chip, you first need a wafer polished to atomic flatness — and nobody in India currently makes them at 300mm diameter or at the purity the industry requires.</p>
-
-    <p>This matters because wafers are the physical foundation of every other step. The Tata-PSMC fab in Dholera, which is targeting 50,000 wafers per month of 28nm-to-110nm production by late 2026, will be buying every one of those wafers from Shin-Etsu, SUMCO, GlobalWafers, or Siltronic. That's not a temporary condition — it's a permanent supply agreement baked into the fab's economics. If Japan ever applied export controls comparable to those the US applies to China, Dholera would lose its ability to operate.</p>
-
-    <p>Who owns this globally is a textbook oligopoly. <strong>Shin-Etsu (Japan) 27%, SUMCO (Japan) 24%, GlobalWafers (Taiwan) 17%, Siltronic (Germany) 12%, SK Siltron (Korea) 9%</strong> — the top five account for 89% of 300mm wafer revenue.<sup>[1]</sup> Entering this market is hard because the technology requires decades of experience in Czochralski crystal pulling, the capital expenditure per plant is $1B+, and the learning curve on defect reduction is long. It is harder than operating a fab because the tolerance for atomic-scale flaws is even tighter: a wafer with a 10nm particle defect is scrap.</p>
-
-    <p>What would it take for India to build indigenous wafer capability? Realistically, a joint venture with an existing player — most likely SUMCO, Siltronic, or SK Siltron — rather than a greenfield attempt. Capex order-of-magnitude: $1.5–3B for a 150,000-wafer/month plant. Talent: 500–1,000 specialized engineers (most of whom don't yet exist in India). Timeline: 5–7 years from announcement to qualified output. ISM 2.0 has explicitly flagged wafer manufacturing as a priority; one Indian wafer project is reportedly targeting June 2026 commercial operations,<span class="asterisk">*</span> though the scale and specification are unclear.</p>
-
-    <p>The plausible path forward is a partnership model where an established player brings technology and India provides site, subsidy (ISM 2.0 covers up to 50% of capex), and domestic demand via its own fabs. This is feasible in the medium term (2028–2031). What is not feasible near-term is building leading-edge wafer capability (for 3nm and below) — that requires partnerships deeper in the supply chain than India has yet negotiated.</p>
-
-    <h3>Lithography equipment — <em>the impossible-to-replace machine</em></h3>
-    <p class="lede">Lithography is the step where a circuit pattern is "printed" onto a wafer using light. For everything smaller than 7nm, the required machine is EUV — Extreme Ultraviolet lithography — and exactly one company on Earth makes it: <a href="https://www.asml.com/">ASML</a> in Veldhoven, Netherlands. A single EUV scanner costs $180–380 million and weighs 180 tons. It contains mirrors made by Zeiss so precise their imperfections are measured in picometers, and a laser from Trumpf powerful enough to vaporize tin droplets 50,000 times per second.</p>
-
-    <p>India has no domestic lithography industry. Not for EUV, not for DUV (the 193nm immersion machines used at 28–7nm nodes), not even for i-line steppers used at 180nm. Every lithography tool in every Indian fab — including the legacy SCL Mohali fab — was purchased from abroad, overwhelmingly from ASML, Canon, and Nikon.</p>
-
-    <p>Why is this uniquely hard? Because EUV is not just a harder machine — it is arguably the most complex machine ever commercialized. ASML's EUV supply chain spans Zeiss (Germany, optics), Trumpf (Germany, laser), Cymer (San Diego, light source — ASML-acquired), and thousands of sub-suppliers for vacuum systems, motion control, and metrology. ASML itself took more than 20 years and tens of billions of dollars of R&D — much of it funded by customers like Intel, Samsung, and TSMC — to productize EUV. There is no second source. China has been trying for a decade with SMEE and has not approached DUV immersion performance, let alone EUV.</p>
-
-    <p>What it would take for India to build is, frankly, not feasible in any reasonable timeline for EUV. For DUV i-line and older generations, a partnership with Nikon or Canon (both of whom have been squeezed out of the leading-edge race by ASML and could use a growth market) would be plausible over a 7–10 year horizon. This would not solve India's sub-28nm ambitions but it would give India some sovereign capability for the 90nm+ nodes that dominate automotive, power, and industrial chips.</p>
-
-    <p>The plausible path forward is to accept lithography as an import dependency, mitigate it via diversification (maintaining relationships with ASML, Canon, and Nikon simultaneously), and invest instead in components of lithography — precision motion stages, EUV-compatible reticles, inspection tools — where India's existing electronics and optics talent could plausibly contribute as a sub-supplier to ASML and others. This is a lower-profile but more realistic place to make a dent.</p>
-
-    <h3>Photoresist and advanced specialty chemicals — <em>the Japanese monopoly</em></h3>
-    <p class="lede">Photoresist is a light-sensitive polymer coated onto wafers before each lithography step. When UV or EUV light hits it, the resist chemistry changes, and a circuit pattern is transferred from a mask onto the wafer in microns-thick layers. It is the "photographic film" of chip making. And Japan owns it.</p>
-
-    <p>Approximately <strong>88–90% of the global photoresist market</strong> is supplied by five Japanese firms: Tokyo Ohka Kogyo (TOK), JSR Corporation, Shin-Etsu Chemical, Fujifilm, and Sumitomo Chemical.<sup>[2]</sup> The concentration is even more extreme for EUV-grade photoresist, where the top four (TOK, JSR, Shin-Etsu, Fujifilm) hold roughly 75% of the market. The only non-Japanese player of significance is DuPont (US), which supplies more specialized resists for particular customers.</p>
-
-    <p>This matters because no resist means no patterning, no matter how good the fab or the lithography machine. India currently has zero domestic photoresist production at semiconductor grade. Academic labs at IISc and a few IITs work on resist chemistry, but there is no pilot plant, let alone commercial production. For the Tata-PSMC fab to operate at 28nm, it will buy DUV i-line and KrF resist from Japan. For any future 7nm or smaller fab, it would need EUV resist — again, from Japan.</p>
-
-    <p>What it would take for India to build is a combination of polymer chemistry expertise (Shin-Etsu's photoresist business grew out of 60 years of silicone chemistry) and an obsessively-controlled manufacturing process (particle counts under 10 per liter, purities above 99.9999%). Realistic partners would be DuPont (US, looking to expand), Sumitomo (Japan, lower tier than TOK/JSR), or Dongjin Semichem (Korea, smaller player). An Indian commercial-grade resist product is plausible in the 2029–2032 timeframe with the right JV; nothing sooner is realistic.</p>
-
-    <p>In parallel, the broader specialty chemicals category — CMP slurries, planarization films, cleaning chemistries, deposition precursors — is dominated by Germany (Merck EMD), Japan (Fujifilm, Sumitomo), and the US. This is a more accessible entry point than photoresist because the technology barriers are lower and Indian chemicals companies (Reliance Industries, UPL, Aarti Industries) have relevant capabilities. A focused ISM 2.0 push on specialty chemicals could yield real supply-chain participation in the 2027–2029 timeframe.</p>
-
-    <h3>Specialty and rare gases — <em>the Ukraine lesson</em></h3>
-    <p class="lede">A modern fab uses more than 50 different high-purity gases in its daily operations. Most are industrial (nitrogen, argon, oxygen, hydrogen) and available globally. A handful are rare and geographically concentrated: neon (used in DUV excimer lasers), xenon and krypton (used in etching and as EUV light-source feedstock), helium (used as a coolant and in leak detection), and exotic etch gases like NF<sub>3</sub> and SF<sub>6</sub>.</p>
-
-    <p>The 2022 invasion of Ukraine revealed how concentrated this layer is. Ukraine, primarily through facilities at Odesa (Iceblick) and Mariupol (Cryoin), supplied <strong>~70% of the world's neon</strong> and ~40% of its krypton before the war.<sup>[3]</sup> Xenon prices spiked from $15/liter in 2020 to over $100/liter by mid-2022. Fabs globally scrambled to secure 12-month contracts from alternative sources in Japan, the US, and China. The industry avoided catastrophe but spent ~$3 billion hedging the disruption.</p>
-
-    <p>India has almost no domestic specialty-gas production. Linde India exists but operates at industrial scale, not the sub-ppb purity semiconductors require. Practically all specialty gases for Micron Sanand and Tata Dholera will come from Air Liquide (France), Linde (global), and Taiyo Nippon Sanso (Japan) — the three companies that collectively hold ~80% of the specialty gas market.</p>
-
-    <p>What it would take for India to build domestic specialty gas capability is relatively modest compared to wafers or lithography: $50–200M per gas plant, partnership with Linde or Air Liquide (both of whom are expanding in India anyway), and a 2–3 year build-out. Helium is the exception — it's extracted from natural gas fields, and India has few commercially viable sources, so helium imports will remain structural.</p>
-
-    <p>The plausible path forward is co-located gas plants: when a fab is built, the gas supplier builds an air separation unit and specialty gas recovery facility on the same site. This is already the model at Dholera (Air Liquide has signed agreements) and Sanand. Near-term progress on this bottleneck is feasible and underway. Rare gases (neon, xenon, krypton) remain a diversification challenge — the answer is maintaining multiple sources globally, not building Indian production.</p>
-
-    <h3>Leading-edge process nodes — <em>the five-generation gap</em></h3>
-    <p class="lede">India's most advanced announced node is 28nm (Tata-PSMC Dholera). TSMC entered high-volume manufacturing on 2nm in Q4 2025. Samsung and Intel are both at 2–3nm. Between 28nm and 2nm there are seven technology nodes: 22nm, 16nm, 10nm, 7nm, 5nm, 3nm, and 2nm. India is structurally behind.</p>
-
-    <p>This gap matters less than it sounds — for most real-world chips. Automotive silicon, power management, industrial controllers, MEMS, RF, display drivers, and many analog/mixed-signal products are manufactured at 28nm and older nodes. These collectively account for roughly two-thirds of all wafer volume globally. Indian fabs at 28nm will have plenty of customers. The gap matters for AI accelerators, smartphone SoCs, leading-edge GPUs, and servers — applications that are moving aggressively toward 3nm and below and that India is not positioning to serve.</p>
-
-    <p>The question is whether India should care. Capex to enter leading-edge is $20B+ per fab at 3nm/2nm, requires EUV (ASML will sell, India is not restricted), and requires a deep talent pool that does not yet exist. TSMC's 2nm fab has 3,000+ process engineers; India has perhaps 50 people globally with that specific experience. The capex is achievable. The talent is not — at least not in the 2026–2030 timeframe.</p>
-
-    <p>The plausible path forward is a two-phase strategy. Near term (2026–2030): anchor mature nodes (28nm+) at scale, build 1–2 fabs, dominate automotive and industrial chip demand, train 10,000 process engineers. Medium term (2030–2035): push toward 14nm or 10nm via foundry partnership (PSMC, UMC, GlobalFoundries); this is the GF-equivalent tier that India can realistically reach. Leading-edge (sub-5nm) is a 2035+ conversation if at all. Treating 28nm mastery as a stepping stone — not a consolation prize — is the realistic framing.</p>
-
-    <h3>EDA tools — <em>the US software moat</em></h3>
-    <p class="lede">Electronic Design Automation (EDA) is the software engineers use to design chips. It takes a high-level description of what a chip should do and converts it into the billion-transistor layout that a fab can manufacture. Three companies dominate: <a href="https://www.synopsys.com/">Synopsys</a> (46%), <a href="https://www.cadence.com/">Cadence</a> (35%), and <a href="https://eda.sw.siemens.com/">Siemens EDA</a> (13%). Together, <strong>85%+ of all EDA revenue</strong>, all US-headquartered.<sup>[4]</sup></p>
-
-    <p>Every Indian chip design — from the Snapdragon SoCs laid out in Qualcomm Bangalore to the Shakti RISC-V core taped out at IIT Madras — uses these tools. India is one of the largest EDA user bases globally (tens of thousands of tool seats) but has no domestic EDA capability at commercial production quality. Open-source alternatives exist: OpenROAD (place-and-route), Magic (layout), ngspice (simulation), Yosys (synthesis), and efforts led by Google, Skywater, and the CHIPS Alliance. These are good enough for education and research and for very-mature-node chips (130nm and up), but fall short at 28nm and below.</p>
-
-    <p>The dependency risk is real and has precedent. When the US Commerce Department applied export controls on Huawei in 2019, it also applied them to EDA licenses. Huawei's HiSilicon chip design operation effectively shut down for advanced nodes within months. A similar action against India — unlikely but not impossible — would freeze advanced chip design capability in the country.</p>
-
-    <p>What it would take to build indigenous EDA is both harder and easier than it appears. Easier because the technology is software, not capital equipment — no fabs, no clean rooms. Harder because the existing players have 30 years of accumulated process technology files (PDKs) signed with every major foundry, and displacing them requires those same signed relationships. Bangalore has enormous existing Synopsys, Cadence, and Siemens engineering presence — the talent to build EDA exists there.</p>
-
-    <p>The plausible path forward is a two-track strategy: participate aggressively in open-source EDA (OpenROAD, CHIPS Alliance) and contribute enough code and PDK work that India becomes structurally important to that stack; and, in parallel, build a domestic EDA company focused on specific niches — verification, formal methods, physical design for mature nodes — where the existing players are weakest and the barriers to entry are lowest. A ₹500–1,000 crore investment over 5–7 years could produce a credible domestic EDA player. It is one of the highest-leverage bottlenecks to address.</p>
-
-    <h3>Semiconductor IP — <em>the Arm question, and the RISC-V opportunity</em></h3>
-    <p class="lede">IP cores are pre-designed building blocks — CPUs, GPUs, memory controllers, USB interfaces, DDR controllers — that chip designers license rather than design from scratch. The dominant supplier is <a href="https://www.arm.com/">Arm</a> (Cambridge, UK, SoftBank-owned), whose Cortex-A cores power essentially every smartphone made outside of Apple and whose Cortex-M cores dominate microcontrollers.</p>
-
-    <p>This is the one bottleneck where India has real existing strength. IIT Madras's Shakti processor family is a production-grade open-source RISC-V CPU, developed over 10+ years, with silicon tapeouts on SCL Mohali's 180nm process. C-DAC's Vega processor targets a similar niche. The global RISC-V ecosystem — an open, royalty-free instruction set architecture that sits as an alternative to Arm — hit <strong>25% processor market penetration by January 2026</strong>,<sup>[5]</sup> with Meta and Qualcomm aggressively adopting it in datacenter and automotive products.</p>
-
-    <p>This matters because it gives India a plausible path to sovereign CPU IP without needing to dethrone Arm or build equivalent IP from scratch. RISC-V is open. The cores that go into an Indian SoC can be Shakti or Vega — built in India, maintained in India, modifiable without licensing costs or geopolitical exposure.</p>
-
-    <p>What it would take to capitalize on this is investment in the RISC-V ecosystem (more IITs and C-DAC involvement, more commercial spinouts like InCore Semiconductors and Shakti Semiconductors), integration into ISM 2.0 and DLI (Design-Linked Incentive) schemes, and active engagement with the global RISC-V International foundation. The capex is small ($10–50M per startup) but the cumulative effect could be significant. This is the highest-leverage, lowest-cost bottleneck on the list.</p>
-
-    <h3>Skilled process-engineering talent — <em>the binding constraint</em></h3>
-    <p class="lede">India produces roughly 600,000 electronics and electrical engineering graduates per year. The projected semiconductor workforce shortage by 2027 is 250,000–300,000 professionals.<sup>[6]</sup> These numbers look compatible on the surface; they are not.</p>
-
-    <p>The gap is qualitative, not quantitative. Of the 600,000 graduates, only a small fraction (estimates range from 5% to 15%) are industry-ready for semiconductor roles at the depth required by a modern fab, OSAT, or design center. The critical shortages are concentrated in specific sub-disciplines: process engineering (the people who know how to run a lithography tool, or debug a yield problem in etch); physical design (the ones who translate circuits into layout); analog and RF design; verification engineers; and packaging engineers. These are slow-to-train roles — 5–7 years of mentored experience before a person is genuinely productive.</p>
-
-    <p>Why this matters is that the fabs and OSATs currently ramping (Tata Dholera, Tata Jagiroad, Kaynes, CG Semi) need tens of thousands of these engineers combined. PSMC and Tata can transfer some experienced Taiwanese engineers, but the visa and cultural friction are significant and unsustainable at scale. Without domestic talent development, the fabs will struggle with yield and throughput — which is the single largest determinant of fab economics.</p>
-
-    <p>What it would take to fix is a decade-long structural investment in applied semiconductor education. Stanford, MIT, and UC Berkeley graduate ~100 semiconductor-focused PhDs per year combined — Taiwan's NTU and NCTU graduate more, India's entire IIT system graduates a fraction of that figure. ISM 2.0 has explicitly targeted "1 million chip-ready engineers by 2030," and state governments (Gujarat, Karnataka, Tamil Nadu, Telangana) are partnering with universities on specialized curricula. Private players (MOSart Labs, KeenSemi, VLSI Expert, Takshila VLSI) are building parallel training pipelines.</p>
-
-    <p>The plausible path forward is to treat talent as infrastructure. A ₹2,000–5,000 crore investment over 10 years in semiconductor-focused institutes (in the mold of IIT Bombay's Nanoelectronics Center, but scaled 10x), paired with industry-sponsored internships at every approved fab and OSAT, is realistic and has strong precedent (Taiwan's ITRI model, Israel's Talpiot). This is the bottleneck that will determine whether the fabs India is building in 2026 produce world-class chips or mediocre ones.</p>
-
-    <h3>Other gaps worth noting</h3>
-
-    <h4>Mask and reticle manufacturing</h4>
-    <p>A photomask is the "stencil" that lithography machines project through onto the wafer. Global suppliers (Photronics, Toppan, DNP) dominate at all nodes; India has near-zero capacity. For mature-node fabs this is addressable (one Indian mask shop could serve multiple domestic fabs); for advanced-node EUV masks it is not — the technology is tied to the fab's own tooling and is typically done in-house at TSMC/Samsung/Intel. A domestic mask shop at 28–180nm would be a useful, modest capex investment ($200–500M, 3–5 year build).</p>
-
-    <h4>ATMP substrates — organic and ceramic</h4>
-    <p>When an OSAT packages a chip, the chip sits on a substrate — a tiny printed circuit board, typically organic (laminated resin) or ceramic, that connects the die to the outside world. Unimicron (Taiwan), Nanya PCB (Taiwan), Ibiden (Japan), Shinko (Japan) dominate. India has zero semiconductor-grade substrate production. With five OSATs in India ramping in 2026–2028, this becomes an immediate supply bottleneck. A domestic substrate maker is lower-risk than wafers or photoresist and could be a credible entry point for Indian PCB manufacturers (Kaynes, itself, or Amara Raja-adjacent players). 3–5 year build, $300–800M capex.</p>
-
-    <h4>Semiconductor-grade water and utilities</h4>
-    <p>A fab uses 2–5 million gallons of ultrapure water per day — roughly equivalent to a town of 50,000 people. Dholera has water infrastructure from its smart-city plans, but long-term sustainability as multiple fabs and OSATs scale up is not guaranteed. This is primarily a policy and infrastructure challenge, not a technology one, but it is a real constraint.</p>
-
-  </div>
-
-  <div class="synthesis">
-    <h3>Where to <em>concentrate</em>, first.</h3>
-    <p>
-      Given India's actual 2026 starting position — two operational OSATs, one fab ramping at 28nm, strong existing design talent, weak upstream supply — the highest-leverage gaps to close first are <strong>talent</strong>, <strong>RISC-V IP</strong>, and <strong>specialty chemicals and gases</strong>.
-    </p>
-    <p>
-      Talent is foundational: every other gap becomes harder to close without it, and the gap is visible in the productivity of the fabs that are now coming online. RISC-V IP is uniquely accessible — India's existing strength in Shakti and Vega can be amplified with modest capital to yield genuine sovereign IP within 3–5 years, something no other bottleneck permits on that timescale. Specialty chemicals and gases are reachable via partnership-driven co-location strategies that are already being negotiated for Dholera and Sanand, and the capex per win is small relative to the supply-chain resilience they provide.
-    </p>
-    <p>
-      The hard bottlenecks — wafers, lithography, leading-edge nodes, EDA — are real, but they are slow and expensive to address. Wafers via partnership is plausible over 5–7 years. Lithography is plausibly never addressable at EUV scale. EDA is addressable at the niche level (verification, formal, mature nodes) but not as a frontal assault on Synopsys/Cadence. Leading-edge nodes will come when the workforce and supply chain can sustain them — probably 10+ years out.
-    </p>
-    <p>
-      The shape of India's realistic semiconductor sovereignty in 2035 is not an autarky at 2nm. It is a credible domestic T3–T4 presence at mature nodes, growing participation in T1 at the specialty-chemical and gas layer, strong T5 design leveraging RISC-V, and accepted long-term dependencies on Japanese photoresist and wafers, Dutch lithography, and US EDA. That is both less ambitious than the rhetoric suggests and more achievable than any alternative.
-    </p>
-  </div>
-
-  <div class="footnotes">
-    <h4>Footnotes & Sources</h4>
-    <ol>
-      <li>Silicon wafer market shares 2025 — <a href="https://www.mordorintelligence.com/industry-reports/semiconductor-silicon-wafer-market">Mordor Intelligence</a>. Top-5 combined = 89% of 300mm wafer revenue.</li>
-      <li>Photoresist Japanese share — <a href="https://www.fountyltech.com/news/japanese-companies-monopolize-the-euv-photoresist-supply-market/">Fountyl analysis</a> and <a href="https://www.fortunebusinessinsights.com/photoresist-chemicals-market-115414">Fortune Business Insights</a>. 88% Japan share in EUV; top-4 = 75%.</li>
-      <li>Ukraine neon share pre-2022 — <a href="https://www.usitc.gov/publications/332/executive_briefings/ebot_decarlo_goodman_ukraine_neon_and_semiconductors.pdf">USITC executive briefing</a> and <a href="https://www.csis.org/blogs/perspectives-innovation/russias-invasion-ukraine-impacts-gas-markets-critical-chip-production">CSIS analysis</a>. ~70% neon, ~40% krypton.</li>
-      <li>EDA market shares — <a href="https://www.embedded.com/taking-stock-of-the-eda-industry/">Embedded.com</a>. Synopsys 46%, Cadence 35%, Siemens 13% as of 2024.</li>
-      <li>RISC-V market penetration — <a href="https://blog.adafruit.com/2026/01/07/risc-v-hits-25-market-penetration-thanks-to-meta-and-qualcomm">Adafruit / Semico Research</a>, January 2026.</li>
-      <li>India semiconductor workforce gap — <a href="https://www.business-standard.com/industry/news/india-s-chip-industry-to-face-shortage-of-300-000-professionals-by-2027-124061100186_1.html">Business Standard</a>, 250–300k shortage by 2027.</li>
-      <li>India Semiconductor Mission 2.0 status — <a href="https://ism.gov.in/">ISM official</a> and <a href="https://static.pib.gov.in/WriteReadData/specificdocs/documents/2026/feb/doc202627782201.pdf">PIB February 2026</a>. 10 units approved, ₹1.60 lakh crore committed.</li>
-    </ol>
-    <p style="margin-top:1rem;color:var(--text-3);font-size:.78rem"><span class="asterisk">*</span> Asterisked numbers are based on press reporting and have not been cross-checked against official filings. Treat with caution.</p>
-  </div>
-
 </section>
 
+<!-- ── 02 TSMC GLOBAL MAP ── -->
+<section class="section section-alt" id="s2">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-label">02 — Global</div>
+      </div>
+      <div>
+        <h2 class="section-title">TSMC's <em>supply chain</em>, mapped</h2>
+        <p class="section-sub">A chip is patterned silicon. To pattern it you need wafers from Japan, photoresist from Kawasaki, lithography from Veldhoven, optics from Oberkochen, lasers from Ditzingen, and gases from France and (until 2022) Ukraine. Every TSMC fab sits at the end of this chain.</p>
+      </div>
+    </div>
+
+    <div class="p-card p-tone-accent">
+      <div class="p-badge">Interactive · 6 tiers</div>
+      <div class="p-head">
+        <p class="p-kicker">TSMC · End-to-end · 2026</p>
+        <h3 class="p-title">The <em>geography</em> of dependency</h3>
+        <p class="p-body">Click any marker for a plain-English explainer. Toggle tiers via the top-right control. Animated dashed lines show directional flow — wafers to fabs, fabs to OSAT, OSAT to customers.</p>
+      </div>
+      <div class="p-content" style="padding-top:1.5rem">
+        <iframe class="map-frame" src="maps/tsmc-supply-chain.html" title="TSMC global supply chain interactive map" loading="lazy"></iframe>
+      </div>
+      <div class="p-foot">Raw materials (T0) are few and remote. Refined inputs (T1) are a near-total Japanese monopoly on photoresist and a 51% Japanese share on silicon wafers. Equipment (T2) is split between one Dutch company (ASML) and four US firms plus Japan's TEL.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 03 INDIA MAP ── -->
+<section class="section" id="s3">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-label">03 — India 2026</div>
+      </div>
+      <div>
+        <h2 class="section-title">India's <em>live ecosystem</em>, today</h2>
+        <p class="section-sub">Two operational facilities, three ramping, one under construction. Ten approved projects totaling ₹1.60 lakh crore under ISM 2.0. Every wafer, every lithography tool, every photoresist currently comes from abroad — the red dashed lines show exactly which routes.</p>
+      </div>
+    </div>
+
+    <div class="p-card p-tone-warn">
+      <div class="p-badge">ISM 2.0 · Live</div>
+      <div class="p-head">
+        <p class="p-kicker">India · As of March 2026</p>
+        <h3 class="p-title">Operational, ramping, <em>under construction</em></h3>
+        <p class="p-body">Gujarat cluster (Dholera + Sanand) outlined in blue. Red dashed arrows show import dependencies from Japan, Germany, Netherlands, US, France. Design clusters in Bangalore, Hyderabad, and IIT Madras shown in pink.</p>
+      </div>
+      <div class="p-content" style="padding-top:1.5rem">
+        <iframe class="map-frame" src="maps/india-semicon.html" title="India 2026 semiconductor ecosystem interactive map" loading="lazy"></iframe>
+      </div>
+      <div class="p-foot">India in 2026 is overwhelmingly a T4 and T5 story. The operational facilities are OSATs. The two fabs sit at 28nm and 180nm — 5–8 generations behind TSMC's 2nm. Design is where India is already world-class: ~125,000 engineers across Bangalore and Hyderabad.</div>
+    </div>
+
+    <div class="g4" style="margin-top:1.25rem;gap:.85rem">
+      <div class="stat-inline"><span class="k">ISM Projects</span><span class="v">10<span class="dim"> units</span></span><span class="d">₹1.60 lakh cr committed, 6 states</span></div>
+      <div class="stat-inline"><span class="k">Operational</span><span class="v">2<span class="dim"> fabs</span></span><span class="d">Micron Sanand, Kaynes Sanand</span></div>
+      <div class="stat-inline"><span class="k">Under Construction</span><span class="v">4<span class="dim"> + 1</span></span><span class="d">Tata Jagiroad, Dholera, CG Semi, HCL-Foxconn</span></div>
+      <div class="stat-inline"><span class="k">Upstream imports</span><span class="v">~100<span class="dim">%</span></span><span class="d">Wafers, resist, litho, specialty gases</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 04 BOTTLENECK ANALYSIS ── -->
+<section class="section section-alt" id="s4">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-label">04 — Bottleneck analysis</div>
+      </div>
+      <div>
+        <h2 class="section-title">What India doesn't have, and <em>what it would take</em> to build.</h2>
+        <p class="section-sub">Each card below is one structural gap: what's missing, why it matters, who owns it globally, and realistic paths forward. Written as a briefing memo — read sequentially or jump to a gap.</p>
+      </div>
+    </div>
+
+    <div class="g2" style="gap:1rem">
+
+      <!-- 1 Wafers -->
+      <div class="p-card p-prose p-tone-critical">
+        <div class="p-badge">Gap 1 · Critical</div>
+        <div class="p-head">
+          <p class="p-kicker">Silicon wafer manufacturing</p>
+          <h3 class="p-title">The <em>blank canvas</em></h3>
+        </div>
+        <div class="p-content">
+          <p class="lede">A silicon wafer is the disc of ultra-pure crystalline silicon every chip begins as. India imports essentially 100% of semiconductor-grade wafers. To pattern a single chip you first need a wafer polished to atomic flatness — and nobody in India currently makes them at 300mm or the purity the industry requires.</p>
+          <p>This matters because wafers are the foundation of every other step. The Tata-PSMC fab in Dholera, targeting 50,000 wafers per month of 28nm-to-110nm production by late 2026, will buy every one from Shin-Etsu, SUMCO, GlobalWafers, or Siltronic. That's a permanent supply agreement baked into the fab's economics, not a temporary condition.</p>
+          <p>The global picture is a textbook oligopoly. <strong>Shin-Etsu 27%, SUMCO 24%, GlobalWafers 17%, Siltronic 12%, SK Siltron 9%</strong> — top five account for 89% of 300mm wafer revenue.<sup>[1]</sup> Entering is hard because Czochralski crystal pulling takes decades of experience, capex per plant is $1B+, and the tolerance for atomic-scale flaws is tighter than operating a fab: a wafer with a 10nm particle defect is scrap.</p>
+          <p>What it would take: a JV with SUMCO, Siltronic, or SK Siltron rather than a greenfield build. Capex $1.5–3B, 500–1,000 specialized engineers (most not yet in India), 5–7 years to qualified output. ISM 2.0 flags wafer manufacturing as priority; one Indian project reportedly targets June 2026 commercial ops<span class="asterisk">*</span> though scale is unclear.</p>
+          <p>The plausible path is a partnership model — feasible medium-term (2028–2031). Leading-edge (3nm-and-below) wafers are out of reach near-term.</p>
+        </div>
+      </div>
+
+      <!-- 2 Lithography -->
+      <div class="p-card p-prose p-tone-critical">
+        <div class="p-badge">Gap 2 · Critical</div>
+        <div class="p-head">
+          <p class="p-kicker">Lithography equipment</p>
+          <h3 class="p-title">The <em>impossible-to-replace</em> machine</h3>
+        </div>
+        <div class="p-content">
+          <p class="lede">Lithography is the step where a circuit pattern is "printed" onto a wafer using light. For everything smaller than 7nm, the required machine is EUV — and exactly one company on Earth makes it: <a href="https://www.asml.com/">ASML</a> in Veldhoven, Netherlands.</p>
+          <p>A single EUV scanner costs $180–380 million and weighs 180 tons. It contains mirrors made by Zeiss so precise their imperfections are measured in picometers, and a 40 kW Trumpf laser powerful enough to vaporize tin droplets 50,000 times per second. India has no domestic lithography industry — not for EUV, DUV, or even i-line steppers used at 180nm.</p>
+          <p>Why uniquely hard? EUV is arguably the most complex machine ever commercialized. ASML took 20+ years and tens of billions — much funded by Intel, Samsung, and TSMC — to productize. China has tried for a decade with SMEE and has not approached DUV immersion, let alone EUV. There is no second source.</p>
+          <p>For EUV, building indigenous capability is not feasible in any reasonable timeline. For DUV i-line and older nodes, a partnership with Nikon or Canon (both squeezed out of leading-edge by ASML) is plausible on a 7–10 year horizon — enough for sovereign capability at 90nm+ nodes that dominate automotive, power, and industrial chips.</p>
+          <p>The realistic path: accept lithography as an import dependency, diversify across ASML + Canon + Nikon, and invest in lithography sub-components (precision stages, EUV reticles, inspection tools) where India could contribute as a sub-supplier. Lower-profile but more achievable.</p>
+        </div>
+      </div>
+
+      <!-- 3 Photoresist -->
+      <div class="p-card p-prose p-tone-warn">
+        <div class="p-badge">Gap 3 · High</div>
+        <div class="p-head">
+          <p class="p-kicker">Photoresist & specialty chemicals</p>
+          <h3 class="p-title">The <em>Japanese</em> monopoly</h3>
+        </div>
+        <div class="p-content">
+          <p class="lede">Photoresist is the light-sensitive polymer coated onto wafers before each lithography step. When UV light hits, the chemistry changes and a circuit pattern transfers from a mask onto the wafer. It is the photographic film of chip making. Japan owns it.</p>
+          <p>Approximately <strong>88–90% of the global photoresist market</strong> is supplied by five Japanese firms: TOK, JSR, Shin-Etsu, Fujifilm, Sumitomo Chemical.<sup>[2]</sup> For EUV-grade photoresist, the top four hold 75%. The only non-Japanese player of significance is DuPont (US).</p>
+          <p>India has zero domestic photoresist production at semiconductor grade. Tata-PSMC Dholera will buy DUV i-line and KrF resist from Japan; any future 7nm fab would need EUV resist — also Japan.</p>
+          <p>Building requires polymer chemistry expertise (Shin-Etsu's photoresist grew out of 60 years of silicone chemistry) plus obsessive particle control (counts under 10 per liter, purity above 99.9999%). Realistic partners: DuPont, Sumitomo, or Dongjin Semichem. Indian commercial-grade resist is plausible in 2029–2032 with the right JV; nothing sooner is realistic.</p>
+          <p>The broader specialty chemicals category (CMP slurries, cleaning chemistries, deposition precursors) is dominated by Merck EMD (Germany), Fujifilm, and US firms. This is more accessible — Indian chemical companies (Reliance, UPL, Aarti) have relevant capabilities. An ISM 2.0 push here could yield real supply-chain participation in 2027–2029.</p>
+        </div>
+      </div>
+
+      <!-- 4 Rare gases -->
+      <div class="p-card p-prose p-tone-warn">
+        <div class="p-badge">Gap 4 · High</div>
+        <div class="p-head">
+          <p class="p-kicker">Specialty & rare gases</p>
+          <h3 class="p-title">The <em>Ukraine</em> lesson</h3>
+        </div>
+        <div class="p-content">
+          <p class="lede">A modern fab uses 50+ different high-purity gases daily. Most are industrial (nitrogen, argon, oxygen). A handful are rare: neon (DUV lasers), xenon and krypton (etching + EUV source), helium (coolant), exotic etch gases (NF<sub>3</sub>, SF<sub>6</sub>).</p>
+          <p>The 2022 invasion of Ukraine revealed the concentration. Ukraine — primarily Iceblick (Odesa) and Cryoin (Mariupol) — supplied <strong>~70% of the world's neon</strong> and ~40% of its krypton.<sup>[3]</sup> Xenon went from $15/liter in 2020 to $100+/liter by mid-2022. The industry avoided catastrophe by spending ~$3B hedging.</p>
+          <p>India has near-zero specialty-gas production. Linde India operates at industrial scale, not sub-ppb purity. Micron Sanand and Tata Dholera will source from Air Liquide (France), Linde (global), and Taiyo Nippon Sanso (Japan) — three firms controlling ~80% of the market.</p>
+          <p>Building is modest compared to wafers or lithography: $50–200M per gas plant, partnership with Linde or Air Liquide (both expanding in India anyway), 2–3 year build. Co-located gas plants at Dholera and Sanand are already being negotiated.</p>
+          <p>Near-term progress is feasible and underway. Rare gases (neon, xenon) remain a diversification challenge — the answer is multiple sources globally, not building Indian production.</p>
+        </div>
+      </div>
+
+      <!-- 5 Leading-edge nodes -->
+      <div class="p-card p-prose p-tone-violet">
+        <div class="p-badge">Gap 5 · Structural</div>
+        <div class="p-head">
+          <p class="p-kicker">Leading-edge process nodes</p>
+          <h3 class="p-title">The <em>five-generation</em> gap</h3>
+        </div>
+        <div class="p-content">
+          <p class="lede">India's most advanced announced node is 28nm (Tata-PSMC Dholera). TSMC entered HVM on 2nm in Q4 2025. Between 28nm and 2nm there are seven nodes: 22, 16, 10, 7, 5, 3, 2. India is structurally behind.</p>
+          <p>This gap matters less than it sounds — for most real-world chips. Automotive silicon, power management, industrial controllers, MEMS, RF, display drivers, analog/mixed-signal products are manufactured at 28nm and older nodes. These account for ~2/3 of all wafer volume globally. Indian fabs at 28nm will have plenty of customers.</p>
+          <p>The gap matters for AI accelerators, smartphone SoCs, leading-edge GPUs, servers — applications moving aggressively toward 3nm and below, which India is not positioned to serve.</p>
+          <p>Capex to enter leading-edge is $20B+ per fab at 3nm/2nm, requires EUV (ASML will sell, India is unrestricted), and requires a deep talent pool that doesn't yet exist. TSMC's 2nm fab has 3,000+ process engineers; India has ~50 people with that specific experience. Capex is achievable. Talent is not — at least not in 2026–2030.</p>
+          <p>A two-phase strategy: near term anchor mature nodes at scale, build 1–2 fabs, dominate automotive and industrial, train 10,000 process engineers. Medium term (2030–2035) push to 14nm or 10nm via foundry partnership (PSMC, UMC, GlobalFoundries). Leading-edge (sub-5nm) is a 2035+ conversation.</p>
+        </div>
+      </div>
+
+      <!-- 6 EDA -->
+      <div class="p-card p-prose p-tone-accent">
+        <div class="p-badge">Gap 6 · Strategic</div>
+        <div class="p-head">
+          <p class="p-kicker">EDA tools</p>
+          <h3 class="p-title">The <em>US software</em> moat</h3>
+        </div>
+        <div class="p-content">
+          <p class="lede">EDA software takes a high-level chip description and converts it into the billion-transistor layout a fab can manufacture. Three companies dominate: <strong>Synopsys (46%), Cadence (35%), Siemens EDA (13%)</strong>. 85%+ of all EDA revenue, all US-HQ.<sup>[4]</sup></p>
+          <p>Every Indian chip design — from Qualcomm Bangalore's Snapdragon SoCs to IIT Madras's Shakti RISC-V core — uses these tools. India is one of the largest user bases globally but has no domestic EDA at commercial production quality. Open-source alternatives (OpenROAD, Magic, ngspice, Yosys) are good enough for education and 130nm-up, but fall short at 28nm and below.</p>
+          <p>The dependency risk has precedent: when the US applied export controls on Huawei in 2019, EDA licenses were included and HiSilicon's advanced-node design operation effectively shut down within months. A similar action against India is unlikely but not impossible.</p>
+          <p>Easier than hardware because the technology is software — no fabs, no clean rooms. Harder because existing players have 30 years of accumulated process technology files (PDKs) signed with every foundry. Bangalore has enormous Synopsys/Cadence/Siemens engineering presence — the talent exists.</p>
+          <p>Two-track path: participate aggressively in OpenROAD / CHIPS Alliance (contribute code + PDKs to become structurally important); in parallel, build a domestic EDA player focused on niches (verification, formal methods, physical design for mature nodes). A ₹500–1,000 cr investment over 5–7 years could produce a credible domestic player. Among the highest-leverage gaps to address.</p>
+        </div>
+      </div>
+
+      <!-- 7 IP -->
+      <div class="p-card p-prose p-tone-lead">
+        <div class="p-badge">Gap 7 · Opportunity</div>
+        <div class="p-head">
+          <p class="p-kicker">Semiconductor IP</p>
+          <h3 class="p-title">The <em>RISC-V</em> opening</h3>
+        </div>
+        <div class="p-content">
+          <p class="lede">IP cores are pre-designed building blocks — CPUs, GPUs, memory controllers, USB, DDR — that chip designers license rather than designing from scratch. The dominant supplier is <a href="https://www.arm.com/">Arm</a> (UK, SoftBank-owned), whose cores power essentially every non-Apple smartphone.</p>
+          <p>This is the one bottleneck where India has real existing strength. IIT Madras's Shakti processor family is a production-grade open-source RISC-V CPU, developed over 10+ years, with silicon taped out on SCL Mohali 180nm. C-DAC's Vega targets a similar niche. The global RISC-V ecosystem — an open, royalty-free ISA — hit <strong>25% processor market penetration by January 2026</strong>,<sup>[5]</sup> with Meta and Qualcomm aggressively adopting it.</p>
+          <p>This gives India a plausible path to sovereign CPU IP without needing to dethrone Arm. RISC-V is open. An Indian SoC's cores can be Shakti or Vega — built in India, maintained in India, modifiable without licensing costs or geopolitical exposure.</p>
+          <p>Capitalizing requires: investment in the RISC-V ecosystem (more IITs, more commercial spinouts like InCore and Shakti Semiconductors), integration into ISM 2.0 and DLI schemes, and active engagement with RISC-V International. Capex per startup is small ($10–50M) but cumulative effect is significant. This is the highest-leverage, lowest-cost bottleneck on the list.</p>
+        </div>
+      </div>
+
+      <!-- 8 Talent -->
+      <div class="p-card p-prose p-tone-critical">
+        <div class="p-badge">Gap 8 · Binding</div>
+        <div class="p-head">
+          <p class="p-kicker">Process-engineering talent</p>
+          <h3 class="p-title">The <em>binding constraint</em></h3>
+        </div>
+        <div class="p-content">
+          <p class="lede">India produces ~600,000 electronics graduates per year. The projected semiconductor workforce shortage by 2027 is 250,000–300,000 professionals.<sup>[6]</sup> These numbers look compatible; they are not.</p>
+          <p>The gap is qualitative, not quantitative. Of 600k graduates, only 5–15% are industry-ready for semiconductor roles at the depth a modern fab, OSAT, or design center requires. Critical shortages concentrate in process engineering (running a lithography tool, debugging an etch yield problem), physical design (translating circuits into layout), analog and RF, verification, and packaging. 5–7 years of mentored experience before someone is genuinely productive.</p>
+          <p>Fabs and OSATs ramping now (Tata Dholera, Tata Jagiroad, Kaynes, CG Semi) need tens of thousands of these engineers combined. PSMC and Tata can transfer experienced Taiwanese engineers, but visa and cultural friction are unsustainable at scale. Without domestic talent, fabs struggle with yield — the single largest determinant of fab economics.</p>
+          <p>Decade-long structural investment in applied semiconductor education. Stanford + MIT + UC Berkeley graduate ~100 semiconductor-focused PhDs per year combined; Taiwan's NTU/NCTU graduate more; India's entire IIT system graduates a fraction. ISM 2.0 targets "1 million chip-ready engineers by 2030." State governments (Gujarat, Karnataka, TN, Telangana) partnering with universities on specialized curricula. Private players (MOSart Labs, KeenSemi, VLSI Expert, Takshila) building parallel pipelines.</p>
+          <p>Treat talent as infrastructure. A ₹2,000–5,000 cr investment over 10 years in semiconductor-focused institutes (IIT Bombay's Nanoelectronics Center scaled 10x), paired with industry-sponsored internships at every approved facility, is realistic with strong precedent (Taiwan's ITRI, Israel's Talpiot). This is the bottleneck that determines whether India's 2026 fabs produce world-class chips or mediocre ones.</p>
+        </div>
+      </div>
+
+      <!-- 9 Other gaps -->
+      <div class="p-card p-prose" style="grid-column:1 / -1">
+        <div class="p-badge">Gap 9 · Adjacent</div>
+        <div class="p-head">
+          <p class="p-kicker">Other gaps worth noting</p>
+          <h3 class="p-title">Masks, <em>substrates</em>, ultrapure water</h3>
+        </div>
+        <div class="p-content">
+          <h4>Mask and reticle manufacturing</h4>
+          <p>A photomask is the "stencil" lithography projects through onto the wafer. Photronics, Toppan, and DNP dominate at all nodes; India has near-zero capacity. For mature-node fabs this is addressable (one Indian mask shop could serve multiple domestic fabs); for advanced-node EUV masks it is not — the technology is tied to the fab's own tooling and is typically done in-house at TSMC/Samsung/Intel. A 28–180nm domestic mask shop would be a useful modest-capex investment ($200–500M, 3–5 year build).</p>
+          <h4>ATMP substrates — organic and ceramic</h4>
+          <p>When an OSAT packages a chip, the die sits on a substrate — a tiny printed circuit board (organic laminated resin or ceramic) that connects the die to the outside world. Unimicron (Taiwan), Nanya PCB, Ibiden (Japan), Shinko (Japan) dominate. India has zero semiconductor-grade substrate production. With five OSATs in India ramping 2026–2028, this is an immediate supply bottleneck. Lower-risk than wafers or photoresist; credible entry for Indian PCB makers (Kaynes itself, Amara Raja-adjacent players). 3–5 year build, $300–800M capex.</p>
+          <h4>Semiconductor-grade water and utilities</h4>
+          <p>A fab uses 2–5 million gallons of ultrapure water per day — a town of 50,000 people. Dholera has water infrastructure from smart-city plans, but long-term sustainability as multiple fabs scale up is not guaranteed. Primarily a policy/infrastructure challenge, not technology — but a real constraint.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── 05 SYNTHESIS ── -->
+<section class="section" id="s5">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-label">05 — Synthesis</div>
+      </div>
+      <div>
+        <h2 class="section-title">Where to <em>concentrate</em>, first.</h2>
+        <p class="section-sub">The realistic shape of India's semiconductor sovereignty in 2035 is not an autarky at 2nm. It is a credible domestic T3–T4 presence at mature nodes, growing participation in T1 at the specialty-chemical and gas layer, strong T5 design leveraging RISC-V, and accepted long-term dependencies on Japanese resist, Dutch lithography, and US EDA.</p>
+      </div>
+    </div>
+
+    <div class="p-card p-tone-lead synthesis" style="min-height:0">
+      <div class="p-badge">Recommendation</div>
+      <div class="p-head">
+        <p class="p-kicker">Three priorities</p>
+        <h3 class="p-title">Talent, <em>RISC-V IP</em>, specialty chemicals.</h3>
+      </div>
+      <div class="p-content">
+        <p>Given India's actual 2026 starting position — two operational OSATs, one fab ramping at 28nm, strong existing design talent, weak upstream supply — the highest-leverage gaps to close first are <strong>talent</strong>, <strong>RISC-V IP</strong>, and <strong>specialty chemicals and gases</strong>.</p>
+        <p>Talent is foundational: every other gap becomes harder to close without it, and the gap is visible in the productivity of the fabs now coming online. RISC-V IP is uniquely accessible — India's existing strength in Shakti and Vega can be amplified with modest capital to yield genuine sovereign IP within 3–5 years, which no other bottleneck permits on that timescale. Specialty chemicals and gases are reachable via partnership-driven co-location strategies already being negotiated for Dholera and Sanand; the capex per win is small relative to the supply-chain resilience provided.</p>
+        <p>The hard bottlenecks — wafers, lithography, leading-edge nodes, EDA — are real but slow and expensive. Wafers via partnership is plausible over 5–7 years. Lithography is plausibly never addressable at EUV scale. EDA is addressable at the niche level (verification, mature nodes) but not as a frontal assault on Synopsys/Cadence. Leading-edge nodes will come when the workforce and supply chain sustain them — probably 10+ years out.</p>
+        <p>That is both less ambitious than the rhetoric suggests and more achievable than any alternative.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem">
+      <div class="footnotes-card">
+        <h4>Footnotes & Sources</h4>
+        <ol>
+          <li>Silicon wafer market shares 2025 — <a href="https://www.mordorintelligence.com/industry-reports/semiconductor-silicon-wafer-market">Mordor Intelligence</a>. Top-5 combined = 89% of 300mm wafer revenue.</li>
+          <li>Photoresist Japanese share — <a href="https://www.fountyltech.com/news/japanese-companies-monopolize-the-euv-photoresist-supply-market/">Fountyl analysis</a> and <a href="https://www.fortunebusinessinsights.com/photoresist-chemicals-market-115414">Fortune Business Insights</a>. 88% Japan share in EUV; top-4 = 75%.</li>
+          <li>Ukraine neon share pre-2022 — <a href="https://www.usitc.gov/publications/332/executive_briefings/ebot_decarlo_goodman_ukraine_neon_and_semiconductors.pdf">USITC executive briefing</a> and <a href="https://www.csis.org/blogs/perspectives-innovation/russias-invasion-ukraine-impacts-gas-markets-critical-chip-production">CSIS</a>. ~70% neon, ~40% krypton.</li>
+          <li>EDA market shares — <a href="https://www.embedded.com/taking-stock-of-the-eda-industry/">Embedded.com</a>. Synopsys 46%, Cadence 35%, Siemens 13% as of 2024.</li>
+          <li>RISC-V market penetration — <a href="https://blog.adafruit.com/2026/01/07/risc-v-hits-25-market-penetration-thanks-to-meta-and-qualcomm">Adafruit / Semico Research</a>, January 2026.</li>
+          <li>India semiconductor workforce gap — <a href="https://www.business-standard.com/industry/news/india-s-chip-industry-to-face-shortage-of-300-000-professionals-by-2027-124061100186_1.html">Business Standard</a>, 250–300k shortage by 2027.</li>
+          <li>India Semiconductor Mission 2.0 status — <a href="https://ism.gov.in/">ISM official</a> and <a href="https://static.pib.gov.in/WriteReadData/specificdocs/documents/2026/feb/doc202627782201.pdf">PIB February 2026</a>. 10 units approved, ₹1.60 lakh crore committed.</li>
+        </ol>
+        <p style="margin-top:1rem;font-size:.78rem;color:var(--text-3)"><span class="asterisk">*</span> Asterisked numbers are based on press reporting and have not been cross-checked against official filings. Treat with caution.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
 <footer class="footer">
-  <p>India Semicon 2.0 · Supply Chain & Bottleneck Analysis · April 2026</p>
-  <p style="margin-top:.5rem"><a href="index.html">← Back to main dashboard</a> · <a href="research/supply-chain-research-brief.md">Research brief (markdown)</a> · <a href="https://github.com/KhushalM/india-semicon-2">Source on GitHub</a></p>
+  <div class="footer-inner">
+    <div>
+      India Semicon 2.0 · Supply Chain & Bottleneck Analysis · April 2026
+    </div>
+    <div style="display:flex;gap:1.25rem;align-items:center">
+      <span class="footer-update"><span class="dot"></span>Updated April 19</span>
+      <a href="index.html">← Main dashboard</a>
+      <a href="research/supply-chain-research-brief.md">Research brief</a>
+      <a href="https://github.com/KhushalM/india-semicon-2">Source ↗</a>
+    </div>
+  </div>
 </footer>
+
+<script>
+// Card glow follows mouse
+document.querySelectorAll('.p-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+});
+
+// Scroll-spy active nav
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+window.addEventListener('scroll', () => {
+  let current = sections[0]?.id;
+  sections.forEach(s => {
+    if (window.scrollY + 90 >= s.offsetTop) current = s.id;
+  });
+  navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
+});
+</script>
 
 </body>
 </html>
