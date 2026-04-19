@@ -38,12 +38,16 @@ html{scroll-behavior:smooth}
   --serif:'Fraunces',ui-serif,Georgia,serif;
   --mono:'Geist Mono',ui-monospace,monospace;
 }
-body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased;font-feature-settings:'ss01','cv11'}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;font-feature-settings:'ss01','cv11'}
+
+/* Scroll progress bar (matches main) */
+.progress-bar{position:fixed;top:0;left:0;right:0;height:2px;background:transparent;z-index:200;pointer-events:none}
+.progress-bar-inner{height:100%;background:var(--accent);width:0;transition:width .08s linear;box-shadow:0 0 10px rgba(var(--accent-glow),.6)}
 
 /* ============================================================
-   NAV
+   NAV (exact copy: .nav is fixed, not sticky)
    ============================================================ */
-.nav-wrap{position:sticky;top:0;z-index:100;-webkit-backdrop-filter:saturate(180%) blur(14px);backdrop-filter:saturate(180%) blur(14px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--border)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;-webkit-backdrop-filter:saturate(180%) blur(14px);backdrop-filter:saturate(180%) blur(14px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--border);transition:background .2s}
 .nav-inner{max-width:1320px;margin:0 auto;padding:.85rem 2rem;display:flex;align-items:center;gap:1.25rem}
 .nav-brand{display:flex;align-items:center;gap:.6rem;font-weight:800;letter-spacing:-.01em;font-size:.95rem;color:var(--text);text-decoration:none}
 .nav-brand-mark{width:30px;height:30px;border-radius:50%;background:transparent;display:grid;place-items:center;box-shadow:0 2px 10px rgba(15,22,41,.22);flex-shrink:0;overflow:hidden}
@@ -65,26 +69,22 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
 .hero-bg{position:absolute;inset:0;z-index:-2;background:url('assets/hero-bg.webp') center 40%/cover no-repeat;will-change:transform;filter:saturate(1.1) contrast(1.03) brightness(1.02)}
 .hero-tint{position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(110% 70% at 75% 15%, rgba(255,255,255,.32) 0%, rgba(210,230,250,.08) 45%, transparent 70%),linear-gradient(180deg, rgba(120,170,220,.15) 0%, rgba(180,210,240,.2) 40%, rgba(200,222,244,.6) 75%, var(--bg) 100%),linear-gradient(90deg, rgba(40,80,130,.45) 0%, rgba(80,130,180,.2) 40%, transparent 65%)}
 .hero-fade{position:absolute;left:0;right:0;bottom:0;height:30%;background:linear-gradient(180deg,transparent 0%,var(--bg) 100%);z-index:-1;pointer-events:none}
-.hero-inner{max-width:1320px;margin:0 auto;width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3rem;align-items:end}
+.hero-inner{max-width:1320px;margin:0 auto;width:100%;display:grid;grid-template-columns:minmax(0,1fr);gap:3rem;align-items:end}
 .hero-meta{display:flex;align-items:center;gap:.75rem;margin-bottom:1.2rem}
 .hero-label{font-family:var(--mono);font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:.16em;color:var(--accent)}
 .hero-label-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft);animation:pulse 2.2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.hero-title{font-family:var(--sans);font-weight:500;font-size:clamp(2.75rem,7.5vw,5.75rem);letter-spacing:-.04em;line-height:.98;color:#0b1e3a;max-width:16ch;text-wrap:balance;text-shadow:0 2px 30px rgba(255,255,255,.35)}
+.hero-title{font-family:var(--sans);font-weight:500;font-size:clamp(2.75rem,7.5vw,5.75rem);letter-spacing:-.04em;line-height:.98;color:#0b1e3a;max-width:14ch;text-wrap:balance;text-shadow:0 2px 30px rgba(255,255,255,.35)}
 .hero-title em{font-family:var(--serif);font-style:italic;font-weight:400;color:#1e3a5f}
 .hero-sub{font-size:clamp(1rem,1.2vw,1.1rem);color:#2e4a6e;max-width:58ch;margin-top:1.75rem;font-weight:450;line-height:1.6;text-wrap:pretty;text-shadow:0 1px 16px rgba(255,255,255,.4)}
 .hero-footline{display:flex;gap:.85rem;align-items:center;margin-top:2rem;font-family:var(--mono);font-size:.72rem;color:#4a6687;letter-spacing:.02em;flex-wrap:wrap}
 .hero-footline>span{white-space:nowrap}
 .hero-footline .dot{color:#8aa5c4;opacity:.6}
-.hero-meta-side{display:flex;flex-direction:column;gap:1rem;font-size:.72rem;color:var(--text-3);text-align:right;font-family:var(--mono);min-width:200px}
-.hero-meta-side .item{display:flex;flex-direction:column;gap:.2rem}
-.hero-meta-side .k{font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:#6b87a9}
-.hero-meta-side .v{font-size:.85rem;color:#0b1e3a;font-weight:500;font-family:var(--sans)}
 .scroll-cue{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#4a6687;display:flex;flex-direction:column;align-items:center;gap:.5rem;animation:bob 2.5s ease-in-out infinite;font-family:var(--mono)}
 @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,6px)}}
 
 /* ============================================================
-   CONTAINER + SECTION
+   CONTAINER + SECTION (exact copy: section-head = 2 cols: label+title | sub)
    ============================================================ */
 .container{max-width:1320px;margin:0 auto;padding:0 2rem}
 .section{padding:var(--sec-pad) 0;position:relative;scroll-margin-top:70px}
@@ -93,8 +93,26 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
 .section-label{font-family:var(--mono);font-size:.68rem;font-weight:600;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:.7rem}
 .section-title{font-family:var(--serif);font-weight:500;font-size:clamp(1.8rem,3.5vw,2.75rem);letter-spacing:-.025em;line-height:1.05;color:var(--text);text-wrap:balance}
 .section-title em{font-style:italic;color:var(--accent-ink)}
-.section-sub{font-size:.92rem;color:var(--text);max-width:64ch;margin-top:.75rem;line-height:1.6;text-wrap:pretty;opacity:.92}
+.section-sub{font-size:.92rem;color:var(--text);max-width:56ch;margin-top:.75rem;line-height:1.6;text-wrap:pretty;opacity:.92}
 .section-rule{height:1px;background:var(--border);margin-top:2rem}
+
+/* ============================================================
+   STATS STRIP (matches main: dark portrait stat cards under hero)
+   ============================================================ */
+.stats{max-width:1320px;margin:-4rem auto 0;padding:0 2rem;position:relative;z-index:3;display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem}
+.stat{background:#0a0f1a;border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:1.5rem 1.4rem;color:#fff;box-shadow:0 8px 32px rgba(0,0,0,.35);transition:transform .25s,box-shadow .25s,border-color .25s;display:flex;flex-direction:column;position:relative;overflow:hidden;min-height:200px}
+.stat:hover{transform:translateY(-3px);box-shadow:0 20px 60px rgba(0,0,0,.5);border-color:rgba(255,255,255,.14)}
+.stat-label{font-family:var(--mono);font-size:.64rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1rem}
+.stat-value{font-family:var(--serif);font-size:clamp(2.1rem,3vw,2.7rem);font-weight:500;letter-spacing:-.03em;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+.stat-value .dim{font-weight:400;color:rgba(255,255,255,.4)}
+.stat-detail{font-size:.78rem;color:rgba(255,255,255,.6);margin-top:.65rem;line-height:1.5;font-family:var(--serif)}
+.stat-trend{display:inline-flex;align-items:center;gap:.25rem;font-family:var(--mono);font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .6rem;border-radius:999px;margin-top:auto;align-self:flex-start;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1)}
+.trend-up{color:#86efac;background:rgba(74,222,128,.14);border-color:rgba(74,222,128,.3)}
+.trend-hot{color:#93c5fd;background:rgba(96,165,250,.14);border-color:rgba(96,165,250,.3)}
+.stats .stat:nth-child(1){background:radial-gradient(800px 400px at 0% 0%,rgba(74,222,128,.08),transparent 50%),#0a0f1a;border-color:rgba(74,222,128,.18)}
+.stats .stat:nth-child(2){background:radial-gradient(800px 400px at 0% 0%,rgba(96,165,250,.08),transparent 50%),#0a0f1a;border-color:rgba(96,165,250,.2)}
+.stats .stat:nth-child(3){background:radial-gradient(800px 400px at 0% 0%,rgba(251,191,36,.08),transparent 50%),#0a0f1a;border-color:rgba(251,191,36,.18)}
+.stats .stat:nth-child(4){background:radial-gradient(800px 400px at 0% 0%,rgba(167,139,250,.08),transparent 50%),#0a0f1a;border-color:rgba(167,139,250,.2)}
 
 /* ============================================================
    PORTRAIT CARD (.p-card) — exact copy
@@ -163,13 +181,6 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
 /* Map frame inside p-content */
 .map-frame{width:100%;height:640px;border:0;display:block;background:#edf2f7;border-radius:12px}
 
-/* Stats inline — matches main dashboard style */
-.stat-inline{background:var(--card-bg);border:1px solid var(--card-border);border-radius:14px;padding:1rem 1.1rem;color:#fff;display:flex;flex-direction:column;gap:.45rem}
-.stat-inline .k{font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)}
-.stat-inline .v{font-family:var(--serif);font-size:1.7rem;font-weight:500;letter-spacing:-.02em;line-height:1;color:#fff}
-.stat-inline .v .dim{font-weight:400;color:rgba(255,255,255,.4)}
-.stat-inline .d{font-size:.75rem;color:rgba(255,255,255,.6);line-height:1.45}
-
 /* Synthesis prose card — light reversed */
 .synthesis p{font-size:.98rem;line-height:1.85;color:rgba(255,255,255,.82);margin-bottom:1em}
 .synthesis p:last-child{margin-bottom:0}
@@ -197,12 +208,15 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
 @media(max-width:900px){
   .hero{padding:6rem 1.25rem 3rem;min-height:auto}
   .hero-inner{grid-template-columns:1fr;gap:2rem}
-  .hero-meta-side{text-align:left}
   .section-head{grid-template-columns:1fr;gap:1rem}
   .g2,.g3,.g4{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr);margin-top:-2rem}
   .map-frame{height:560px}
   .container{padding:0 1.25rem}
   .nav-inner{padding:.75rem 1.25rem}
+}
+@media(max-width:560px){
+  .stats{grid-template-columns:1fr}
 }
 
 /* Card glow-follow (mouse-tracked) */
@@ -211,76 +225,111 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
 </head>
 <body>
 
-<!-- ── NAV ── -->
-<div class="nav-wrap">
+<!-- Scroll progress bar -->
+<div class="progress-bar"><div class="progress-bar-inner" id="progressBar"></div></div>
+
+<!-- ── NAV (matches main: .nav fixed, Indian-flag wafer mark) ── -->
+<nav class="nav">
   <div class="nav-inner">
     <a class="nav-brand" href="index.html">
-      <span class="nav-brand-mark">
-        <svg width="30" height="30" viewBox="0 0 30 30" aria-label="India Semicon 2.0 wafer mark">
+      <span class="nav-brand-mark" aria-label="India Semicon 2.0 wafer mark">
+        <svg viewBox="0 0 32 32" width="22" height="22">
           <defs>
             <linearGradient id="waferGradNav" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#60a5fa"/>
-              <stop offset="100%" stop-color="#2563eb"/>
+              <stop offset="0" stop-color="#FF9933"/>
+              <stop offset=".5" stop-color="#ffffff"/>
+              <stop offset="1" stop-color="#138808"/>
             </linearGradient>
           </defs>
-          <circle cx="15" cy="15" r="13" fill="url(#waferGradNav)"/>
-          <rect x="11" y="11" width="8" height="8" fill="#0b1e3a" opacity=".5"/>
+          <circle cx="16" cy="16" r="14" fill="url(#waferGradNav)"/>
+          <circle cx="16" cy="16" r="14" fill="none" stroke="rgba(0,0,0,.12)" stroke-width="1"/>
+          <path d="M 16 2 L 14 5 L 18 5 Z" fill="#edf2f7" stroke="rgba(0,0,0,.1)" stroke-width=".5"/>
+          <g stroke="rgba(0,0,40,.22)" stroke-width=".5" fill="none">
+            <line x1="6" y1="16" x2="26" y2="16"/>
+            <line x1="16" y1="6" x2="16" y2="26"/>
+            <line x1="10" y1="10" x2="22" y2="10"/>
+            <line x1="10" y1="22" x2="22" y2="22"/>
+            <line x1="10" y1="10" x2="10" y2="22"/>
+            <line x1="22" y1="10" x2="22" y2="22"/>
+          </g>
+          <circle cx="16" cy="16" r="2.3" fill="none" stroke="#0a3c7f" stroke-width=".8"/>
+          <circle cx="16" cy="16" r=".9" fill="#0a3c7f"/>
         </svg>
       </span>
       <span>India Semicon 2.0</span>
     </a>
-    <nav class="nav-links">
-      <a class="nav-link" href="index.html"><span class="num">←</span>Main dashboard</a>
-      <a class="nav-link active" href="#s0"><span class="num">00</span>Overview</a>
-      <a class="nav-link" href="#s1"><span class="num">01</span>Taxonomy</a>
-      <a class="nav-link" href="#s2"><span class="num">02</span>TSMC map</a>
-      <a class="nav-link" href="#s3"><span class="num">03</span>India map</a>
-      <a class="nav-link" href="#s4"><span class="num">04</span>Bottlenecks</a>
-      <a class="nav-link" href="#s5"><span class="num">05</span>Synthesis</a>
-    </nav>
+    <div class="nav-links">
+      <a class="nav-link" href="index.html">← Main</a>
+      <a class="nav-link active" href="#s0">Overview</a>
+      <a class="nav-link" href="#s1">Taxonomy</a>
+      <a class="nav-link" href="#s2">TSMC Map</a>
+      <a class="nav-link" href="#s3">India Map</a>
+      <a class="nav-link" href="#s4">Bottlenecks</a>
+      <a class="nav-link" href="#s5">Synthesis</a>
+    </div>
     <div class="nav-actions">
       <a class="nav-btn primary" href="https://github.com/KhushalM/india-semicon-2" target="_blank" rel="noreferrer">Source ↗</a>
     </div>
   </div>
-</div>
+</nav>
 
-<!-- ── HERO ── -->
-<section class="hero" id="s0">
-  <div class="hero-bg"></div>
+<!-- ── HERO (matches main: single column, data-hero attribute, no aside) ── -->
+<section class="hero" id="s0" data-hero="wafer">
+  <div class="hero-bg" id="heroBg"></div>
   <div class="hero-tint"></div>
   <div class="hero-fade"></div>
   <div class="hero-inner">
     <div>
       <div class="hero-meta">
         <span class="hero-label-dot"></span>
-        <span class="hero-label">Supply chain · Bottlenecks · 2026</span>
+        <span class="hero-label">Supply Chain · Bottlenecks · April 2026</span>
       </div>
-      <h1 class="hero-title">A chip is <em>patterned silicon.</em><br>Trace who makes what, and where India fits in.</h1>
+      <h1 class="hero-title">A chip is <em>patterned silicon.</em></h1>
       <p class="hero-sub">
-        Six tiers of suppliers separate quartz sand from a finished chip. Each one is dominated by two to five firms, and the closer to the top of the stack, the more geographically concentrated they are. This page walks through every tier in plain English, maps the global dependency, then compares it to India's actual capability in 2026.
+        Six tiers of suppliers separate quartz sand from a finished chip. This page walks through every tier in plain English, maps the global dependency, then compares it to India's actual 2026 capability.
       </p>
       <div class="hero-footline">
-        <span>Updated April 2026</span>
-        <span class="dot">·</span>
-        <span>Two Folium maps</span>
+        <span>Two interactive Folium maps</span>
         <span class="dot">·</span>
         <span>Nine bottleneck deep-dives</span>
         <span class="dot">·</span>
-        <span>Research brief attached</span>
+        <span>~15 min read</span>
       </div>
     </div>
-    <aside class="hero-meta-side">
-      <div class="item"><span class="k">Tiers mapped</span><span class="v">T0 — T5</span></div>
-      <div class="item"><span class="k">Global entities</span><span class="v">38 across 7 countries</span></div>
-      <div class="item"><span class="k">India entities</span><span class="v">11 live + design clusters</span></div>
-      <div class="item"><span class="k">Import arrows</span><span class="v">8 upstream routes</span></div>
-    </aside>
   </div>
   <div class="scroll-cue">
-    <span>Scroll</span>
-    <svg width="10" height="14" viewBox="0 0 10 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 1v12M1 9l4 4 4-4"/></svg>
+    Scroll
+    <svg width="12" height="18" viewBox="0 0 12 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 1v14M1 10l5 5 5-5"/></svg>
   </div>
 </section>
+
+<!-- ── 4 STATS STRIP (overlaps hero bottom, matches main) ── -->
+<div class="stats" data-stat-style="portrait">
+  <div class="stat">
+    <div class="stat-label">Tiers Mapped</div>
+    <div class="stat-value">T0<span class="dim">—T5</span></div>
+    <div class="stat-detail">Raw materials through design + customers</div>
+    <span class="stat-trend trend-up">6 tiers</span>
+  </div>
+  <div class="stat">
+    <div class="stat-label">Global Entities</div>
+    <div class="stat-value">38<span class="dim"> firms</span></div>
+    <div class="stat-detail">7 countries, end-to-end TSMC supply chain</div>
+    <span class="stat-trend trend-hot">Interactive</span>
+  </div>
+  <div class="stat">
+    <div class="stat-label">India Live Ecosystem</div>
+    <div class="stat-value">10<span class="dim"> units</span></div>
+    <div class="stat-detail">₹1.60 lakh cr under ISM 2.0, 6 states</div>
+    <span class="stat-trend trend-up">2 operational</span>
+  </div>
+  <div class="stat">
+    <div class="stat-label">Upstream Import Dep.</div>
+    <div class="stat-value">~100<span class="dim">%</span></div>
+    <div class="stat-detail">Wafers, resist, lithography, specialty gases</div>
+    <span class="stat-trend trend-hot">8 routes</span>
+  </div>
+</div>
 
 <!-- ── 01 TAXONOMY ── -->
 <section class="section" id="s1">
@@ -288,11 +337,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
     <div class="section-head">
       <div>
         <div class="section-label">01 — Taxonomy</div>
-      </div>
-      <div>
         <h2 class="section-title">The six tiers, <em>in plain English</em></h2>
-        <p class="section-sub">Every chip passes through these stages in order. Skip any one and the rest becomes impossible. The closer to T0 you go, the more geographic and corporate concentration you find.</p>
       </div>
+      <p class="section-sub">Every chip passes through these stages in order. Skip any one and the rest becomes impossible. The closer to T0 you go, the more geographic and corporate concentration you find.</p>
     </div>
 
     <div class="g3" style="gap:.85rem">
@@ -312,11 +359,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
     <div class="section-head">
       <div>
         <div class="section-label">02 — Global</div>
-      </div>
-      <div>
         <h2 class="section-title">TSMC's <em>supply chain</em>, mapped</h2>
-        <p class="section-sub">A chip is patterned silicon. To pattern it you need wafers from Japan, photoresist from Kawasaki, lithography from Veldhoven, optics from Oberkochen, lasers from Ditzingen, and gases from France and (until 2022) Ukraine. Every TSMC fab sits at the end of this chain.</p>
       </div>
+      <p class="section-sub">A chip is patterned silicon. To pattern it you need wafers from Japan, photoresist from Kawasaki, lithography from Veldhoven, optics from Oberkochen, lasers from Ditzingen, and gases from France and (until 2022) Ukraine. Every TSMC fab sits at the end of this chain.</p>
     </div>
 
     <div class="p-card p-tone-accent">
@@ -340,11 +385,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
     <div class="section-head">
       <div>
         <div class="section-label">03 — India 2026</div>
-      </div>
-      <div>
         <h2 class="section-title">India's <em>live ecosystem</em>, today</h2>
-        <p class="section-sub">Two operational facilities, three ramping, one under construction. Ten approved projects totaling ₹1.60 lakh crore under ISM 2.0. Every wafer, every lithography tool, every photoresist currently comes from abroad — the red dashed lines show exactly which routes.</p>
       </div>
+      <p class="section-sub">Two operational facilities, three ramping, one under construction. Ten approved projects totaling ₹1.60 lakh crore under ISM 2.0. Every wafer, every lithography tool, every photoresist currently comes from abroad — the red dashed lines show exactly which routes.</p>
     </div>
 
     <div class="p-card p-tone-warn">
@@ -361,10 +404,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
     </div>
 
     <div class="g4" style="margin-top:1.25rem;gap:.85rem">
-      <div class="stat-inline"><span class="k">ISM Projects</span><span class="v">10<span class="dim"> units</span></span><span class="d">₹1.60 lakh cr committed, 6 states</span></div>
-      <div class="stat-inline"><span class="k">Operational</span><span class="v">2<span class="dim"> fabs</span></span><span class="d">Micron Sanand, Kaynes Sanand</span></div>
-      <div class="stat-inline"><span class="k">Under Construction</span><span class="v">4<span class="dim"> + 1</span></span><span class="d">Tata Jagiroad, Dholera, CG Semi, HCL-Foxconn</span></div>
-      <div class="stat-inline"><span class="k">Upstream imports</span><span class="v">~100<span class="dim">%</span></span><span class="d">Wafers, resist, litho, specialty gases</span></div>
+      <div class="p-card p-compact p-tone-lead"><div class="p-head"><p class="p-kicker">ISM Projects</p><h3 class="p-title">10<span class="dim"> units</span></h3><p class="p-body">₹1.60 lakh cr committed across 6 states under ISM 2.0</p></div></div>
+      <div class="p-card p-compact p-tone-accent"><div class="p-head"><p class="p-kicker">Operational</p><h3 class="p-title">2<span class="dim"> fabs</span></h3><p class="p-body">Micron ATMP Sanand, Kaynes Semicon Sanand — both in commercial production</p></div></div>
+      <div class="p-card p-compact p-tone-warn"><div class="p-head"><p class="p-kicker">Ramping / Construction</p><h3 class="p-title">4<span class="dim"> + 1</span></h3><p class="p-body">Tata Jagiroad, Tata-PSMC Dholera, CG Semi, HCL-Foxconn Jewar</p></div></div>
+      <div class="p-card p-compact p-tone-critical"><div class="p-head"><p class="p-kicker">Upstream imports</p><h3 class="p-title">~100<span class="dim">%</span></h3><p class="p-body">Wafers, photoresist, lithography, specialty gases — all foreign</p></div></div>
     </div>
   </div>
 </section>
@@ -375,11 +418,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
     <div class="section-head">
       <div>
         <div class="section-label">04 — Bottleneck analysis</div>
-      </div>
-      <div>
         <h2 class="section-title">What India doesn't have, and <em>what it would take</em> to build.</h2>
-        <p class="section-sub">Each card below is one structural gap: what's missing, why it matters, who owns it globally, and realistic paths forward. Written as a briefing memo — read sequentially or jump to a gap.</p>
       </div>
+      <p class="section-sub">Each card below is one structural gap: what's missing, why it matters, who owns it globally, and realistic paths forward. Written as a briefing memo — read sequentially or jump to a gap.</p>
     </div>
 
     <div class="g2" style="gap:1rem">
@@ -538,11 +579,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
     <div class="section-head">
       <div>
         <div class="section-label">05 — Synthesis</div>
-      </div>
-      <div>
         <h2 class="section-title">Where to <em>concentrate</em>, first.</h2>
-        <p class="section-sub">The realistic shape of India's semiconductor sovereignty in 2035 is not an autarky at 2nm. It is a credible domestic T3–T4 presence at mature nodes, growing participation in T1 at the specialty-chemical and gas layer, strong T5 design leveraging RISC-V, and accepted long-term dependencies on Japanese resist, Dutch lithography, and US EDA.</p>
       </div>
+      <p class="section-sub">The realistic shape of India's semiconductor sovereignty in 2035 is not an autarky at 2nm. It is a credible domestic T3–T4 presence at mature nodes, growing participation in T1 at the specialty-chemical and gas layer, strong T5 design leveraging RISC-V, and accepted long-term dependencies on Japanese resist, Dutch lithography, and US EDA.</p>
     </div>
 
     <div class="p-card p-tone-lead synthesis" style="min-height:0">
@@ -593,14 +632,33 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
 </footer>
 
 <script>
-// Card glow follows mouse
+// Card glow follows mouse (matches main PCard onMove pattern)
 document.querySelectorAll('.p-card').forEach(card => {
   card.addEventListener('mousemove', e => {
     const r = card.getBoundingClientRect();
-    card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
-    card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+    card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    card.style.setProperty('--my', (e.clientY - r.top) + 'px');
   });
 });
+
+// Hero parallax (matches main Hero useEffect: translateY + scale)
+const heroBg = document.getElementById('heroBg');
+if (heroBg) {
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    heroBg.style.transform = `translateY(${y * 0.3}px) scale(${1 + y * 0.0002})`;
+  }, { passive: true });
+}
+
+// Scroll progress bar
+const progressBar = document.getElementById('progressBar');
+if (progressBar) {
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight);
+    progressBar.style.width = (scrolled * 100) + '%';
+  }, { passive: true });
+}
 
 // Scroll-spy active nav
 const sections = document.querySelectorAll('section[id]');
@@ -611,8 +669,19 @@ window.addEventListener('scroll', () => {
     if (window.scrollY + 90 >= s.offsetTop) current = s.id;
   });
   navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
-});
+}, { passive: true });
+
+// Reveal on scroll (simple intersection observer)
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('v'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.p-card, .tier-card').forEach(el => { el.classList.add('reveal'); io.observe(el); });
 </script>
+
+<style>
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.v{opacity:1;transform:translateY(0)}
+</style>
 
 </body>
 </html>
