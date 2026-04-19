@@ -355,39 +355,94 @@ def build_tsmc_map() -> folium.Map:
         confidence="High",
     )
 
-    # ── T3 TSMC Fabs ──
+    # ── T3 TSMC Fabs (all known operational + announced facilities) ──
     add_entity(
         fgs["T3"], lat=24.784, lng=120.996,
-        name="TSMC Hsinchu — HQ + Fab 12/20",
+        name="TSMC Hsinchu Fab 2/3/5/8 + HQ",
         tier="T3",
-        tooltip="TSMC Hsinchu — headquarters + N2 R&D + Fab 20",
-        what_is_it="TSMC's corporate headquarters and oldest fab cluster. Home to the Fab 12 complex (16/10/7nm) and the new Fab 20 R&D center where N2 was developed.",
-        role="Where TSMC's process technology is invented before it ramps at other sites. Fab 20 is adjacent to the new Global R&D Center.",
+        tooltip="Hsinchu — oldest fabs + HQ + R&D center",
+        what_is_it="TSMC's corporate headquarters and oldest fab cluster in Hsinchu Science Park. Fabs 2, 3, 5, 8 run mature processes; corporate R&D sits here.",
+        role="The origin of every TSMC node. Node development happens at Hsinchu R&D before ramping elsewhere.",
         why_matters="If Hsinchu is disrupted, TSMC's entire roadmap stalls.",
-        key_facts="Founded 1987. First fab: Fab 1 in Hsinchu Science Park.",
+        key_facts="Founded 1987. Fab 1 (original) was here. Mix of 8-inch (200mm) and 12-inch (300mm) lines.",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T3"], lat=24.779, lng=121.010,
+        name="TSMC Hsinchu Fab 12 + Fab 20",
+        tier="T3",
+        tooltip="Hsinchu Fab 12/20 — 16/10/7nm + N2 R&D",
+        what_is_it="Fab 12 is TSMC's flagship Hsinchu 300mm complex (16/10/7nm nodes). Fab 20 is the new N2 R&D and pilot production site, adjacent to the global R&D center.",
+        role="Where N2 (2nm) was developed before ramping to Kaohsiung Fab 22.",
+        why_matters="Fab 20 proves every new node before high-volume manufacturing starts elsewhere.",
+        key_facts="Fab 20 broke ground 2022; N2 R&D there through 2025.",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T3"], lat=24.841, lng=121.003,
+        name="TSMC Longtan — Fab 10",
+        tier="T3",
+        tooltip="Longtan Fab 10 — mature 200mm",
+        what_is_it="TSMC Longtan Science Park Fab 10 — 200mm (8-inch) wafer fab running 250/180nm nodes.",
+        role="Legacy analog / embedded / automotive-grade chip production. Part of TSMC's mature-node capacity.",
+        why_matters="Mature 200mm capacity remains strategically important for automotive and industrial customers.",
+        key_facts="Opened 1999. Taoyuan County.",
+        confidence="Medium",
+    )
+    add_entity(
+        fgs["T3"], lat=24.192, lng=120.624,
+        name="TSMC Taichung — Fab 15",
+        tier="T3",
+        tooltip="Taichung Fab 15 — 28/16nm Gigafab",
+        what_is_it="TSMC Central Taiwan Science Park 300mm Gigafab 15. Runs 28nm and 16nm nodes.",
+        role="Mid-Taiwan hub for mature-to-mid-advanced capacity — between Hsinchu (north) and Tainan (south).",
+        why_matters="Key 28nm capacity for automotive, IoT, and consumer chips.",
+        key_facts="~100k wpm capacity across phases.",
         confidence="High",
     )
     add_entity(
         fgs["T3"], lat=23.014, lng=120.219,
-        name="TSMC Tainan — Gigafabs 14/18 (3nm, 5nm, 7nm)",
+        name="TSMC Tainan — Fab 14",
         tier="T3",
-        tooltip="TSMC Tainan — current high-volume 3nm / 5nm production",
-        what_is_it="Two 'Gigafabs' in the Tainan Science Park. Fab 14 runs 7nm/5nm; Fab 18 is the 3nm (N3) and 2nm ramp site. Additional 2nm fabs planned in Tainan Special Zone A.",
-        role="The workhorse of TSMC's bleeding-edge output. Apple, Nvidia, AMD chips are made here.",
-        why_matters="The geographical center of mass of the world's most advanced chip production.",
-        key_facts="Fab 18 alone is ~5x the size of a typical European fab.",
+        tooltip="Tainan Fab 14 — 7nm / 5nm Gigafab",
+        what_is_it="TSMC Southern Taiwan Science Park Fab 14. Runs 7nm and 5nm nodes in high volume.",
+        role="The workhorse of TSMC's mature leading-edge output — where Apple A-series, Nvidia, AMD chips are produced.",
+        why_matters="Backbone of TSMC's 5/7nm revenue through mid-decade.",
+        key_facts="~5x the size of a typical European fab.",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T3"], lat=23.100, lng=120.249,
+        name="TSMC Tainan — Fab 18 (3nm HVM)",
+        tier="T3",
+        tooltip="Tainan Fab 18 — 3nm (N3) high-volume manufacturing",
+        what_is_it="TSMC's largest Gigafab — the N3 (3nm) high-volume manufacturing site. Eventually will also ramp N2.",
+        role="Where every 3nm Apple, Qualcomm, and AMD chip is made today.",
+        why_matters="The most valuable fab in the world as of 2025–2026.",
+        key_facts="Multiple phases online since 2022.",
         confidence="High",
     )
     add_entity(
         fgs["T3"], lat=22.635, lng=120.302,
         name="TSMC Kaohsiung — Fab 22 (N2 = 2nm HVM)",
         tier="T3",
-        tooltip="TSMC Kaohsiung Fab 22 — 2nm high-volume manufacturing (NEW 2026)",
-        what_is_it="TSMC's newest Gigafab complex, purpose-built for the 2nm node. Five phases (P1-P5) planned; P1 is in high-volume manufacturing as of late 2025.",
-        role="This is the fab that will produce 2nm chips for Apple, Nvidia, and every other leading-edge customer through ~2028.",
-        why_matters="P1 HVM + P2 trial + P3 building = ~100,000 wafers/month target end-2026. **Capacity is fully sold out for 2026.**",
-        key_facts="P1 entered HVM Q4 2025. All five phases operational by Q4 2027 (planned).",
+        tooltip="Kaohsiung Fab 22 — 2nm HVM, fully sold out 2026",
+        what_is_it="TSMC's newest Gigafab complex, purpose-built for the 2nm node. Five phases planned (P1–P5); P1 in HVM as of late 2025.",
+        role="Produces 2nm chips for Apple, Nvidia, AMD through ~2028.",
+        why_matters="P1 HVM + P2 trial + P3 building = ~100k wafers/month target end-2026. **Capacity is fully sold out for 2026.**",
+        key_facts="P1 HVM Q4 2025. All 5 phases operational by Q4 2027 (planned).",
         confidence="High", source="WCCFTech, TrendForce",
+    )
+    add_entity(
+        fgs["T3"], lat=45.590, lng=-122.404,
+        name="TSMC WaferTech — Camas, WA, USA",
+        tier="T3",
+        tooltip="WaferTech Camas — legacy 200mm (165-500nm)",
+        what_is_it="TSMC's first overseas subsidiary, founded 1996 in Camas, Washington. 200mm (8-inch) wafers, mature 0.16–0.5µm nodes.",
+        role="Legacy fab for automotive, industrial, consumer analog. Still operational but modest scale compared to Taiwan gigafabs.",
+        why_matters="Historical anchor of TSMC's US presence — 20+ years before Arizona Fab 21.",
+        key_facts="Founded 1996. Acquired by TSMC in 1999. ~37,000 wpm capacity.",
+        confidence="High",
     )
     add_entity(
         fgs["T3"], lat=32.037, lng=118.766,

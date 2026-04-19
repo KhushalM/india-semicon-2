@@ -383,6 +383,16 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
       </div>
       <div class="p-foot">Raw materials (T0) are few and remote. Refined inputs (T1) are a near-total Japanese monopoly on photoresist and a 51% Japanese share on silicon wafers. Equipment (T2) is split between one Dutch company (ASML) and four US firms plus Japan's TEL.</div>
     </div>
+
+    <!-- TSMC tier-count summary cards -->
+    <div class="g3" style="gap:.85rem;margin-top:1.25rem">
+      <div class="p-card p-compact" style="--tier-c:#8b5a2b;border-color:rgba(139,90,43,.22)"><div class="p-head"><p class="p-kicker" style="color:rgba(203,146,89,.9)">T0 + T1 · Materials</p><h3 class="p-title">12<span class="dim"> suppliers</span></h3><p class="p-body">Quartz + neon + wafers + photoresist + chemicals + gases. Japanese firms dominate T1: 51% wafers, 88% photoresist.</p></div></div>
+      <div class="p-card p-compact p-tone-violet"><div class="p-head"><p class="p-kicker">T2 · Equipment</p><h3 class="p-title">7<span class="dim"> makers</span></h3><p class="p-body">ASML (EUV monopoly) + Zeiss optics + Trumpf laser + Applied / Lam / KLA (US) + Tokyo Electron. Top-5 = 65% of market.</p></div></div>
+      <div class="p-card p-compact p-tone-accent"><div class="p-head"><p class="p-kicker">T3 · TSMC Fabs</p><h3 class="p-title">11<span class="dim"> sites</span></h3><p class="p-body">Taiwan (7): Hsinchu ×2, Longtan, Taichung, Tainan ×2, Kaohsiung. Overseas (4): Nanjing, Camas WA, Arizona, Kumamoto, Dresden.</p></div></div>
+      <div class="p-card p-compact p-tone-warn"><div class="p-head"><p class="p-kicker">T4 · OSAT partners</p><h3 class="p-title">3<span class="dim"> firms</span></h3><p class="p-body">ASE Technology ($18.5B rev, 45% share), Amkor ($6.3B), JCET ($5B, +19% YoY). Top-3 control half the market.</p></div></div>
+      <div class="p-card p-compact p-tone-critical"><div class="p-head"><p class="p-kicker">T5 · Fabless customers</p><h3 class="p-title">6<span class="dim"> majors</span></h3><p class="p-body">Apple (#1), Nvidia, AMD, Qualcomm, Broadcom, MediaTek. Apple alone buys ~20–25% of TSMC quarterly revenue.</p></div></div>
+      <div class="p-card p-compact p-tone-lead"><div class="p-head"><p class="p-kicker">T5 · EDA + IP</p><h3 class="p-title">3<span class="dim"> + 2</span></h3><p class="p-body">EDA: Synopsys 46% + Cadence 35% + Siemens 13% = 94% share. IP: Arm dominant, RISC-V now at 25% penetration.</p></div></div>
+    </div>
   </div>
 </section>
 
@@ -410,11 +420,14 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
       <div class="p-foot">India in 2026 is overwhelmingly a T4 and T5 story. The operational facilities are OSATs. The two fabs sit at 28nm and 180nm — 5–8 generations behind TSMC's 2nm. Design is where India is already world-class: ~125,000 engineers across Bangalore and Hyderabad.</div>
     </div>
 
-    <div class="g4" style="margin-top:1.25rem;gap:.85rem">
-      <div class="p-card p-compact p-tone-lead"><div class="p-head"><p class="p-kicker">ISM Projects</p><h3 class="p-title">10<span class="dim"> units</span></h3><p class="p-body">₹1.60 lakh cr committed across 6 states under ISM 2.0</p></div></div>
-      <div class="p-card p-compact p-tone-accent"><div class="p-head"><p class="p-kicker">Operational</p><h3 class="p-title">2<span class="dim"> fabs</span></h3><p class="p-body">Micron ATMP Sanand, Kaynes Semicon Sanand — both in commercial production</p></div></div>
-      <div class="p-card p-compact p-tone-warn"><div class="p-head"><p class="p-kicker">Ramping / Construction</p><h3 class="p-title">4<span class="dim"> + 1</span></h3><p class="p-body">Tata Jagiroad, Tata-PSMC Dholera, CG Semi, HCL-Foxconn Jewar</p></div></div>
-      <div class="p-card p-compact p-tone-critical"><div class="p-head"><p class="p-kicker">Upstream imports</p><h3 class="p-title">~100<span class="dim">%</span></h3><p class="p-body">Wafers, photoresist, lithography, specialty gases — all foreign</p></div></div>
+    <!-- India tier-count summary cards -->
+    <div class="g3" style="margin-top:1.25rem;gap:.85rem">
+      <div class="p-card p-compact p-tone-accent"><div class="p-head"><p class="p-kicker">T3 · Front-end Fabs</p><h3 class="p-title">2<span class="dim"> sites</span></h3><p class="p-body"><strong style="color:#fff">Tata-PSMC Dholera</strong> (28-110nm, ₹91,000 cr, first silicon late 2026) + <strong style="color:#fff">SCL Mohali</strong> (legacy 180nm, strategic/ISRO).</p></div></div>
+      <div class="p-card p-compact p-tone-warn"><div class="p-head"><p class="p-kicker">T4 · OSAT / ATMP</p><h3 class="p-title">5<span class="dim"> sites</span></h3><p class="p-body">Micron Sanand (oper.), Kaynes Sanand (oper.), CG Semi Sanand (pilot), Tata Jagiroad (Apr-26 commission), HCL-Foxconn Jewar (2028).</p></div></div>
+      <div class="p-card p-compact p-tone-lead"><div class="p-head"><p class="p-kicker">T5 · Design clusters</p><h3 class="p-title">3<span class="dim"> hubs</span></h3><p class="p-body"><strong style="color:#fff">Bangalore</strong> (~80k engineers: Qualcomm, Intel, Nvidia, AMD, Arm), <strong style="color:#fff">Hyderabad</strong> (AMD flagship), <strong style="color:#fff">IIT Madras</strong> (Shakti RISC-V).</p></div></div>
+      <div class="p-card p-compact p-tone-violet"><div class="p-head"><p class="p-kicker">ISM Projects total</p><h3 class="p-title">10<span class="dim"> units</span></h3><p class="p-body">2 fabs + 8 OSAT/ATMP approved. ₹1.60 lakh cr ($19B) committed across 6 states. DLI: 24 chip design projects backed.</p></div></div>
+      <div class="p-card p-compact p-tone-lead"><div class="p-head"><p class="p-kicker">Operational today</p><h3 class="p-title">2<span class="dim"> / 10</span></h3><p class="p-body">Commercial production: Micron Sanand (Feb-26), Kaynes Sanand (Mar-26). Tata Jagiroad commissioning Apr-26 (3rd).</p></div></div>
+      <div class="p-card p-compact p-tone-critical"><div class="p-head"><p class="p-kicker">Upstream imports (T0–T2)</p><h3 class="p-title">~100<span class="dim">%</span></h3><p class="p-body">Wafers (Japan), photoresist (Japan), lithography (NL), specialty gases (FR/JP), equipment (US/NL/JP). Eight import routes visible.</p></div></div>
     </div>
   </div>
 </section>
