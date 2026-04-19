@@ -42,7 +42,7 @@ const GEO = {
 };
 
 // State-line overlay asset (PNG mask, aligned to viewBox 0 0 400 440)
-const STATES_URL = 'assets/india-states.png';
+const STATES_URL = (typeof window !== 'undefined' && window.__resources && window.__resources.statesMask) || 'assets/india-states.png';
 
 function IndiaMap() {
   const [tip, setTip] = useState(null);

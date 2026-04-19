@@ -106,7 +106,7 @@ function App() {
     <>
       <Nav active={active} onJump={onJump} onToggleTheme={onToggleTheme} theme={theme}
            onOpenKbar={() => setKbarOpen(true)} onShare={onShare} />
-      <Hero headline={tweaks.headline} heroStyle={tweaks.heroStyle} />
+      <Hero headline={tweaks.headline} />
       <HeroStats statStyle={tweaks.statStyle} />
       <SectionOverview />
       <SectionMarket />
@@ -128,8 +128,6 @@ function App() {
           </div>
           <div style={{display:'flex',gap:'.85rem',alignItems:'center',color:'var(--text-3)'}}>
             <span>Press <kbd>⌘</kbd><kbd>K</kbd> to search</span>
-            <span>·</span>
-            <button onClick={onShare} style={{background:'none',border:'none',color:'var(--accent)',cursor:'pointer',font:'inherit',fontWeight:600}}>Share this page</button>
           </div>
         </div>
       </footer>

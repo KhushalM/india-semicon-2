@@ -207,9 +207,6 @@ function Nav({ active, onJump, onToggleTheme, theme, onOpenKbar, onToggleTweaks,
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
             )}
           </button>
-          <button className="nav-btn" onClick={onShare} title="Share link to current section" aria-label="Share">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="m16 6-4-4-4 4"/><path d="M12 2v13"/></svg>
-          </button>
         </div>
       </div>
     </nav>
@@ -217,121 +214,267 @@ function Nav({ active, onJump, onToggleTheme, theme, onOpenKbar, onToggleTweaks,
 }
 
 // ── Hero HUD overlay (NEXA-inspired) ──────────
-function HeroHUD() {
-  const [tick, setTick] = useState(0);
+// Interactive wafer: drag to spin, hover to tilt (3D), click a die to inspect
+function InteractiveWafer() {
+  const wrapRef = useRef(null);
+  const [rot, setRot] = useState(0);              // Z-axis spin (around wafer center)
+  const [orbit, setOrbit] = useState({x:30, y:0}); // X = pitch (tip forward/back), Y = yaw (spin around vertical)
+  const [hover, setHover] = useState({x:0, y:0});  // subtle cursor-follow tilt on top
+  const [pick, setPick] = useState(null);
+  const dragRef = useRef({dragging:false, lastX:0, lastY:0, velocity:0, vx:0, vy:0, moved:0});
+  const rotRef = useRef(rot);
+  const orbitRef = useRef(orbit);
+  rotRef.current = rot;
+  orbitRef.current = orbit;
+
+  // Inertia + idle drift
   useEffect(() => {
-    const id = setInterval(() => setTick(t => (t + 1) % 100), 1200);
-    return () => clearInterval(id);
+    let raf;
+    const tick = () => {
+      const d = dragRef.current;
+      if (!d.dragging){
+        // Z-axis inertia + slow continuous drift
+        const nextRot = rotRef.current + d.velocity + 0.15;
+        d.velocity *= 0.96;
+        if (Math.abs(d.velocity) < 0.005) d.velocity = 0;
+        setRot(nextRot);
+        // Orbit inertia — decays and eases back toward base tilt
+        const o = orbitRef.current;
+        const nextY = o.y + d.vy;
+        const nextX = o.x + d.vx;
+        d.vx *= 0.94; d.vy *= 0.94;
+        if (Math.abs(d.vx) < 0.01) d.vx = 0;
+        if (Math.abs(d.vy) < 0.01) d.vy = 0;
+        setOrbit({x:nextX, y:nextY});
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
   }, []);
-  // Fake live-ish values
-  const coord = `22°26'N  72°52'E`;
-  const uptime = `${String(Math.floor(tick / 6) + 12).padStart(2, '0')}:${String((tick * 7) % 60).padStart(2, '0')}:${String((tick * 13) % 60).padStart(2, '0')}`;
-  const die = 320 + (tick % 7) * 3;
+
+  const onPointerDown = (e) => {
+    e.currentTarget.setPointerCapture?.(e.pointerId);
+    dragRef.current = {dragging:true, lastX:e.clientX, lastY:e.clientY, velocity:0, vx:0, vy:0, moved:0};
+  };
+  const onPointerMove = (e) => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    // Subtle cursor-follow tilt (always on)
+    const nx = ((e.clientX - r.left)/r.width - 0.5) * 2;
+    const ny = ((e.clientY - r.top)/r.height - 0.5) * 2;
+    setHover({x:Math.max(-1,Math.min(1,nx)), y:Math.max(-1,Math.min(1,ny))});
+
+    const d = dragRef.current;
+    if (d.dragging){
+      const dx = e.clientX - d.lastX;
+      const dy = e.clientY - d.lastY;
+      // horizontal drag → yaw (rotate around vertical axis)
+      // vertical drag   → pitch (tip forward/back)
+      const yaw   = dx * 0.6;
+      const pitch = -dy * 0.6;
+      d.vx = pitch; d.vy = yaw;
+      d.lastX = e.clientX; d.lastY = e.clientY;
+      d.moved += Math.abs(dx) + Math.abs(dy);
+      setOrbit(o => ({x:o.x + pitch, y:o.y + yaw}));
+    }
+  };
+  const onPointerUp = () => { dragRef.current.dragging = false; };
+  const onPointerLeave = () => {
+    dragRef.current.dragging = false;
+    setHover({x:0,y:0});
+  };
+
+  // 13x13 die grid. Compute list of dies within the wafer circle.
+  const dies = useMemo(() => {
+    const list = [];
+    const DIE_TYPES = [
+      {kind:'Logic · 7nm', c:'#2563eb', weight:3},
+      {kind:'I/O · 28nm',  c:'#60a5fa', weight:2},
+      {kind:'Memory',      c:'#7c3aed', weight:2},
+      {kind:'Analog',      c:'#f59e0b', weight:2},
+      {kind:'Defect',      c:'#ef4444', weight:1, defect:true},
+    ];
+    const pool = DIE_TYPES.flatMap(t => Array(t.weight).fill(t));
+    let seed = 17;
+    const rng = () => { seed = (seed * 9301 + 49297) % 233280; return seed/233280; };
+    for (let r=0;r<13;r++){
+      for (let c=0;c<13;c++){
+        const x = 10 + c*6.5, y = 10 + r*6.5;
+        const cx = x + 3.25, cy = y + 3.25;
+        const d = Math.hypot(cx-50, cy-50);
+        if (d > 43) continue;
+        const t = pool[Math.floor(rng()*pool.length)];
+        const yld = t.defect ? 0 : Math.round(88 + rng()*11);
+        list.push({c:cx, r:cy, x, y, col:c, row:r, kind:t.kind, color:t.c, defect:!!t.defect, yield:yld});
+      }
+    }
+    return list;
+  }, []);
+
+  const pickTimerRef = useRef(null);
+  const justPickedRef = useRef(false);
+  // Use pointerdown so it fires before drag/click-clear logic
+  const onDieDown = (e, d) => {
+    e.stopPropagation();
+    setPick(d);
+    justPickedRef.current = true;
+    if (pickTimerRef.current) clearTimeout(pickTimerRef.current);
+    pickTimerRef.current = setTimeout(() => setPick(null), 5000);
+  };
+  useEffect(() => () => { if (pickTimerRef.current) clearTimeout(pickTimerRef.current); }, []);
+
+  // Compose transform: orbit (from drag) + subtle hover modulation
+  // orbit.x = pitch (tip forward/back), orbit.y = yaw (spin around vertical)
+  const tiltX = orbit.x + hover.y * -4;
+  const tiltY = orbit.y + hover.x * 4;
+  const sheenX = 30 + hover.x * 25;
+  const sheenY = 30 + hover.y * 25;
 
   return (
-    <div className="hud">
-      <div className="hud-grid"></div>
-      <div className="hud-corner tl"></div>
-      <div className="hud-corner tr"></div>
-      <div className="hud-corner bl"></div>
-      <div className="hud-corner br"></div>
-
-      {/* Silicon wafer */}
-      <div className="hud-wafer" aria-hidden="true">
-        <svg viewBox="0 0 100 100">
+    <div
+      ref={wrapRef}
+      className="hud-wafer interactive"
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerCancel={onPointerUp}
+      onPointerLeave={onPointerLeave}
+      onClick={() => {
+        if (justPickedRef.current) { justPickedRef.current = false; return; }
+        if (dragRef.current.moved < 2) {
+          if (pickTimerRef.current) clearTimeout(pickTimerRef.current);
+          setPick(null);
+        }
+      }}
+      style={{
+        perspective: '900px',
+        cursor: dragRef.current.dragging ? 'grabbing' : 'grab'
+      }}
+    >
+      <div
+        className="hud-wafer-inner"
+        style={{
+          transform:`rotateX(${tiltX}deg) rotateY(${tiltY}deg)`,
+          transition: 'transform .15s ease-out',
+          width:'100%', height:'100%',
+          transformStyle:'preserve-3d',
+          position:'relative'
+        }}
+      >
+        {/* thickness edge: a dark ring translated back on Z so the bottom rim shows through the perspective tilt */}
+        <svg viewBox="0 0 100 100" style={{position:'absolute',inset:0,overflow:'visible',transform:'translateZ(-4px)',pointerEvents:'none'}}>
+          <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(20,25,32,.55)" strokeWidth="1.2"/>
+        </svg>
+        <svg viewBox="0 0 100 100" style={{position:'absolute',inset:0,overflow:'visible',transform:'translateZ(-2px)',pointerEvents:'none'}}>
+          <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(20,25,32,.35)" strokeWidth=".8"/>
+        </svg>
+        <svg viewBox="0 0 100 100" style={{overflow:'visible',position:'relative'}}>
           <defs>
-            <radialGradient id="waferG" cx="38%" cy="35%">
-              <stop offset="0%" stopColor="rgba(255,255,255,.85)"/>
-              <stop offset="30%" stopColor="rgba(220,232,248,.55)"/>
-              <stop offset="65%" stopColor="rgba(170,200,232,.35)"/>
-              <stop offset="100%" stopColor="rgba(90,130,180,.5)"/>
-            </radialGradient>
-            <radialGradient id="waferRim" cx="50%" cy="50%">
-              <stop offset="92%" stopColor="rgba(30,58,95,0)"/>
-              <stop offset="98%" stopColor="rgba(30,58,95,.25)"/>
-              <stop offset="100%" stopColor="rgba(30,58,95,.55)"/>
-            </radialGradient>
-            <linearGradient id="waferSheen" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="rgba(255,255,255,.28)"/>
-              <stop offset="30%" stopColor="rgba(255,200,220,.12)"/>
-              <stop offset="55%" stopColor="rgba(180,220,255,.1)"/>
-              <stop offset="80%" stopColor="rgba(220,200,255,.1)"/>
-              <stop offset="100%" stopColor="rgba(255,255,255,0)"/>
-            </linearGradient>
             <clipPath id="waferClip">
-              {/* circle with bottom notch */}
-              <path d="M 50 4 a 46 46 0 1 1 -12.5 89.7 L 37 96 A 2 2 0 0 1 35 94 L 35 93 A 2 2 0 0 1 37 91 L 37.7 90.7 A 46 46 0 0 1 50 4 Z"/>
+              <circle cx="50" cy="50" r="46"/>
             </clipPath>
           </defs>
 
-          {/* wafer body */}
-          <g clipPath="url(#waferClip)">
-            <circle cx="50" cy="50" r="46" fill="url(#waferG)"/>
-            <rect x="0" y="0" width="100" height="100" fill="url(#waferSheen)" opacity=".7"/>
+          {/* Rotating group contains everything that should spin with the wafer */}
+          <g transform={`rotate(${rot} 50 50)`}>
+            {/* invisible hit area painted FIRST so dies (painted after) receive events first */}
+            <circle cx="50" cy="50" r="46" fill="rgba(255,255,255,.001)" style={{pointerEvents:'auto'}}/>
+            <g clipPath="url(#waferClip)">
+              {/* no fill — see-through body */}
+              {/* subtle concentric polish rings */}
+              <g fill="none" stroke="rgba(20,25,32,.08)" strokeWidth=".15">
+                <circle cx="50" cy="50" r="38"/>
+                <circle cx="50" cy="50" r="28"/>
+                <circle cx="50" cy="50" r="18"/>
+              </g>
+              {/* die grid */}
+              <g stroke="rgba(20,25,32,.35)" strokeWidth=".15" fill="none">
+                {Array.from({length:13}).map((_,i)=>(
+                  <line key={`dv${i}`} x1={10+i*6.5} y1="4" x2={10+i*6.5} y2="96"/>
+                ))}
+                {Array.from({length:13}).map((_,i)=>(
+                  <line key={`dh${i}`} x1="4" y1={10+i*6.5} x2="96" y2={10+i*6.5}/>
+                ))}
+              </g>
 
-            {/* die grid (rectangular chips across the wafer) */}
-            <g stroke="rgba(11,30,58,.22)" strokeWidth=".18" fill="none">
-              {Array.from({ length: 13 }).map((_, i) => (
-                <line key={`dv${i}`} x1={10 + i * 6.5} y1="4" x2={10 + i * 6.5} y2="96"/>
-              ))}
-              {Array.from({ length: 13 }).map((_, i) => (
-                <line key={`dh${i}`} x1="4" y1={10 + i * 6.5} x2="96" y2={10 + i * 6.5}/>
-              ))}
+              {/* clickable dies — mostly invisible; a sprinkle of translucent ones for texture */}
+              <g>
+                {dies.map((d, i) => {
+                  const selected = pick && pick.col===d.col && pick.row===d.row;
+                  // deterministic sprinkle: ~15% of cells get a faint fill
+                  const sprinkle = ((d.col*7 + d.row*13) % 7) === 0;
+                  let fill = 'transparent';
+                  let opacity = 1;
+                  if (selected) { fill = d.color; opacity = .85; }
+                  else if (d.defect) { fill = '#64707e'; opacity = .35; }
+                  else if (sprinkle) { fill = '#94a3b8'; opacity = .12; }
+                  return (
+                    <rect key={i}
+                      x={d.x+0.2} y={d.y+0.2} width="6.1" height="6.1"
+                      fill={fill}
+                      opacity={opacity}
+                      stroke={selected ? d.color : 'none'}
+                      strokeWidth={selected ? .5 : 0}
+                      style={{cursor:'pointer',pointerEvents:'auto'}}
+                      onPointerDown={(e)=>onDieDown(e,d)}
+                    />
+                  );
+                })}
+              </g>
+
+              {/* crosshair on picked */}
+              {pick && (
+                <g pointerEvents="none">
+                  <rect x={pick.x-1} y={pick.y-1} width="8.5" height="8.5"
+                    fill="none" stroke={pick.color} strokeWidth=".3" strokeDasharray=".6 .4"/>
+                </g>
+              )}
             </g>
-            {/* subtle yield coloring on a few dies */}
-            <g opacity=".35">
-              <rect x="36.5" y="29.5" width="6.5" height="6.5" fill="#2563eb"/>
-              <rect x="56.5" y="42.5" width="6.5" height="6.5" fill="#2563eb"/>
-              <rect x="49.5" y="62.5" width="6.5" height="6.5" fill="#2563eb"/>
-              <rect x="30" y="49.5" width="6.5" height="6.5" fill="#94a3b8"/>
-              <rect x="62.5" y="62.5" width="6.5" height="6.5" fill="#94a3b8"/>
-            </g>
+
+            {/* orientation notch */}
+            <path d="M 46.5 95.9 L 50 92.5 L 53.5 95.9 Z" fill="none" stroke="rgba(20,25,32,.45)" strokeWidth=".25" strokeLinejoin="round"/>
+
+            {/* rim */}
+            <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(20,25,32,.4)" strokeWidth=".5" pointerEvents="none"/>
           </g>
 
-          {/* rim glow */}
-          <circle cx="50" cy="50" r="46" fill="none" stroke="url(#waferRim)" strokeWidth="2"/>
-          <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(11,30,58,.5)" strokeWidth=".3"/>
-
-          {/* highlighted die (hot spot) */}
-          <rect x="56.5" y="42.5" width="6.5" height="6.5" fill="none" stroke="#2563eb" strokeWidth=".35"/>
-          <rect x="55.5" y="41.5" width="8.5" height="8.5" fill="none" stroke="#2563eb" strokeWidth=".2" strokeDasharray=".6 .4"/>
-
-          {/* callout line to a chip */}
-          <line x1="62" y1="44" x2="86" y2="28" stroke="rgba(11,30,58,.55)" strokeWidth=".2"/>
-          <circle cx="62" cy="44" r=".6" fill="#2563eb"/>
-          <text x="87" y="27" fontFamily="var(--mono)" fontSize="2.2" fill="#1e3a5f" letterSpacing=".1">DIE 04·17</text>
-          <text x="87" y="30" fontFamily="var(--mono)" fontSize="1.8" fill="rgba(30,58,95,.55)">yield 94.2%</text>
         </svg>
       </div>
+      {/* Inspect card — rendered OUTSIDE the 3D-transformed inner so it stays upright regardless of wafer angle */}
+      {pick && (
+        <div className="wafer-card" style={{
+          position:'absolute', top:'4%', right:'-2%',
+          background:'rgba(255,255,255,.95)',
+          border:'1px solid rgba(20,25,32,.18)',
+          borderRadius:6,
+          padding:'.55rem .7rem',
+          minWidth:150,
+          boxShadow:'0 4px 16px rgba(20,40,80,.12)',
+          pointerEvents:'none',
+          fontFamily:'var(--mono)'
+        }}>
+          <div style={{fontSize:'.58rem',letterSpacing:'.12em',color:'#1e3a5f',textTransform:'uppercase'}}>{`Die ${String(pick.col).padStart(2,'0')}·${String(pick.row).padStart(2,'0')}`}</div>
+          <div style={{fontFamily:'var(--serif)',fontStyle:'italic',fontSize:'1rem',color:pick.color,marginTop:2}}>{pick.kind}</div>
+          <div style={{fontSize:'.62rem',color:'rgba(30,58,95,.7)',marginTop:2}}>{pick.defect ? 'Status: REJECT' : `Yield ${pick.yield}%`}</div>
+        </div>
+      )}
+      <div className="hud-wafer-hint">drag to spin · click a die</div>
+    </div>
+  );
+}
 
-      {/* Big central readout (speedo-style number) */}
-      <div className="hud-readout">
-        <div className="rk">Fab Capacity · Q2</div>
-        <div className="rv">{die}<span style={{fontSize:'.45em',opacity:.55,marginLeft:'.1em'}}>K/wk</span></div>
-        <div className="ru">Wafer starts · Dholera +Sanand</div>
-      </div>
-
-      {/* Floating telemetry panels */}
-      <div className="hud-panel p1">
-        <div className="pk">Lat/Lon</div>
-        <div className="pvs">{coord}</div>
-      </div>
-      <div className="hud-panel p2">
-        <div className="pk">Status</div>
-        <div className="pv">● Operational</div>
-        <div className="pvs">uptime {uptime}</div>
-      </div>
-      <div className="hud-panel p3">
-        <div className="pk">Yield Index</div>
-        <div className="pv">94.{(tick * 3) % 10}%</div>
-        <div className="pvs">last 24h · +0.3</div>
-      </div>
+function HeroHUD() {
+  return (
+    <div className="hud">
+      <InteractiveWafer />
     </div>
   );
 }
 
 // ── Hero ──────────────────────────────────────
-function Hero({ headline, heroStyle = 'hud' }) {
+function Hero({ headline }) {
   const ref = useRef(null);
   useEffect(() => {
     const onScroll = () => {
@@ -342,11 +485,11 @@ function Hero({ headline, heroStyle = 'hud' }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
   return (
-    <section className="hero" id="s0" data-hero={heroStyle}>
+    <section className="hero" id="s0" data-hero="wafer">
       <div ref={ref} className="hero-bg"></div>
       <div className="hero-tint"></div>
       <div className="hero-fade"></div>
-      {heroStyle !== 'minimal' && <HeroHUD />}
+      <HeroHUD />
       <div className="hero-inner">
         <div>
           <div className="hero-meta">
@@ -506,16 +649,6 @@ function TweaksPanel({ open, tweaks, onChange, onClose }) {
               onClick={() => onChange('accentColor', a.id)}
               aria-label={a.id}
             />
-          ))}
-        </div>
-      </div>
-      <div className="tweaks-row">
-        <div className="tweaks-row-label">Hero style</div>
-        <div className="tweaks-opts">
-          {['hud', 'wafer', 'minimal'].map(s => (
-            <button key={s}
-              className={`tweaks-opt ${tweaks.heroStyle === s ? 'active' : ''}`}
-              onClick={() => onChange('heroStyle', s)}>{s}</button>
           ))}
         </div>
       </div>
