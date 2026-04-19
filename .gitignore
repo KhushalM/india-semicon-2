@@ -5,3 +5,6 @@ uploads/
 shots/
 *.log
 node_modules/
+.venv-maps/
+__pycache__/
+*.pyc

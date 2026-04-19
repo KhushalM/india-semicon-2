@@ -1,0 +1,2393 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_d990ea73856e0b7295f4f364bfb8dec1 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-ant-path@1.1.2/dist/leaflet-ant-path.min.js"></script>
+</head>
+<body>
+    
+    
+<div style="
+  position: fixed; bottom: 20px; right: 20px; z-index: 9999;
+  background: #fff; border-radius: 12px; padding: 16px 18px;
+  box-shadow: 0 8px 32px rgba(15,22,41,.18);
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  max-width: 280px;
+  border: 1px solid rgba(15,23,42,.08);
+  ">
+  <div style="font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .1em; color: #2563eb; margin-bottom: 4px">Legend</div>
+  <div style="font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 2px">TSMC Global Supply Chain</div>
+  <div style="font-size: 12px; color: #64748b; margin-bottom: 10px; line-height: 1.5">Click any marker for a plain-English explainer. Toggle tiers in the top-right panel. Animated dashed lines show directional flow.</div>
+  <div style="display:flex;align-items:center;gap:10px;margin:6px 0"><span style="width:16px;height:16px;border-radius:50%;background:#8b5a2b;flex-shrink:0;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.15)"></span><span style="font-size:12px;color:#334155"><strong style="color:#0f172a">T0</strong> · Raw Materials</span></div><div style="display:flex;align-items:center;gap:10px;margin:6px 0"><span style="width:16px;height:16px;border-radius:50%;background:#0d9488;flex-shrink:0;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.15)"></span><span style="font-size:12px;color:#334155"><strong style="color:#0f172a">T1</strong> · Refined Inputs</span></div><div style="display:flex;align-items:center;gap:10px;margin:6px 0"><span style="width:16px;height:16px;border-radius:50%;background:#7c3aed;flex-shrink:0;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.15)"></span><span style="font-size:12px;color:#334155"><strong style="color:#0f172a">T2</strong> · Equipment</span></div><div style="display:flex;align-items:center;gap:10px;margin:6px 0"><span style="width:16px;height:16px;border-radius:50%;background:#2563eb;flex-shrink:0;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.15)"></span><span style="font-size:12px;color:#334155"><strong style="color:#0f172a">T3</strong> · Front-End Fabs</span></div><div style="display:flex;align-items:center;gap:10px;margin:6px 0"><span style="width:16px;height:16px;border-radius:50%;background:#d97706;flex-shrink:0;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.15)"></span><span style="font-size:12px;color:#334155"><strong style="color:#0f172a">T4</strong> · OSAT / Back-End</span></div><div style="display:flex;align-items:center;gap:10px;margin:6px 0"><span style="width:16px;height:16px;border-radius:50%;background:#db2777;flex-shrink:0;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.15)"></span><span style="font-size:12px;color:#334155"><strong style="color:#0f172a">T5</strong> · Design & Customers</span></div>
+  <div style="margin-top:10px;padding-top:10px;border-top:1px solid #e2e8f0;font-size:11px;color:#64748b;line-height:1.55">
+    <strong style="color:#334155">Tip:</strong> Click any marker for a plain-English explainer. Use the layer control (top-right) to toggle tiers.
+  </div>
+</div>
+    
+    <div style="position:fixed;bottom:20px;left:20px;z-index:9999;
+      font:11px/1.4 -apple-system,BlinkMacSystemFont,sans-serif;color:#64748b;
+      background:rgba(255,255,255,.92);padding:6px 10px;border-radius:6px;
+      box-shadow:0 1px 4px rgba(0,0,0,.08)">
+      Map: CartoDB · Data: industry reports, SEMI, company filings (2025-26)
+    </div>
+    
+    
+            <div class="folium-map" id="map_d990ea73856e0b7295f4f364bfb8dec1" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_d990ea73856e0b7295f4f364bfb8dec1 = L.map(
+                "map_d990ea73856e0b7295f4f364bfb8dec1",
+                {
+                    center: [25.0, 100.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 3,
+  "zoomControl": true,
+  "preferCanvas": true,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_d990ea73856e0b7295f4f364bfb8dec1);
+
+            
+
+        
+    
+            var tile_layer_e113445972c030faea479cb44c55ed73 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_e113445972c030faea479cb44c55ed73.addTo(map_d990ea73856e0b7295f4f364bfb8dec1);
+        
+    
+            var feature_group_b6dadbd8a4f55b8b8f209f8002bb10c0 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_2bc048c56f8d2393b4920bcf82a3529f = L.marker(
+                [35.912, -82.076],
+                {
+}
+            ).addTo(feature_group_b6dadbd8a4f55b8b8f209f8002bb10c0);
+        
+    
+            var div_icon_a248df4299170ef4e124643bad406ddb = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#8b5a2b;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT0\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_4bbd8ebd0df47f3765dcea0c1500ce00 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_591dd7452e7ce25dd6d201ecf269dfce = $(`<div id="html_591dd7452e7ce25dd6d201ecf269dfce" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#8b5a2b;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T0 · Raw Materials</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Spruce Pine, NC — quartzite mining</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#8b5a2b;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">A small town in North Carolina that mines the world's purest quartzite — the feedstock from which semiconductor-grade silicon is made.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#8b5a2b;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">The quartz is refined into silicon, then grown into ingots, then sliced into the wafers every chip starts from.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#8b5a2b;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">~90% of the world's semiconductor-grade quartz comes from this one region. Single geographic choke-point.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#8b5a2b;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Operators: Sibelco, The Quartz Corp. If Spruce Pine is disrupted (e.g., hurricane), the entire industry feels it.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>   <div style="margin-top:10px;font-size:11px;color:#64748b"><em>Source: USITC, industry reports</em></div> </div> </div>`)[0];
+                popup_4bbd8ebd0df47f3765dcea0c1500ce00.setContent(html_591dd7452e7ce25dd6d201ecf269dfce);
+            
+        
+
+        marker_2bc048c56f8d2393b4920bcf82a3529f.bindPopup(popup_4bbd8ebd0df47f3765dcea0c1500ce00)
+        ;
+
+        
+    
+    
+            marker_2bc048c56f8d2393b4920bcf82a3529f.bindTooltip(
+                `<div>
+                     Spruce Pine — high-purity quartz (the silicon feedstock)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2bc048c56f8d2393b4920bcf82a3529f.setIcon(div_icon_a248df4299170ef4e124643bad406ddb);
+            
+    
+            var marker_f9f5b5384ba51cfc3a906fba385fa2d3 = L.marker(
+                [46.482, 30.723],
+                {
+}
+            ).addTo(feature_group_b6dadbd8a4f55b8b8f209f8002bb10c0);
+        
+    
+            var div_icon_72eb6f2c8ddd0ede39a9727bec9d29fb = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#8b5a2b;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT0\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_bdba25c40fd526899ace0a77cadce551 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_6013d0bfc3feb271ad8ba3eb57eec342 = $(`<div id="html_6013d0bfc3feb271ad8ba3eb57eec342" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#8b5a2b;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T0 · Raw Materials</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Odesa, Ukraine — neon production</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#8b5a2b;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Ukrainian cities Odesa and pre-2022 Mariupol produced purified neon gas from by-products of Russian/Ukrainian steel mills.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#8b5a2b;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Neon is used inside excimer lasers that power DUV lithography — the machines that draw circuit patterns onto wafers.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#8b5a2b;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Ukraine supplied ~70% of world's neon pre-2022. When war broke out, prices spiked 10x and fabs scrambled for alternatives.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#8b5a2b;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Primary producers: Iceblick, Cryoin. Post-invasion: most capacity offline or relocated; industry now hedges with Japan, China, US.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>   <div style="margin-top:10px;font-size:11px;color:#64748b"><em>Source: CSIS, USITC</em></div> </div> </div>`)[0];
+                popup_bdba25c40fd526899ace0a77cadce551.setContent(html_6013d0bfc3feb271ad8ba3eb57eec342);
+            
+        
+
+        marker_f9f5b5384ba51cfc3a906fba385fa2d3.bindPopup(popup_bdba25c40fd526899ace0a77cadce551)
+        ;
+
+        
+    
+    
+            marker_f9f5b5384ba51cfc3a906fba385fa2d3.bindTooltip(
+                `<div>
+                     Odesa — neon (chip-making gas)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f9f5b5384ba51cfc3a906fba385fa2d3.setIcon(div_icon_72eb6f2c8ddd0ede39a9727bec9d29fb);
+            
+    
+            feature_group_b6dadbd8a4f55b8b8f209f8002bb10c0.addTo(map_d990ea73856e0b7295f4f364bfb8dec1);
+        
+    
+            var feature_group_5105ce654bda8680bacf983580476846 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_05033558639ac1db5893aa3fbefc466c = L.marker(
+                [35.912, 136.167],
+                {
+}
+            ).addTo(feature_group_5105ce654bda8680bacf983580476846);
+        
+    
+            var div_icon_1d4deed3af9d510921d5c961ded88bc2 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#0d9488;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT1\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_33898caf7dfa858250acdaee02b9d349 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_979addd2ec1aaebf6ecacb6676622767 = $(`<div id="html_979addd2ec1aaebf6ecacb6676622767" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#0d9488;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T1 · Refined Inputs</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Shin-Etsu Chemical — Takefu, Japan</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">World's largest maker of polished silicon wafers — the mirror-smooth discs that fabs pattern into chips. Also makes photoresist and silicone.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Wafers flow to TSMC (and every other fab) as the blank canvas. Without wafers, no chips.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">27% of global 300mm wafer supply. Combined with #2 SUMCO (Japan), two Japanese firms = 51% of wafers.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Invested JPY 150B (~$1B) expanding Shirakawa + Takefu for 2nm-3nm-grade wafers. 200k wafers/month added.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>   <div style="margin-top:10px;font-size:11px;color:#64748b"><em>Source: Mordor Intelligence market data</em></div> </div> </div>`)[0];
+                popup_33898caf7dfa858250acdaee02b9d349.setContent(html_979addd2ec1aaebf6ecacb6676622767);
+            
+        
+
+        marker_05033558639ac1db5893aa3fbefc466c.bindPopup(popup_33898caf7dfa858250acdaee02b9d349)
+        ;
+
+        
+    
+    
+            marker_05033558639ac1db5893aa3fbefc466c.bindTooltip(
+                `<div>
+                     Shin-Etsu — world's largest silicon wafer maker (27% share)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_05033558639ac1db5893aa3fbefc466c.setIcon(div_icon_1d4deed3af9d510921d5c961ded88bc2);
+            
+    
+            var marker_f46d14fbb6e16d046e4d19585d619a47 = L.marker(
+                [33.27, 129.874],
+                {
+}
+            ).addTo(feature_group_5105ce654bda8680bacf983580476846);
+        
+    
+            var div_icon_e42b8014272054e57385d43f906d55c7 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#0d9488;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT1\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_bc208bee3194d41307015225bad4c1fc = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_e59fc843e624f1637a782a6e4a2188fb = $(`<div id="html_e59fc843e624f1637a782a6e4a2188fb" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#0d9488;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T1 · Refined Inputs</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">SUMCO — Imari, Japan</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Japanese silicon wafer maker, spun off from Sumitomo. Specializes in 300mm prime/epitaxial wafers for leading-edge logic and memory.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Supplies TSMC, Samsung, Intel, Micron. Competes head-to-head with Shin-Etsu on the top-tier 2nm-capable wafers.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">24% global share. Japan concentration = geopolitical risk concentration.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Major site: Imari, Kyushu. Public on Tokyo Stock Exchange.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>   <div style="margin-top:10px;font-size:11px;color:#64748b"><em>Source: Mordor, SEMI</em></div> </div> </div>`)[0];
+                popup_bc208bee3194d41307015225bad4c1fc.setContent(html_e59fc843e624f1637a782a6e4a2188fb);
+            
+        
+
+        marker_f46d14fbb6e16d046e4d19585d619a47.bindPopup(popup_bc208bee3194d41307015225bad4c1fc)
+        ;
+
+        
+    
+    
+            marker_f46d14fbb6e16d046e4d19585d619a47.bindTooltip(
+                `<div>
+                     SUMCO — #2 silicon wafer maker (24% share)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f46d14fbb6e16d046e4d19585d619a47.setIcon(div_icon_e42b8014272054e57385d43f906d55c7);
+            
+    
+            var marker_c22c570851a1b2f6debb73d34b246119 = L.marker(
+                [24.813, 120.974],
+                {
+}
+            ).addTo(feature_group_5105ce654bda8680bacf983580476846);
+        
+    
+            var div_icon_e740f024e70527cf8b8691faf663586f = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#0d9488;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT1\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_c574fe526c501016c99882e67ce39ef9 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_c9c0e0546c43d4d6a264fd9013c25e8d = $(`<div id="html_c9c0e0546c43d4d6a264fd9013c25e8d" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#0d9488;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T1 · Refined Inputs</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">GlobalWafers — Hsinchu, Taiwan</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Taiwanese wafer maker, owns German silicon firms Siltronic-adjacent capacity (attempted merger blocked 2022) and new Sherman, TX fab.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Supplies TSMC locally in Taiwan + global foundries.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">17% global share. New Sherman, TX plant hit 300,000 wafers/year run rate — rare Western capacity.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Parent of MEMC Electronic Materials legacy assets.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_c574fe526c501016c99882e67ce39ef9.setContent(html_c9c0e0546c43d4d6a264fd9013c25e8d);
+            
+        
+
+        marker_c22c570851a1b2f6debb73d34b246119.bindPopup(popup_c574fe526c501016c99882e67ce39ef9)
+        ;
+
+        
+    
+    
+            marker_c22c570851a1b2f6debb73d34b246119.bindTooltip(
+                `<div>
+                     GlobalWafers — #3 silicon wafer maker (17% share)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c22c570851a1b2f6debb73d34b246119.setIcon(div_icon_e740f024e70527cf8b8691faf663586f);
+            
+    
+            var marker_165c8aae4f108cc4737a6c422a89961a = L.marker(
+                [48.165, 12.82],
+                {
+}
+            ).addTo(feature_group_5105ce654bda8680bacf983580476846);
+        
+    
+            var div_icon_9f9136c7ee13fa3cbb0d847af6fc9a08 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#0d9488;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT1\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_de7ea2f18333cf2f2579145415aab981 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_316e9ce945f43c273b7f7ce969c0dc90 = $(`<div id="html_316e9ce945f43c273b7f7ce969c0dc90" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#0d9488;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T1 · Refined Inputs</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Siltronic — Burghausen, Germany</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">German silicon wafer manufacturer, one of only two non-Asian producers at scale (the other is GlobalWafers USA).</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Strategic EU wafer supply for European fabs (Intel Magdeburg, ESMC Dresden).</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">12% global share. The EU's own wafer champion. Critical for sovereign silicon strategy.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Parent: Wacker Chemie AG.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_de7ea2f18333cf2f2579145415aab981.setContent(html_316e9ce945f43c273b7f7ce969c0dc90);
+            
+        
+
+        marker_165c8aae4f108cc4737a6c422a89961a.bindPopup(popup_de7ea2f18333cf2f2579145415aab981)
+        ;
+
+        
+    
+    
+            marker_165c8aae4f108cc4737a6c422a89961a.bindTooltip(
+                `<div>
+                     Siltronic — EU silicon wafer maker (12% share)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_165c8aae4f108cc4737a6c422a89961a.setIcon(div_icon_9f9136c7ee13fa3cbb0d847af6fc9a08);
+            
+    
+            var marker_d13f80725c0dc63de0a39ca8ac82b48b = L.marker(
+                [35.527, 139.716],
+                {
+}
+            ).addTo(feature_group_5105ce654bda8680bacf983580476846);
+        
+    
+            var div_icon_2d444163a64185203039a95899cb06e6 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#0d9488;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT1\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_5be52b0b37056c669bda5d57aebd4b54 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_8bdbaf84eaddfb85c0877536d7f45e4e = $(`<div id="html_8bdbaf84eaddfb85c0877536d7f45e4e" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#0d9488;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T1 · Refined Inputs</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Tokyo Ohka Kogyo (TOK) — Kawasaki, Japan</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Maker of photoresist — a light-sensitive liquid coated onto wafers. Where UV light hits, the resist changes chemically, transferring a circuit pattern.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">EUV photoresist is the 'photographic film' that lets ASML's EUV machines etch circuits at 2nm scale. TOK is a top-3 global supplier.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Japanese firms (TOK, JSR, Shin-Etsu, Fujifilm) control ~90% of photoresist and ~75% of EUV resist. Any disruption halts leading-edge chip production.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Clients: TSMC, Samsung, Intel.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>   <div style="margin-top:10px;font-size:11px;color:#64748b"><em>Source: Fountyl, Fortune Business Insights</em></div> </div> </div>`)[0];
+                popup_5be52b0b37056c669bda5d57aebd4b54.setContent(html_8bdbaf84eaddfb85c0877536d7f45e4e);
+            
+        
+
+        marker_d13f80725c0dc63de0a39ca8ac82b48b.bindPopup(popup_5be52b0b37056c669bda5d57aebd4b54)
+        ;
+
+        
+    
+    
+            marker_d13f80725c0dc63de0a39ca8ac82b48b.bindTooltip(
+                `<div>
+                     TOK — photoresist (EUV-grade, Japanese monopoly)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d13f80725c0dc63de0a39ca8ac82b48b.setIcon(div_icon_2d444163a64185203039a95899cb06e6);
+            
+    
+            var marker_74a1b41730b4a50ccd8733a0822276e8 = L.marker(
+                [35.681, 139.767],
+                {
+}
+            ).addTo(feature_group_5105ce654bda8680bacf983580476846);
+        
+    
+            var div_icon_de3e9ac301acd4fdca79ef15f7877acd = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#0d9488;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT1\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_19592f5850c30c6fa42f6541b1a7ed17 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_00d87dac117826075710c3d515dc4dd7 = $(`<div id="html_00d87dac117826075710c3d515dc4dd7" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#0d9488;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T1 · Refined Inputs</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">JSR Corporation — Tokyo, Japan</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Japanese specialty chemicals firm, originally a synthetic rubber maker, now a leader in ArF-immersion and EUV photoresists.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Supplies EUV photoresist to TSMC, Samsung, Intel. Also makes anti-reflective coatings and planarization films.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">~25% share of EUV resist market. Taken private by JIC (Japan Investment Corp) in 2024 — a strategic sovereignty move.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Post-take-private, JSR is a state-aligned pillar of Japan's semiconductor materials strategy.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_19592f5850c30c6fa42f6541b1a7ed17.setContent(html_00d87dac117826075710c3d515dc4dd7);
+            
+        
+
+        marker_74a1b41730b4a50ccd8733a0822276e8.bindPopup(popup_19592f5850c30c6fa42f6541b1a7ed17)
+        ;
+
+        
+    
+    
+            marker_74a1b41730b4a50ccd8733a0822276e8.bindTooltip(
+                `<div>
+                     JSR — EUV photoresist leader
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_74a1b41730b4a50ccd8733a0822276e8.setIcon(div_icon_de3e9ac301acd4fdca79ef15f7877acd);
+            
+    
+            var marker_09b0da0a40b3876c8a31fa39df562e7e = L.marker(
+                [48.11, 11.582],
+                {
+}
+            ).addTo(feature_group_5105ce654bda8680bacf983580476846);
+        
+    
+            var div_icon_7ac6e68ceec0512a189e8e1c6af1834c = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#0d9488;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT1\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_a5ccb8d9d16f2fe3f730e57568592ca2 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_c582cc43478f8ee861b7926026c92471 = $(`<div id="html_c582cc43478f8ee861b7926026c92471" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#0d9488;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T1 · Refined Inputs</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Merck EMD Electronics — Darmstadt, Germany</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">German specialty chemicals giant (Merck KGaA). Makes photoresists, CMP slurries, planarization chemistry, and deposition precursors.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Supplies ~30,000 different chemicals to fabs worldwide. Acquired Versum Materials in 2019 to deepen semiconductor presence.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Strategic non-Japanese source of advanced chemistries. EU's main chemical supplier for leading-edge fabs.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Not the US Merck (pharma) — German Merck is ~350 years old.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_a5ccb8d9d16f2fe3f730e57568592ca2.setContent(html_c582cc43478f8ee861b7926026c92471);
+            
+        
+
+        marker_09b0da0a40b3876c8a31fa39df562e7e.bindPopup(popup_a5ccb8d9d16f2fe3f730e57568592ca2)
+        ;
+
+        
+    
+    
+            marker_09b0da0a40b3876c8a31fa39df562e7e.bindTooltip(
+                `<div>
+                     Merck — specialty chemicals for chip manufacturing
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_09b0da0a40b3876c8a31fa39df562e7e.setIcon(div_icon_7ac6e68ceec0512a189e8e1c6af1834c);
+            
+    
+            var marker_5caf1cfd1924a4657332eb2b3d6322bc = L.marker(
+                [48.877, 2.305],
+                {
+}
+            ).addTo(feature_group_5105ce654bda8680bacf983580476846);
+        
+    
+            var div_icon_71a9d64edd0a93824d9d89285cde2f03 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#0d9488;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT1\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_ce78c09711f892c9963d76c30fe56c53 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_359b2228cbd92bffdc6dde227944459b = $(`<div id="html_359b2228cbd92bffdc6dde227944459b" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#0d9488;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T1 · Refined Inputs</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Air Liquide — Paris, France</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">French industrial gases giant. Supplies nitrogen, oxygen, hydrogen, plus specialty gases (neon, xenon, krypton, NF3, SF6) to fabs.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">A fab uses ~50 different high-purity gases. Air Liquide co-locates gas plants next to fabs for reliability.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Air Liquide + Linde + Taiyo Nippon Sanso = ~80% global specialty gas supply.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Gas supply is a 'utility' but utterly critical — a 2-hour nitrogen outage can scrap millions in work-in-progress.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>   <div style="margin-top:10px;font-size:11px;color:#64748b"><em>Source: Industry reports</em></div> </div> </div>`)[0];
+                popup_ce78c09711f892c9963d76c30fe56c53.setContent(html_359b2228cbd92bffdc6dde227944459b);
+            
+        
+
+        marker_5caf1cfd1924a4657332eb2b3d6322bc.bindPopup(popup_ce78c09711f892c9963d76c30fe56c53)
+        ;
+
+        
+    
+    
+            marker_5caf1cfd1924a4657332eb2b3d6322bc.bindTooltip(
+                `<div>
+                     Air Liquide — industrial + specialty gases
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_5caf1cfd1924a4657332eb2b3d6322bc.setIcon(div_icon_71a9d64edd0a93824d9d89285cde2f03);
+            
+    
+            var marker_3a4ec5e11c34218fff8e77b157c21b0d = L.marker(
+                [51.236, -0.575],
+                {
+}
+            ).addTo(feature_group_5105ce654bda8680bacf983580476846);
+        
+    
+            var div_icon_59fd391ff25b207ca2865528283e2255 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#0d9488;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT1\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_420f10603e56062ea5216b054a68c502 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_f326a130937ed62c1e1fae3ff08507b3 = $(`<div id="html_f326a130937ed62c1e1fae3ff08507b3" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#0d9488;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T1 · Refined Inputs</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Linde plc — Guildford, UK (global HQ)</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">World's largest industrial gas company (Linde AG + Praxair merger). Supplies the same portfolio of gases as Air Liquide to semiconductor fabs.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Linde operates on-site air separation units (ASUs) at most major fabs, delivering nitrogen, oxygen, argon directly via pipelines.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Duopoly with Air Liquide on Western-world gas supply to chip fabs.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0d9488;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Dual-listed US (NYSE:LIN) after 2018 merger.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_420f10603e56062ea5216b054a68c502.setContent(html_f326a130937ed62c1e1fae3ff08507b3);
+            
+        
+
+        marker_3a4ec5e11c34218fff8e77b157c21b0d.bindPopup(popup_420f10603e56062ea5216b054a68c502)
+        ;
+
+        
+    
+    
+            marker_3a4ec5e11c34218fff8e77b157c21b0d.bindTooltip(
+                `<div>
+                     Linde — world's largest industrial gas supplier
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3a4ec5e11c34218fff8e77b157c21b0d.setIcon(div_icon_59fd391ff25b207ca2865528283e2255);
+            
+    
+            feature_group_5105ce654bda8680bacf983580476846.addTo(map_d990ea73856e0b7295f4f364bfb8dec1);
+        
+    
+            var feature_group_3a59b7e73792e52293c62ba48a3752b6 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_af092a6b18fdee725ad340949ffd5b80 = L.marker(
+                [51.443, 5.478],
+                {
+}
+            ).addTo(feature_group_3a59b7e73792e52293c62ba48a3752b6);
+        
+    
+            var div_icon_1355871b5564e740d9b38a665b2acd84 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#7c3aed;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT2\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_5b5b4392c4a0d941c8041f446eae5085 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_6a84698b044421b9b9924d9d47a2a018 = $(`<div id="html_6a84698b044421b9b9924d9d47a2a018" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#7c3aed;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T2 · Equipment</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">ASML — Veldhoven, Netherlands</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Dutch company that makes lithography machines — the $200M machines that 'print' circuit patterns onto wafers using UV/EUV light.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">The only company on Earth that makes EUV (Extreme Ultraviolet, 13.5nm wavelength) lithography. Required for every chip at 7nm and smaller.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Single point of failure for the entire global chip industry at leading edge. TSMC, Samsung, Intel, SK Hynix all depend on ASML EUV. US export controls block EUV sales to China.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">EUV market share: 100%. Overall lithography: 83%. Suppliers: Zeiss (optics), Trumpf (laser), Cymer (source). TSMC is ASML's #1 customer.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>   <div style="margin-top:10px;font-size:11px;color:#64748b"><em>Source: TrendForce, ASML</em></div> </div> </div>`)[0];
+                popup_5b5b4392c4a0d941c8041f446eae5085.setContent(html_6a84698b044421b9b9924d9d47a2a018);
+            
+        
+
+        marker_af092a6b18fdee725ad340949ffd5b80.bindPopup(popup_5b5b4392c4a0d941c8041f446eae5085)
+        ;
+
+        
+    
+    
+            marker_af092a6b18fdee725ad340949ffd5b80.bindTooltip(
+                `<div>
+                     ASML — EUV lithography monopoly (sole global supplier)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_af092a6b18fdee725ad340949ffd5b80.setIcon(div_icon_1355871b5564e740d9b38a665b2acd84);
+            
+    
+            var marker_32707c01769902d904e4658615e7034f = L.marker(
+                [48.783, 10.098],
+                {
+}
+            ).addTo(feature_group_3a59b7e73792e52293c62ba48a3752b6);
+        
+    
+            var div_icon_1a1e49a5c8ec978c6b24633cc2d9d331 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#7c3aed;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT2\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_2a24925ed5fe14477e575b1d9b39be08 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_e2ac6a8076f9a1a3e67207af2dd3c914 = $(`<div id="html_e2ac6a8076f9a1a3e67207af2dd3c914" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#7c3aed;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T2 · Equipment</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Zeiss SMT — Oberkochen, Germany</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">The optics division of Carl Zeiss. Makes the mirrors inside ASML's EUV scanners — 'the most precise mirrors in the world,' with surface accuracy measured in picometers.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Exclusive supplier of EUV projection optics to ASML. If Zeiss can't deliver, ASML can't ship EUV machines.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Another single point of failure. A single EUV mirror takes months to polish and costs tens of millions of euros.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Zeiss SMT is the semiconductor-focused business of the 180-year-old Zeiss group.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>   <div style="margin-top:10px;font-size:11px;color:#64748b"><em>Source: Zeiss SMT, ASML</em></div> </div> </div>`)[0];
+                popup_2a24925ed5fe14477e575b1d9b39be08.setContent(html_e2ac6a8076f9a1a3e67207af2dd3c914);
+            
+        
+
+        marker_32707c01769902d904e4658615e7034f.bindPopup(popup_2a24925ed5fe14477e575b1d9b39be08)
+        ;
+
+        
+    
+    
+            marker_32707c01769902d904e4658615e7034f.bindTooltip(
+                `<div>
+                     Zeiss — EUV mirrors (ASML's exclusive optics supplier)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_32707c01769902d904e4658615e7034f.setIcon(div_icon_1a1e49a5c8ec978c6b24633cc2d9d331);
+            
+    
+            var marker_64911024d306137d6ad8ee08e8df5059 = L.marker(
+                [48.834, 9.046],
+                {
+}
+            ).addTo(feature_group_3a59b7e73792e52293c62ba48a3752b6);
+        
+    
+            var div_icon_f09d0242ae456bca1cf24d31cea12587 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#7c3aed;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT2\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_11616cb1e4902a3dd16ab0ba96c89ca5 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_0e2aebcd8b1078f06eb77a1065a95568 = $(`<div id="html_0e2aebcd8b1078f06eb77a1065a95568" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#7c3aed;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T2 · Equipment</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Trumpf — Ditzingen, Germany</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">German precision-tool and laser giant. Makes the 40 kW CO2 laser that vaporizes tin droplets to generate EUV light inside ASML scanners.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Laser zaps tin droplets 50,000 times per second; plasma emits 13.5nm EUV light. Trumpf's laser = ASML's flashlight.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">This laser requires 1 MW of power supply. No other company builds production-grade CO2 lasers at this scale.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Only Trumpf and ASML's in-house Cymer unit together can make the EUV source work.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_11616cb1e4902a3dd16ab0ba96c89ca5.setContent(html_0e2aebcd8b1078f06eb77a1065a95568);
+            
+        
+
+        marker_64911024d306137d6ad8ee08e8df5059.bindPopup(popup_11616cb1e4902a3dd16ab0ba96c89ca5)
+        ;
+
+        
+    
+    
+            marker_64911024d306137d6ad8ee08e8df5059.bindTooltip(
+                `<div>
+                     Trumpf — 40 kW CO2 laser for EUV light source
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_64911024d306137d6ad8ee08e8df5059.setIcon(div_icon_f09d0242ae456bca1cf24d31cea12587);
+            
+    
+            var marker_357dd55aa625f510331df93aa718d206 = L.marker(
+                [37.353, -121.955],
+                {
+}
+            ).addTo(feature_group_3a59b7e73792e52293c62ba48a3752b6);
+        
+    
+            var div_icon_cac276349765f54f8b7dfe313599e6bf = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#7c3aed;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT2\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_60075ac9041656d7c1898c237494e279 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_60875daf3d6a9f98cc99c7850adcacda = $(`<div id="html_60875daf3d6a9f98cc99c7850adcacda" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#7c3aed;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T2 · Equipment</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Applied Materials — Santa Clara, CA</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">World's largest semiconductor equipment company by revenue. Makes deposition (PVD, CVD, ALD), ion implant, chemical-mechanical planarization (CMP), and inspection tools.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">A chip goes through 1,000+ process steps; Applied's tools handle a huge fraction of the non-lithography steps.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Critical US equipment champion. US export controls on China go through companies like AMAT.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Revenue ~$27B. Customers: TSMC, Samsung, Intel, every major fab.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_60075ac9041656d7c1898c237494e279.setContent(html_60875daf3d6a9f98cc99c7850adcacda);
+            
+        
+
+        marker_357dd55aa625f510331df93aa718d206.bindPopup(popup_60075ac9041656d7c1898c237494e279)
+        ;
+
+        
+    
+    
+            marker_357dd55aa625f510331df93aa718d206.bindTooltip(
+                `<div>
+                     Applied Materials — #1 equipment maker (deposition, implant, CMP)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_357dd55aa625f510331df93aa718d206.setIcon(div_icon_cac276349765f54f8b7dfe313599e6bf);
+            
+    
+            var marker_f9c72563c8928f5523ac630b89b4089f = L.marker(
+                [37.562, -121.998],
+                {
+}
+            ).addTo(feature_group_3a59b7e73792e52293c62ba48a3752b6);
+        
+    
+            var div_icon_b72748c73c6c1d416609edb2e425a75c = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#7c3aed;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT2\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_e1c8c4dc62ee2641eb8b57b44a5d3368 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_04333f769fffda7c43bf329a5e9bfb87 = $(`<div id="html_04333f769fffda7c43bf329a5e9bfb87" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#7c3aed;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T2 · Equipment</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Lam Research — Fremont, CA</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">US equipment maker specializing in plasma etch, thin-film deposition, and photoresist strip.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">After lithography patterns the resist, etch tools (Lam dominates) remove unprotected material to carve circuits.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Top-3 US equipment company. Dominates etch, which is ~15-20% of fab capex.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Revenue ~$15B.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_e1c8c4dc62ee2641eb8b57b44a5d3368.setContent(html_04333f769fffda7c43bf329a5e9bfb87);
+            
+        
+
+        marker_f9c72563c8928f5523ac630b89b4089f.bindPopup(popup_e1c8c4dc62ee2641eb8b57b44a5d3368)
+        ;
+
+        
+    
+    
+            marker_f9c72563c8928f5523ac630b89b4089f.bindTooltip(
+                `<div>
+                     Lam Research — etch + deposition equipment leader
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f9c72563c8928f5523ac630b89b4089f.setIcon(div_icon_b72748c73c6c1d416609edb2e425a75c);
+            
+    
+            var marker_aea4ada6f5b563c8a195ede7514cbdc8 = L.marker(
+                [37.437, -121.893],
+                {
+}
+            ).addTo(feature_group_3a59b7e73792e52293c62ba48a3752b6);
+        
+    
+            var div_icon_0f055b49298ac0569be8ddfc1422a73f = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#7c3aed;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT2\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_aa42d60b717081cb0a1448a33de399a4 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_0da6a9a2858ccf99f1a68389f7b880cc = $(`<div id="html_0da6a9a2858ccf99f1a68389f7b880cc" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#7c3aed;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T2 · Equipment</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">KLA Corporation — Milpitas, CA</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">US company that makes the measurement and inspection tools used at every process step to catch defects before they compound.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Every wafer is measured dozens of times during its 3-month journey through a fab. KLA tools do the measuring.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Near-monopoly (>50% share) in semiconductor metrology.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Revenue ~$10B. Without metrology, yield collapses.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_aa42d60b717081cb0a1448a33de399a4.setContent(html_0da6a9a2858ccf99f1a68389f7b880cc);
+            
+        
+
+        marker_aea4ada6f5b563c8a195ede7514cbdc8.bindPopup(popup_aa42d60b717081cb0a1448a33de399a4)
+        ;
+
+        
+    
+    
+            marker_aea4ada6f5b563c8a195ede7514cbdc8.bindTooltip(
+                `<div>
+                     KLA — metrology + inspection (quality control)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_aea4ada6f5b563c8a195ede7514cbdc8.setIcon(div_icon_0f055b49298ac0569be8ddfc1422a73f);
+            
+    
+            var marker_1ab0cdffb39b659cd19a39358a39bdb8 = L.marker(
+                [35.683, 139.769],
+                {
+}
+            ).addTo(feature_group_3a59b7e73792e52293c62ba48a3752b6);
+        
+    
+            var div_icon_edc6b5e04d94a95d61c9551a73238b44 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#7c3aed;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT2\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_679d9653cdd05f859156937aa281ed9f = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_48b858a1f03c11036387cd9d17be2d36 = $(`<div id="html_48b858a1f03c11036387cd9d17be2d36" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#7c3aed;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T2 · Equipment</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Tokyo Electron (TEL) — Tokyo, Japan</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Japan's largest semiconductor equipment maker. Dominates coat/develop (applying photoresist) and is a top-3 etch supplier.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Every wafer entering a lithography step is coated by a TEL tool. Then the exposed resist is developed in a TEL tool.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">TEL coat/develop tools are paired with ASML scanners — they sit literally side-by-side on the fab floor.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Revenue ~$15B. Headquarters: Tokyo; major R&D site Kumamoto.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_679d9653cdd05f859156937aa281ed9f.setContent(html_48b858a1f03c11036387cd9d17be2d36);
+            
+        
+
+        marker_1ab0cdffb39b659cd19a39358a39bdb8.bindPopup(popup_679d9653cdd05f859156937aa281ed9f)
+        ;
+
+        
+    
+    
+            marker_1ab0cdffb39b659cd19a39358a39bdb8.bindTooltip(
+                `<div>
+                     Tokyo Electron — coat/develop + etch (#2 non-ASML Asian equipment)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1ab0cdffb39b659cd19a39358a39bdb8.setIcon(div_icon_edc6b5e04d94a95d61c9551a73238b44);
+            
+    
+            feature_group_3a59b7e73792e52293c62ba48a3752b6.addTo(map_d990ea73856e0b7295f4f364bfb8dec1);
+        
+    
+            var feature_group_5ccbf533fd0d0a13e03938f0a7395ee5 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_57e89c489ca44c499a9cc53178d9a409 = L.marker(
+                [24.784, 120.996],
+                {
+}
+            ).addTo(feature_group_5ccbf533fd0d0a13e03938f0a7395ee5);
+        
+    
+            var div_icon_8bfe76e396c18c6dd7daed7b1efd0a00 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#2563eb;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT3\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_785dccf2041cc880c86ea011ae19c6e1 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_5693466b3db87b2cdaf0f5e30fd9cd7e = $(`<div id="html_5693466b3db87b2cdaf0f5e30fd9cd7e" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#2563eb;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T3 · Front-End Fabs</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">TSMC Hsinchu — HQ + Fab 12/20</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">TSMC's corporate headquarters and oldest fab cluster. Home to the Fab 12 complex (16/10/7nm) and the new Fab 20 R&D center where N2 was developed.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Where TSMC's process technology is invented before it ramps at other sites. Fab 20 is adjacent to the new Global R&D Center.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">If Hsinchu is disrupted, TSMC's entire roadmap stalls.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Founded 1987. First fab: Fab 1 in Hsinchu Science Park.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_785dccf2041cc880c86ea011ae19c6e1.setContent(html_5693466b3db87b2cdaf0f5e30fd9cd7e);
+            
+        
+
+        marker_57e89c489ca44c499a9cc53178d9a409.bindPopup(popup_785dccf2041cc880c86ea011ae19c6e1)
+        ;
+
+        
+    
+    
+            marker_57e89c489ca44c499a9cc53178d9a409.bindTooltip(
+                `<div>
+                     TSMC Hsinchu — headquarters + N2 R&D + Fab 20
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_57e89c489ca44c499a9cc53178d9a409.setIcon(div_icon_8bfe76e396c18c6dd7daed7b1efd0a00);
+            
+    
+            var marker_27ba9eaa29693ef0d468ecd2d3473b3f = L.marker(
+                [23.014, 120.219],
+                {
+}
+            ).addTo(feature_group_5ccbf533fd0d0a13e03938f0a7395ee5);
+        
+    
+            var div_icon_0d7258048c186b922c96f921da11d254 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#2563eb;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT3\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_3f724e453714022f5e1fc5a93499e9c6 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_e7d794e89633613a1053ba4f674a9694 = $(`<div id="html_e7d794e89633613a1053ba4f674a9694" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#2563eb;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T3 · Front-End Fabs</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">TSMC Tainan — Gigafabs 14/18 (3nm, 5nm, 7nm)</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Two 'Gigafabs' in the Tainan Science Park. Fab 14 runs 7nm/5nm; Fab 18 is the 3nm (N3) and 2nm ramp site. Additional 2nm fabs planned in Tainan Special Zone A.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">The workhorse of TSMC's bleeding-edge output. Apple, Nvidia, AMD chips are made here.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">The geographical center of mass of the world's most advanced chip production.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Fab 18 alone is ~5x the size of a typical European fab.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_3f724e453714022f5e1fc5a93499e9c6.setContent(html_e7d794e89633613a1053ba4f674a9694);
+            
+        
+
+        marker_27ba9eaa29693ef0d468ecd2d3473b3f.bindPopup(popup_3f724e453714022f5e1fc5a93499e9c6)
+        ;
+
+        
+    
+    
+            marker_27ba9eaa29693ef0d468ecd2d3473b3f.bindTooltip(
+                `<div>
+                     TSMC Tainan — current high-volume 3nm / 5nm production
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_27ba9eaa29693ef0d468ecd2d3473b3f.setIcon(div_icon_0d7258048c186b922c96f921da11d254);
+            
+    
+            var marker_cd995204bdd01efa3e79c462ede7dcbd = L.marker(
+                [22.635, 120.302],
+                {
+}
+            ).addTo(feature_group_5ccbf533fd0d0a13e03938f0a7395ee5);
+        
+    
+            var div_icon_83a82da871a17cba0323616edc183f4e = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#2563eb;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT3\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_f29f4fe67e1f805bf3b6c85ce0b58361 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_87b09dc08295d6f8cfca17758f587b68 = $(`<div id="html_87b09dc08295d6f8cfca17758f587b68" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#2563eb;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T3 · Front-End Fabs</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">TSMC Kaohsiung — Fab 22 (N2 = 2nm HVM)</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">TSMC's newest Gigafab complex, purpose-built for the 2nm node. Five phases (P1-P5) planned; P1 is in high-volume manufacturing as of late 2025.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">This is the fab that will produce 2nm chips for Apple, Nvidia, and every other leading-edge customer through ~2028.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">P1 HVM + P2 trial + P3 building = ~100,000 wafers/month target end-2026. **Capacity is fully sold out for 2026.**</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">P1 entered HVM Q4 2025. All five phases operational by Q4 2027 (planned).</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>   <div style="margin-top:10px;font-size:11px;color:#64748b"><em>Source: WCCFTech, TrendForce</em></div> </div> </div>`)[0];
+                popup_f29f4fe67e1f805bf3b6c85ce0b58361.setContent(html_87b09dc08295d6f8cfca17758f587b68);
+            
+        
+
+        marker_cd995204bdd01efa3e79c462ede7dcbd.bindPopup(popup_f29f4fe67e1f805bf3b6c85ce0b58361)
+        ;
+
+        
+    
+    
+            marker_cd995204bdd01efa3e79c462ede7dcbd.bindTooltip(
+                `<div>
+                     TSMC Kaohsiung Fab 22 — 2nm high-volume manufacturing (NEW 2026)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_cd995204bdd01efa3e79c462ede7dcbd.setIcon(div_icon_83a82da871a17cba0323616edc183f4e);
+            
+    
+            var marker_49ca3c9c03f8930a87219eff1d2d8966 = L.marker(
+                [32.037, 118.766],
+                {
+}
+            ).addTo(feature_group_5ccbf533fd0d0a13e03938f0a7395ee5);
+        
+    
+            var div_icon_bb5200d4aa2f64b88d8bebccc38af1c2 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#2563eb;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT3\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_56a890fef34edb85ca3f44c53454cf55 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_a73e7548552dfd600a3c71a9e96fd34e = $(`<div id="html_a73e7548552dfd600a3c71a9e96fd34e" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#2563eb;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T3 · Front-End Fabs</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">TSMC Nanjing — Fab 16 (28nm / 16nm)</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">TSMC's wholly-owned subsidiary in Nanjing, China. Produces 28nm and 16nm chips for Chinese domestic customers.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">A hedge to serve Chinese customers without diverting Taiwan capacity, while staying within US/Taiwan export rules.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Increasingly geopolitically constrained by US export controls on China chip equipment.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Launched 2018; capacity ~40k wpm.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_56a890fef34edb85ca3f44c53454cf55.setContent(html_a73e7548552dfd600a3c71a9e96fd34e);
+            
+        
+
+        marker_49ca3c9c03f8930a87219eff1d2d8966.bindPopup(popup_56a890fef34edb85ca3f44c53454cf55)
+        ;
+
+        
+    
+    
+            marker_49ca3c9c03f8930a87219eff1d2d8966.bindTooltip(
+                `<div>
+                     TSMC Nanjing — mature-node fab for Chinese customers
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_49ca3c9c03f8930a87219eff1d2d8966.setIcon(div_icon_bb5200d4aa2f64b88d8bebccc38af1c2);
+            
+    
+            var marker_c4e0887f1d613ff0c022a5664e3d439a = L.marker(
+                [33.467, -112.052],
+                {
+}
+            ).addTo(feature_group_5ccbf533fd0d0a13e03938f0a7395ee5);
+        
+    
+            var div_icon_4ed8bf8bb1d2e6f2b0a07d744cd79d1c = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#2563eb;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT3\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_a2eecd323afc3339499eeef21a1aaba1 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_5bd9a08b3c983cbbfb9949b4c92d2cbb = $(`<div id="html_5bd9a08b3c983cbbfb9949b4c92d2cbb" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#2563eb;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T3 · Front-End Fabs</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">TSMC Arizona Fab 21 — Phoenix, USA</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">TSMC's US fab complex in Phoenix, AZ. Phase 1 runs 4nm (in production). Phase 2 starts 3nm equipment install Q3 2026 (ahead of schedule).</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">US-sited production of leading-edge chips for American customers (Apple, Nvidia, AMD). Backed by $6.6B CHIPS Act grant.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">The centerpiece of US 'reshoring' strategy. Whether it works at comparable cost and yield to Taiwan is TBD.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Phase 2 production start: calendar 2027. Phase 3 under discussion for 2nm.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>   <div style="margin-top:10px;font-size:11px;color:#64748b"><em>Source: Tom's Hardware, TrendForce</em></div> </div> </div>`)[0];
+                popup_a2eecd323afc3339499eeef21a1aaba1.setContent(html_5bd9a08b3c983cbbfb9949b4c92d2cbb);
+            
+        
+
+        marker_c4e0887f1d613ff0c022a5664e3d439a.bindPopup(popup_a2eecd323afc3339499eeef21a1aaba1)
+        ;
+
+        
+    
+    
+            marker_c4e0887f1d613ff0c022a5664e3d439a.bindTooltip(
+                `<div>
+                     TSMC Arizona — 4nm now, 3nm mid-2026, 2nm planned
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c4e0887f1d613ff0c022a5664e3d439a.setIcon(div_icon_4ed8bf8bb1d2e6f2b0a07d744cd79d1c);
+            
+    
+            var marker_f79421b26f2e921317be89eb93617133 = L.marker(
+                [32.872, 130.783],
+                {
+}
+            ).addTo(feature_group_5ccbf533fd0d0a13e03938f0a7395ee5);
+        
+    
+            var div_icon_8dc85ce87ce0e5c6ad90a9f42ae79a42 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#2563eb;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT3\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_ddeaf5806ff89c878dff277ba3424694 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_4ba803bf23af3d749e600498d782b337 = $(`<div id="html_4ba803bf23af3d749e600498d782b337" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#2563eb;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T3 · Front-End Fabs</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">JASM — Kumamoto, Japan (TSMC + Sony + Denso)</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">TSMC-majority joint venture with Sony and Denso. First fab (Fab 23) entered commercial operations December 2024.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Serves Japan's automotive and imaging sensor demand at mature nodes. Second fab may shift to 4nm.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Japan's strategic bet to anchor a leading-edge adjacent fab on home soil.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">~$7B first phase. Site: Kikuyo, Kumamoto prefecture.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>   <div style="margin-top:10px;font-size:11px;color:#64748b"><em>Source: Wikipedia JASM</em></div> </div> </div>`)[0];
+                popup_ddeaf5806ff89c878dff277ba3424694.setContent(html_4ba803bf23af3d749e600498d782b337);
+            
+        
+
+        marker_f79421b26f2e921317be89eb93617133.bindPopup(popup_ddeaf5806ff89c878dff277ba3424694)
+        ;
+
+        
+    
+    
+            marker_f79421b26f2e921317be89eb93617133.bindTooltip(
+                `<div>
+                     JASM Kumamoto Fab 23 — 12/22/28nm HVM since Dec 2024
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f79421b26f2e921317be89eb93617133.setIcon(div_icon_8dc85ce87ce0e5c6ad90a9f42ae79a42);
+            
+    
+            var marker_870f44e3668ccbe605f1974c2e4dd1f1 = L.marker(
+                [51.076, 13.738],
+                {
+}
+            ).addTo(feature_group_5ccbf533fd0d0a13e03938f0a7395ee5);
+        
+    
+            var div_icon_cd549eded2399faf7683395ab210dbd5 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#2563eb;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT3\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_35907a2318aae7638aeed7ebf695b7f5 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_4706675053380b6d54bc9aaf7da35bb1 = $(`<div id="html_4706675053380b6d54bc9aaf7da35bb1" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#2563eb;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T3 · Front-End Fabs</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">ESMC — Dresden, Germany (TSMC + Bosch + Infineon + NXP)</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">European Semiconductor Manufacturing Company. TSMC 70% owner; Bosch, Infineon, NXP 10% each.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">22nm and 28nm chips for European automotive and industrial demand.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Europe's answer to supply shocks; EU's first advanced-mature-node fab.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">40,000 wafers/month capacity; fully operational 2029.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">Medium (still under construction)</strong>   </div>    </div> </div>`)[0];
+                popup_35907a2318aae7638aeed7ebf695b7f5.setContent(html_4706675053380b6d54bc9aaf7da35bb1);
+            
+        
+
+        marker_870f44e3668ccbe605f1974c2e4dd1f1.bindPopup(popup_35907a2318aae7638aeed7ebf695b7f5)
+        ;
+
+        
+    
+    
+            marker_870f44e3668ccbe605f1974c2e4dd1f1.bindTooltip(
+                `<div>
+                     ESMC Dresden — 22/28nm for EU automotive (fully operational 2029)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_870f44e3668ccbe605f1974c2e4dd1f1.setIcon(div_icon_cd549eded2399faf7683395ab210dbd5);
+            
+    
+            feature_group_5ccbf533fd0d0a13e03938f0a7395ee5.addTo(map_d990ea73856e0b7295f4f364bfb8dec1);
+        
+    
+            var feature_group_953ee00f01ec5f57ff7667650c0802d7 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_6b7a981bd52f38e46e6b78365a620e68 = L.marker(
+                [22.643, 120.291],
+                {
+}
+            ).addTo(feature_group_953ee00f01ec5f57ff7667650c0802d7);
+        
+    
+            var div_icon_57b0487dc3691d97d67aca4562a5f0e3 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#d97706;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT4\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_770d888f94988d7777de50afa93fbda5 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_a2f4bb168fbc0d04405098e64644ea70 = $(`<div id="html_a2f4bb168fbc0d04405098e64644ea70" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#d97706;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T4 · OSAT / Back-End</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">ASE Technology — Kaohsiung, Taiwan</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">World's largest Outsourced Semiconductor Assembly and Test company. After a wafer is patterned, it comes here to be diced, packaged, and tested.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Bridges fab output → finished chip shipped to customer. Packages protect the die, connect it to a circuit board, and add thermal management.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">ASE (merged with SPIL in 2018) accounts for ~45% of the top-10 OSAT revenue. 2024 revenue: $18.5B.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">HQ Kaohsiung; fabs across Taiwan, Korea, China, Vietnam, USA.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>   <div style="margin-top:10px;font-size:11px;color:#64748b"><em>Source: TrendForce 2024 OSAT ranking</em></div> </div> </div>`)[0];
+                popup_770d888f94988d7777de50afa93fbda5.setContent(html_a2f4bb168fbc0d04405098e64644ea70);
+            
+        
+
+        marker_6b7a981bd52f38e46e6b78365a620e68.bindPopup(popup_770d888f94988d7777de50afa93fbda5)
+        ;
+
+        
+    
+    
+            marker_6b7a981bd52f38e46e6b78365a620e68.bindTooltip(
+                `<div>
+                     ASE — world's #1 OSAT (45% of top-10 revenue)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6b7a981bd52f38e46e6b78365a620e68.setIcon(div_icon_57b0487dc3691d97d67aca4562a5f0e3);
+            
+    
+            var marker_77a3bd401791edb18a40cf867ddde8cd = L.marker(
+                [33.371, -111.907],
+                {
+}
+            ).addTo(feature_group_953ee00f01ec5f57ff7667650c0802d7);
+        
+    
+            var div_icon_d51cdd2e1f805864a52f25bb2078314e = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#d97706;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT4\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_da760614fdf9473c83c40eac26ef5ca2 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_2dccb20e934298d624447ec88c9c9d34 = $(`<div id="html_2dccb20e934298d624447ec88c9c9d34" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#d97706;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T4 · OSAT / Back-End</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Amkor Technology — Tempe, AZ (HQ)</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">American OSAT headquartered in Tempe, AZ, with most actual assembly/test fabs in Korea, Philippines, Vietnam, Japan, Portugal.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Major customer of Apple, TSMC pipeline; building a $2B Arizona site to co-locate with TSMC.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Only major OSAT with US HQ; strategic for CHIPS Act reshoring.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">2024 revenue: $6.3B.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_da760614fdf9473c83c40eac26ef5ca2.setContent(html_2dccb20e934298d624447ec88c9c9d34);
+            
+        
+
+        marker_77a3bd401791edb18a40cf867ddde8cd.bindPopup(popup_da760614fdf9473c83c40eac26ef5ca2)
+        ;
+
+        
+    
+    
+            marker_77a3bd401791edb18a40cf867ddde8cd.bindTooltip(
+                `<div>
+                     Amkor — #2 OSAT (US HQ, Asian fabs)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_77a3bd401791edb18a40cf867ddde8cd.setIcon(div_icon_d51cdd2e1f805864a52f25bb2078314e);
+            
+    
+            var marker_da96221c81efe882c7b80f2ea5c865f6 = L.marker(
+                [31.811, 120.274],
+                {
+}
+            ).addTo(feature_group_953ee00f01ec5f57ff7667650c0802d7);
+        
+    
+            var div_icon_bf5d71c1d196d08841e62aa0504784af = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#d97706;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT4\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_dedf73873210ccbf2e3c3d467674a7ba = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_08d6433ab4141dd192949115c239ee82 = $(`<div id="html_08d6433ab4141dd192949115c239ee82" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#d97706;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T4 · OSAT / Back-End</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">JCET — Jiangyin, China</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">China's largest OSAT. Acquired Singapore's STATS ChipPAC in 2014 to become a global top-3 player.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Assembles/tests chips for Chinese fabless firms + foreign customers; major beneficiary of China's semiconductor self-sufficiency push.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">2024 revenue: $5B (+19% YoY). Chinese OSATs are gaining share rapidly.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Listed on Shanghai Stock Exchange.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_dedf73873210ccbf2e3c3d467674a7ba.setContent(html_08d6433ab4141dd192949115c239ee82);
+            
+        
+
+        marker_da96221c81efe882c7b80f2ea5c865f6.bindPopup(popup_dedf73873210ccbf2e3c3d467674a7ba)
+        ;
+
+        
+    
+    
+            marker_da96221c81efe882c7b80f2ea5c865f6.bindTooltip(
+                `<div>
+                     JCET — #3 OSAT, China's champion ($5B revenue)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_da96221c81efe882c7b80f2ea5c865f6.setIcon(div_icon_bf5d71c1d196d08841e62aa0504784af);
+            
+    
+            feature_group_953ee00f01ec5f57ff7667650c0802d7.addTo(map_d990ea73856e0b7295f4f364bfb8dec1);
+        
+    
+            var feature_group_508f5cc93db550d5e9bc49d543f1ae9e = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_f06f86e216318923ac41614a29e4563c = L.marker(
+                [37.335, -122.009],
+                {
+}
+            ).addTo(feature_group_508f5cc93db550d5e9bc49d543f1ae9e);
+        
+    
+            var div_icon_cf59f92174fd510c36b2efb67c4b2d2c = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#db2777;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT5\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_86e68f4a32d70a1b32276880cc2d51d3 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_8ad11218e764df069a8ddd30152022f4 = $(`<div id="html_8ad11218e764df069a8ddd30152022f4" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#db2777;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T5 · Design & Customers</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Apple — Cupertino, CA</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">The fabless company that designs A-series (iPhone), M-series (Mac), and other silicon — and has them fabricated exclusively at TSMC.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">TSMC's #1 revenue customer by far — ~20-25% of TSMC sales in some quarters. Apple consumes the first year of every new TSMC node.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">When Apple launches a new iPhone, TSMC has already been running that silicon in volume for 6 months.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Apple reportedly buys >90% of TSMC's earliest leading-edge capacity each cycle.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_86e68f4a32d70a1b32276880cc2d51d3.setContent(html_8ad11218e764df069a8ddd30152022f4);
+            
+        
+
+        marker_f06f86e216318923ac41614a29e4563c.bindPopup(popup_86e68f4a32d70a1b32276880cc2d51d3)
+        ;
+
+        
+    
+    
+            marker_f06f86e216318923ac41614a29e4563c.bindTooltip(
+                `<div>
+                     Apple — TSMC's #1 customer (iPhone, Mac, iPad silicon)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f06f86e216318923ac41614a29e4563c.setIcon(div_icon_cf59f92174fd510c36b2efb67c4b2d2c);
+            
+    
+            var marker_451e7819de0ce7ce26d81e6188e0c0bd = L.marker(
+                [37.37, -121.964],
+                {
+}
+            ).addTo(feature_group_508f5cc93db550d5e9bc49d543f1ae9e);
+        
+    
+            var div_icon_4d02ded1eabe50829998b8bb4fbd10ca = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#db2777;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT5\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_798dfee40715b51ab39a05bf1d0d45ab = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_c7453e4c7beb4d18064d234a97523d1d = $(`<div id="html_c7453e4c7beb4d18064d234a97523d1d" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#db2777;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T5 · Design & Customers</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Nvidia — Santa Clara, CA</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Fabless GPU / AI accelerator designer. H100, B100, B200 (Blackwell) and successor chips are all made at TSMC.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Currently the most valuable customer of leading-edge capacity (2nm, 3nm) alongside Apple. Hunger for silicon has reshaped TSMC's capex.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Without TSMC, Nvidia cannot exist at its current scale. No alternative foundry can produce what Nvidia needs.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Nvidia does not own fabs. Everything is TSMC-made (with some Samsung for older products).</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_798dfee40715b51ab39a05bf1d0d45ab.setContent(html_c7453e4c7beb4d18064d234a97523d1d);
+            
+        
+
+        marker_451e7819de0ce7ce26d81e6188e0c0bd.bindPopup(popup_798dfee40715b51ab39a05bf1d0d45ab)
+        ;
+
+        
+    
+    
+            marker_451e7819de0ce7ce26d81e6188e0c0bd.bindTooltip(
+                `<div>
+                     Nvidia — TSMC's #2 customer (AI accelerators)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_451e7819de0ce7ce26d81e6188e0c0bd.setIcon(div_icon_4d02ded1eabe50829998b8bb4fbd10ca);
+            
+    
+            var marker_c1f25482fdd64ef0fefaefdd21273d34 = L.marker(
+                [37.381, -121.978],
+                {
+}
+            ).addTo(feature_group_508f5cc93db550d5e9bc49d543f1ae9e);
+        
+    
+            var div_icon_b505c3958ba7a194e45029509d6bb479 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#db2777;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT5\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_1da7f130e6907f170c570c891f3dc14c = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_a1ef3803bebb07b05cb89af180c4255e = $(`<div id="html_a1ef3803bebb07b05cb89af180c4255e" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#db2777;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T5 · Design & Customers</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">AMD — Santa Clara, CA</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Fabless designer of x86 CPUs (Ryzen, EPYC) and GPUs (Radeon). Uses TSMC's 5nm, 4nm, 3nm for most products.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Major buyer of TSMC capacity across multiple nodes. MI300 AI chips = TSMC 5nm + 6nm chiplets.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">AMD's resurgence is literally built on TSMC process advantage over Intel's internal fabs.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Spun off its fabs in 2009 to create GlobalFoundries — then went all-in fabless.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_1da7f130e6907f170c570c891f3dc14c.setContent(html_a1ef3803bebb07b05cb89af180c4255e);
+            
+        
+
+        marker_c1f25482fdd64ef0fefaefdd21273d34.bindPopup(popup_1da7f130e6907f170c570c891f3dc14c)
+        ;
+
+        
+    
+    
+            marker_c1f25482fdd64ef0fefaefdd21273d34.bindTooltip(
+                `<div>
+                     AMD — major TSMC customer (CPU, GPU, datacenter)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c1f25482fdd64ef0fefaefdd21273d34.setIcon(div_icon_b505c3958ba7a194e45029509d6bb479);
+            
+    
+            var marker_cfe2b0838408b50c1436327276534665 = L.marker(
+                [32.9, -117.241],
+                {
+}
+            ).addTo(feature_group_508f5cc93db550d5e9bc49d543f1ae9e);
+        
+    
+            var div_icon_ae941af5a46b9af9de74a5518c39f447 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#db2777;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT5\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_9cc79ea30e0b5da09dfeba7ffc1a14a4 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_f93de9c8ca4847a74675cd6179df306b = $(`<div id="html_f93de9c8ca4847a74675cd6179df306b" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#db2777;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T5 · Design & Customers</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Qualcomm — San Diego, CA</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Fabless designer of Snapdragon SoCs (dominant in Android smartphones), modems, and automotive chips.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Large TSMC customer (Snapdragon 8 series on 3nm/2nm); also a recently-announced partner with Tata for automotive modules in Jagiroad, Assam.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Qualcomm is the India OSAT story's biggest announced customer (Tata Jagiroad automotive deal).</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Automotive SoCs going to Jagiroad for assembly + test.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_9cc79ea30e0b5da09dfeba7ffc1a14a4.setContent(html_f93de9c8ca4847a74675cd6179df306b);
+            
+        
+
+        marker_cfe2b0838408b50c1436327276534665.bindPopup(popup_9cc79ea30e0b5da09dfeba7ffc1a14a4)
+        ;
+
+        
+    
+    
+            marker_cfe2b0838408b50c1436327276534665.bindTooltip(
+                `<div>
+                     Qualcomm — Snapdragon, automotive modems
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_cfe2b0838408b50c1436327276534665.setIcon(div_icon_ae941af5a46b9af9de74a5518c39f447);
+            
+    
+            var marker_7b7eebbb26a548e2138482df1414ffac = L.marker(
+                [37.338, -122.038],
+                {
+}
+            ).addTo(feature_group_508f5cc93db550d5e9bc49d543f1ae9e);
+        
+    
+            var div_icon_13cba5a748f26d5897e7448f9d41fe74 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#db2777;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT5\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_5e964a2c1400bcb7c94f8bfffac835e9 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_fec098cd8c5b02251bcb82146358de9f = $(`<div id="html_fec098cd8c5b02251bcb82146358de9f" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#db2777;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T5 · Design & Customers</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Broadcom — Palo Alto, CA</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Fabless + acquisitive chip design firm. Networking silicon (Tomahawk), custom AI (Google TPU, Meta MTIA), plus VMware software.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Major TSMC customer for networking + AI ASIC chips.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Quietly one of the largest consumers of TSMC leading-edge capacity.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Market cap > $1T as of late 2025.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_5e964a2c1400bcb7c94f8bfffac835e9.setContent(html_fec098cd8c5b02251bcb82146358de9f);
+            
+        
+
+        marker_7b7eebbb26a548e2138482df1414ffac.bindPopup(popup_5e964a2c1400bcb7c94f8bfffac835e9)
+        ;
+
+        
+    
+    
+            marker_7b7eebbb26a548e2138482df1414ffac.bindTooltip(
+                `<div>
+                     Broadcom — networking, custom AI chips (Google TPU)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7b7eebbb26a548e2138482df1414ffac.setIcon(div_icon_13cba5a748f26d5897e7448f9d41fe74);
+            
+    
+            var marker_75b42aae54266a67b7e159c8e0dbc33f = L.marker(
+                [24.805, 120.997],
+                {
+}
+            ).addTo(feature_group_508f5cc93db550d5e9bc49d543f1ae9e);
+        
+    
+            var div_icon_31d104af57afec1eef95dcedf186b571 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#db2777;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT5\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_a92f2fe7e86cc0e99d5c3fd3fdc010d7 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_b3a4012c6deca41ecf029125db750334 = $(`<div id="html_b3a4012c6deca41ecf029125db750334" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#db2777;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T5 · Design & Customers</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">MediaTek — Hsinchu, Taiwan</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Taiwan's second-largest fabless company (after Realtek). Dimensity smartphone SoCs, TV chips, IoT.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Large TSMC customer, co-located in Hsinchu.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">#2 smartphone chipset player globally after Qualcomm.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Listed on Taiwan Stock Exchange.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_a92f2fe7e86cc0e99d5c3fd3fdc010d7.setContent(html_b3a4012c6deca41ecf029125db750334);
+            
+        
+
+        marker_75b42aae54266a67b7e159c8e0dbc33f.bindPopup(popup_a92f2fe7e86cc0e99d5c3fd3fdc010d7)
+        ;
+
+        
+    
+    
+            marker_75b42aae54266a67b7e159c8e0dbc33f.bindTooltip(
+                `<div>
+                     MediaTek — #2 smartphone SoC (Dimensity), major TSMC customer
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_75b42aae54266a67b7e159c8e0dbc33f.setIcon(div_icon_31d104af57afec1eef95dcedf186b571);
+            
+    
+            var marker_ecf8b6cd50137610b6b91ef1958415c1 = L.marker(
+                [37.38, -122.034],
+                {
+}
+            ).addTo(feature_group_508f5cc93db550d5e9bc49d543f1ae9e);
+        
+    
+            var div_icon_7a22db2a0f18ff05a611b017b31f5096 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#db2777;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT5\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_f42eb113195ba3eec1b4600f202e8804 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_ad099b80e7563bfe2fe9687fd7fa1322 = $(`<div id="html_ad099b80e7563bfe2fe9687fd7fa1322" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#db2777;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T5 · Design & Customers</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Synopsys — Sunnyvale, CA</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">The #1 EDA (Electronic Design Automation) company. Makes the software engineers use to design chips — like Photoshop for silicon.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Every fabless company on this map uses Synopsys tools. Without Synopsys, no chips can be designed.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">46% of EDA revenue. Acquired Ansys (July 2025, $35B) — now a single 'device-to-system' design stack.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Tools: Design Compiler, PrimeTime, IC Validator. IP: ARC CPU cores, DesignWare USB / PCIe / DDR.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>   <div style="margin-top:10px;font-size:11px;color:#64748b"><em>Source: Embedded.com</em></div> </div> </div>`)[0];
+                popup_f42eb113195ba3eec1b4600f202e8804.setContent(html_ad099b80e7563bfe2fe9687fd7fa1322);
+            
+        
+
+        marker_ecf8b6cd50137610b6b91ef1958415c1.bindPopup(popup_f42eb113195ba3eec1b4600f202e8804)
+        ;
+
+        
+    
+    
+            marker_ecf8b6cd50137610b6b91ef1958415c1.bindTooltip(
+                `<div>
+                     Synopsys — #1 EDA (design software, 46% share) + Ansys
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ecf8b6cd50137610b6b91ef1958415c1.setIcon(div_icon_7a22db2a0f18ff05a611b017b31f5096);
+            
+    
+            var marker_75162b9bd6f6748335b8bb6ae49d202e = L.marker(
+                [37.391, -121.948],
+                {
+}
+            ).addTo(feature_group_508f5cc93db550d5e9bc49d543f1ae9e);
+        
+    
+            var div_icon_30def28ef2f144889b06a6f26be56af4 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#db2777;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT5\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_f51f19e141a2621f59ebfa2ad14c66c8 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_92d1ee7eabf9834544125d46721b79f6 = $(`<div id="html_92d1ee7eabf9834544125d46721b79f6" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#db2777;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T5 · Design & Customers</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Cadence Design Systems — San Jose, CA</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">The #2 EDA vendor. Strongest in analog and mixed-signal design (Virtuoso) and custom-layout tools.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Every analog chip (power management, RF, data converters) goes through Cadence Virtuoso.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">35% of EDA revenue. Synopsys + Cadence + Siemens = 85%+ — tight oligopoly.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Tools: Virtuoso, Innovus, Tempus, Palladium (emulation).</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_f51f19e141a2621f59ebfa2ad14c66c8.setContent(html_92d1ee7eabf9834544125d46721b79f6);
+            
+        
+
+        marker_75162b9bd6f6748335b8bb6ae49d202e.bindPopup(popup_f51f19e141a2621f59ebfa2ad14c66c8)
+        ;
+
+        
+    
+    
+            marker_75162b9bd6f6748335b8bb6ae49d202e.bindTooltip(
+                `<div>
+                     Cadence — #2 EDA (35% share), analog/mixed-signal leader
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_75162b9bd6f6748335b8bb6ae49d202e.setIcon(div_icon_30def28ef2f144889b06a6f26be56af4);
+            
+    
+            var marker_ed680ae48ffda75c97f1885cad5bef2f = L.marker(
+                [52.203, 0.121],
+                {
+}
+            ).addTo(feature_group_508f5cc93db550d5e9bc49d543f1ae9e);
+        
+    
+            var div_icon_6334e91f1b7ccbe9f6795d3c70e5e7a9 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#db2777;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT5\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_899e8695f7f0306779da56a5b14d14ed = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_0c669f1e32a015e5873d5aba164b04bb = $(`<div id="html_0c669f1e32a015e5873d5aba164b04bb" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#db2777;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T5 · Design & Customers</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Arm Holdings — Cambridge, UK</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">UK-based IP company. Designs CPU cores (Cortex-A, Cortex-M, Neoverse) that are licensed to Apple, Qualcomm, MediaTek, Samsung, Nvidia — used in virtually every smartphone and embedded device.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Arm is the 'engine' every chip designer licenses rather than designing CPUs from scratch.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Owned by SoftBank (~90%). Re-IPO'd on Nasdaq 2023. RISC-V (open alternative) hit 25% market penetration by Jan 2026 — first real competition.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Arm is now moving into complete chips: AGI CPU on TSMC 3nm, H2 2026.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>   <div style="margin-top:10px;font-size:11px;color:#64748b"><em>Source: Omdia, Adafruit</em></div> </div> </div>`)[0];
+                popup_899e8695f7f0306779da56a5b14d14ed.setContent(html_0c669f1e32a015e5873d5aba164b04bb);
+            
+        
+
+        marker_ed680ae48ffda75c97f1885cad5bef2f.bindPopup(popup_899e8695f7f0306779da56a5b14d14ed)
+        ;
+
+        
+    
+    
+            marker_ed680ae48ffda75c97f1885cad5bef2f.bindTooltip(
+                `<div>
+                     Arm — dominant CPU IP licensor (every smartphone)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ed680ae48ffda75c97f1885cad5bef2f.setIcon(div_icon_6334e91f1b7ccbe9f6795d3c70e5e7a9);
+            
+    
+            feature_group_508f5cc93db550d5e9bc49d543f1ae9e.addTo(map_d990ea73856e0b7295f4f364bfb8dec1);
+        
+    
+            ant_path_8aebfa9dd7e19ca544b1e3e11d24168d = L.polyline.antPath(
+              [[35.912, 136.167], [24.784, 120.996]],
+              {
+  "stroke": true,
+  "color": "#0d9488",
+  "weight": 2,
+  "opacity": 0.55,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+10,
+20,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#0d9488",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 2000,
+  "pulseColor": "#FFFFFF",
+}
+        ).addTo(map_d990ea73856e0b7295f4f364bfb8dec1);
+        
+    
+            ant_path_8aebfa9dd7e19ca544b1e3e11d24168d.bindTooltip(
+                `<div>
+                     Shin-Etsu wafers → TSMC Hsinchu
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            ant_path_3c1d81a3b79902a26d70b18cd07c17e8 = L.polyline.antPath(
+              [[33.27, 129.874], [23.014, 120.219]],
+              {
+  "stroke": true,
+  "color": "#0d9488",
+  "weight": 2,
+  "opacity": 0.55,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+10,
+20,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#0d9488",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 2000,
+  "pulseColor": "#FFFFFF",
+}
+        ).addTo(map_d990ea73856e0b7295f4f364bfb8dec1);
+        
+    
+            ant_path_3c1d81a3b79902a26d70b18cd07c17e8.bindTooltip(
+                `<div>
+                     SUMCO wafers → TSMC Tainan
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            ant_path_c42f4634d7201a8ef39ef6d3c8b64e38 = L.polyline.antPath(
+              [[24.813, 120.974], [22.635, 120.302]],
+              {
+  "stroke": true,
+  "color": "#0d9488",
+  "weight": 2,
+  "opacity": 0.55,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+10,
+20,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#0d9488",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 2000,
+  "pulseColor": "#FFFFFF",
+}
+        ).addTo(map_d990ea73856e0b7295f4f364bfb8dec1);
+        
+    
+            ant_path_c42f4634d7201a8ef39ef6d3c8b64e38.bindTooltip(
+                `<div>
+                     GlobalWafers → TSMC Kaohsiung (local)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            ant_path_55121380b4fd1942b76d2ff670655d1a = L.polyline.antPath(
+              [[35.912, 136.167], [33.467, -112.052]],
+              {
+  "stroke": true,
+  "color": "#0d9488",
+  "weight": 2,
+  "opacity": 0.55,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+10,
+20,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#0d9488",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 2000,
+  "pulseColor": "#FFFFFF",
+}
+        ).addTo(map_d990ea73856e0b7295f4f364bfb8dec1);
+        
+    
+            ant_path_55121380b4fd1942b76d2ff670655d1a.bindTooltip(
+                `<div>
+                     Shin-Etsu wafers → TSMC Arizona
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            ant_path_9cd5436b0f12bfbf287015f3513d4765 = L.polyline.antPath(
+              [[51.443, 5.478], [24.784, 120.996]],
+              {
+  "stroke": true,
+  "color": "#7c3aed",
+  "weight": 2,
+  "opacity": 0.55,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+10,
+20,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#7c3aed",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 1500,
+  "pulseColor": "#FFFFFF",
+}
+        ).addTo(map_d990ea73856e0b7295f4f364bfb8dec1);
+        
+    
+            ant_path_9cd5436b0f12bfbf287015f3513d4765.bindTooltip(
+                `<div>
+                     ASML EUV → TSMC Hsinchu
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            ant_path_18c9b7659cc31e9759b19d458d131872 = L.polyline.antPath(
+              [[51.443, 5.478], [23.014, 120.219]],
+              {
+  "stroke": true,
+  "color": "#7c3aed",
+  "weight": 2,
+  "opacity": 0.55,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+10,
+20,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#7c3aed",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 1500,
+  "pulseColor": "#FFFFFF",
+}
+        ).addTo(map_d990ea73856e0b7295f4f364bfb8dec1);
+        
+    
+            ant_path_18c9b7659cc31e9759b19d458d131872.bindTooltip(
+                `<div>
+                     ASML EUV → TSMC Tainan
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            ant_path_7b25cf063964f244f1cbc9fc9758d1db = L.polyline.antPath(
+              [[51.443, 5.478], [22.635, 120.302]],
+              {
+  "stroke": true,
+  "color": "#7c3aed",
+  "weight": 2,
+  "opacity": 0.55,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+10,
+20,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#7c3aed",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 1500,
+  "pulseColor": "#FFFFFF",
+}
+        ).addTo(map_d990ea73856e0b7295f4f364bfb8dec1);
+        
+    
+            ant_path_7b25cf063964f244f1cbc9fc9758d1db.bindTooltip(
+                `<div>
+                     ASML EUV → TSMC Kaohsiung (2nm)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            ant_path_cca4ddeac901eaf804ab099232b15334 = L.polyline.antPath(
+              [[51.443, 5.478], [33.467, -112.052]],
+              {
+  "stroke": true,
+  "color": "#7c3aed",
+  "weight": 2,
+  "opacity": 0.55,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+10,
+20,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#7c3aed",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 1500,
+  "pulseColor": "#FFFFFF",
+}
+        ).addTo(map_d990ea73856e0b7295f4f364bfb8dec1);
+        
+    
+            ant_path_cca4ddeac901eaf804ab099232b15334.bindTooltip(
+                `<div>
+                     ASML → TSMC Arizona
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            ant_path_66c8d049c482f9450bf16a5c0453e862 = L.polyline.antPath(
+              [[23.014, 120.219], [22.643, 120.291]],
+              {
+  "stroke": true,
+  "color": "#2563eb",
+  "weight": 2,
+  "opacity": 0.55,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+10,
+20,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#2563eb",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 1200,
+  "pulseColor": "#FFFFFF",
+}
+        ).addTo(map_d990ea73856e0b7295f4f364bfb8dec1);
+        
+    
+            ant_path_66c8d049c482f9450bf16a5c0453e862.bindTooltip(
+                `<div>
+                     TSMC Tainan → ASE Kaohsiung
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            ant_path_a2c06e0aa14b5420783346e421a66108 = L.polyline.antPath(
+              [[22.635, 120.302], [22.643, 120.291]],
+              {
+  "stroke": true,
+  "color": "#2563eb",
+  "weight": 2,
+  "opacity": 0.55,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+10,
+20,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#2563eb",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 1200,
+  "pulseColor": "#FFFFFF",
+}
+        ).addTo(map_d990ea73856e0b7295f4f364bfb8dec1);
+        
+    
+            ant_path_a2c06e0aa14b5420783346e421a66108.bindTooltip(
+                `<div>
+                     TSMC Kaohsiung → ASE Kaohsiung
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            ant_path_0773244461836728a1f198609e6c1399 = L.polyline.antPath(
+              [[33.467, -112.052], [33.371, -111.907]],
+              {
+  "stroke": true,
+  "color": "#2563eb",
+  "weight": 2,
+  "opacity": 0.55,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+10,
+20,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#2563eb",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 1200,
+  "pulseColor": "#FFFFFF",
+}
+        ).addTo(map_d990ea73856e0b7295f4f364bfb8dec1);
+        
+    
+            ant_path_0773244461836728a1f198609e6c1399.bindTooltip(
+                `<div>
+                     TSMC Arizona → Amkor Tempe (co-located)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            ant_path_f3675832c20f052c0672485657aa66a1 = L.polyline.antPath(
+              [[22.643, 120.291], [37.335, -122.009]],
+              {
+  "stroke": true,
+  "color": "#d97706",
+  "weight": 2,
+  "opacity": 0.45,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+10,
+20,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#d97706",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 1000,
+  "pulseColor": "#FFFFFF",
+}
+        ).addTo(map_d990ea73856e0b7295f4f364bfb8dec1);
+        
+    
+            ant_path_f3675832c20f052c0672485657aa66a1.bindTooltip(
+                `<div>
+                     ASE → Apple Cupertino
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            ant_path_f403de33af257cf3c175269ed4c50e43 = L.polyline.antPath(
+              [[33.371, -111.907], [37.37, -121.964]],
+              {
+  "stroke": true,
+  "color": "#d97706",
+  "weight": 2,
+  "opacity": 0.45,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+10,
+20,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#d97706",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 1000,
+  "pulseColor": "#FFFFFF",
+}
+        ).addTo(map_d990ea73856e0b7295f4f364bfb8dec1);
+        
+    
+            ant_path_f403de33af257cf3c175269ed4c50e43.bindTooltip(
+                `<div>
+                     Amkor → Nvidia Santa Clara
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var layer_control_e4530965bcc46efa9c6682166fb8ea5a_layers = {
+                base_layers : {
+                    "cartodbpositron" : tile_layer_e113445972c030faea479cb44c55ed73,
+                },
+                overlays :  {
+                    "T0 \u2014 Raw Materials" : feature_group_b6dadbd8a4f55b8b8f209f8002bb10c0,
+                    "T1 \u2014 Refined Inputs" : feature_group_5105ce654bda8680bacf983580476846,
+                    "T2 \u2014 Equipment" : feature_group_3a59b7e73792e52293c62ba48a3752b6,
+                    "T3 \u2014 Front-End Fabs" : feature_group_5ccbf533fd0d0a13e03938f0a7395ee5,
+                    "T4 \u2014 OSAT / Back-End" : feature_group_953ee00f01ec5f57ff7667650c0802d7,
+                    "T5 \u2014 Design \u0026 Customers" : feature_group_508f5cc93db550d5e9bc49d543f1ae9e,
+                },
+            };
+            let layer_control_e4530965bcc46efa9c6682166fb8ea5a = L.control.layers(
+                layer_control_e4530965bcc46efa9c6682166fb8ea5a_layers.base_layers,
+                layer_control_e4530965bcc46efa9c6682166fb8ea5a_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_d990ea73856e0b7295f4f364bfb8dec1);
+
+        
+</script>
+</html>

@@ -1,36 +1,42 @@
 # India Semicon 2.0 — Business Research
 
-Interactive research dashboard on India's semiconductor ecosystem, the $120B buildout through 2030, and ancillary-layer business opportunities.
+Interactive research dashboard on India's semiconductor ecosystem, the $120B buildout through 2030, ancillary-layer business opportunities, and a deep supply-chain / bottleneck analysis.
 
-## Live site
+## Live pages
 
-https://khushalm.github.io/india-semicon-2/
+- **Main dashboard:** https://khushalm.github.io/india-semicon-2/
+- **Supply chain + bottleneck analysis:** https://khushalm.github.io/india-semicon-2/supply-chain.html
 
 ## What's inside
 
-- **`index.html`** — main interactive dashboard (React via in-browser Babel, Chart.js)
-- **`India Semicon 2.0 - Standalone (1).html`** — self-contained bundled version (6.7 MB, no external deps)
-- **`India Semicon 2.0-print.html`** — print-optimized version
-- **`components-*.jsx`** — React components (core, charts, data, map, icons, illustrations)
-- **`sections-*.jsx`** — page sections (overview, market, middle, end)
-- **`app.jsx`** — entry point
-- **`assets/`** — India map SVG, hero background, data bundles
-- **`screenshots/`** — reference renders
+### Main dashboard (`index.html`)
+- Self-contained bundled React SPA with interactive wafer, charts, maps, and research sections
+- Covers market, competition, pain points, entry strategy, networking, govt schemes, month-by-month plan, country lessons, innovation ideas, learning plan, sources
+- Also available: `India Semicon 2.0.html` (split-source, 51 KB, uses Babel Standalone), `India Semicon 2.0-print.html` (print), `India Semicon 2.0 - Standalone.html` (bundled)
 
-## Topics covered
+### Supply chain analysis (`supply-chain.html`)
+- First-principles taxonomy of the six tiers of semiconductor production (T0 raw materials → T5 design)
+- **Interactive Folium map 1:** TSMC global supply chain end-to-end, with animated flows
+- **Interactive Folium map 2:** India's 2026 live ecosystem with import-dependency arrows
+- Long-form bottleneck analysis covering wafers, lithography, photoresist, rare gases, leading-edge nodes, EDA, IP, and talent
 
-1. Market — $120B buildout, 18% CAGR, Gujarat epicenter
-2. Competition & whitespace
-3. Pain points across the value chain
-4. Compound entry strategy (workforce + supply chain + AI quality)
-5. Networking & accessible contacts
-6. Government schemes
-7. Month-by-month execution plan
-8. Country lessons (Taiwan, Korea, China, US)
-9. Innovation ideas at the AI × semiconductor intersection
-10. Technical + business learning curriculum
-11. Research sources
+### Source files
+- `components-*.jsx`, `sections-*.jsx`, `app.jsx` — React component source for the main dashboard
+- `scripts/build_maps.py` — Python script that generates the two Folium maps
+- `maps/tsmc-supply-chain.html`, `maps/india-semicon.html` — generated Folium outputs (embedded by supply-chain.html)
+- `research/supply-chain-research-brief.md` — underlying research notes with inline source citations
+- `assets/` — India map SVG, hero background, data bundles
+
+## Regenerating the Folium maps
+
+```bash
+python3 -m venv .venv-maps
+.venv-maps/bin/pip install folium
+.venv-maps/bin/python scripts/build_maps.py
+```
+
+This regenerates `maps/tsmc-supply-chain.html` and `maps/india-semicon.html`. Edit entities, tier colors, or popup text in `scripts/build_maps.py`.
 
 ## Local development
 
-Just open `index.html` in a browser. JSX is compiled client-side via Babel Standalone.
+Open `index.html` in a browser. For the supply-chain page, open `supply-chain.html` — it embeds the two map files via iframes.

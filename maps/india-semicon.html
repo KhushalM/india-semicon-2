@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_5900fa5ad4483e5384faf38fd4b85843 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-ant-path@1.1.2/dist/leaflet-ant-path.min.js"></script>
+</head>
+<body>
+    
+    
+<div style="
+  position: fixed; bottom: 20px; right: 20px; z-index: 9999;
+  background: #fff; border-radius: 12px; padding: 16px 18px;
+  box-shadow: 0 8px 32px rgba(15,22,41,.18);
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  max-width: 280px;
+  border: 1px solid rgba(15,23,42,.08);
+  ">
+  <div style="font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .1em; color: #2563eb; margin-bottom: 4px">Legend</div>
+  <div style="font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 2px">India Semiconductor Ecosystem (2026)</div>
+  <div style="font-size: 12px; color: #64748b; margin-bottom: 10px; line-height: 1.5">Red dashed lines = IMPORTS (what India depends on from abroad). Every wafer, every machine, every photoresist currently comes from outside.</div>
+  <div style="display:flex;align-items:center;gap:10px;margin:6px 0"><span style="width:16px;height:16px;border-radius:50%;background:#8b5a2b;flex-shrink:0;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.15)"></span><span style="font-size:12px;color:#334155"><strong style="color:#0f172a">T0</strong> · Raw Materials</span></div><div style="display:flex;align-items:center;gap:10px;margin:6px 0"><span style="width:16px;height:16px;border-radius:50%;background:#0d9488;flex-shrink:0;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.15)"></span><span style="font-size:12px;color:#334155"><strong style="color:#0f172a">T1</strong> · Refined Inputs</span></div><div style="display:flex;align-items:center;gap:10px;margin:6px 0"><span style="width:16px;height:16px;border-radius:50%;background:#7c3aed;flex-shrink:0;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.15)"></span><span style="font-size:12px;color:#334155"><strong style="color:#0f172a">T2</strong> · Equipment</span></div><div style="display:flex;align-items:center;gap:10px;margin:6px 0"><span style="width:16px;height:16px;border-radius:50%;background:#2563eb;flex-shrink:0;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.15)"></span><span style="font-size:12px;color:#334155"><strong style="color:#0f172a">T3</strong> · Front-End Fabs</span></div><div style="display:flex;align-items:center;gap:10px;margin:6px 0"><span style="width:16px;height:16px;border-radius:50%;background:#d97706;flex-shrink:0;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.15)"></span><span style="font-size:12px;color:#334155"><strong style="color:#0f172a">T4</strong> · OSAT / Back-End</span></div><div style="display:flex;align-items:center;gap:10px;margin:6px 0"><span style="width:16px;height:16px;border-radius:50%;background:#db2777;flex-shrink:0;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.15)"></span><span style="font-size:12px;color:#334155"><strong style="color:#0f172a">T5</strong> · Design & Customers</span></div>
+  <div style="margin-top:10px;padding-top:10px;border-top:1px solid #e2e8f0;font-size:11px;color:#64748b;line-height:1.55">
+    <strong style="color:#334155">Tip:</strong> Click any marker for a plain-English explainer. Use the layer control (top-right) to toggle tiers.
+  </div>
+</div>
+    
+    <div style="position:fixed;top:80px;left:20px;z-index:9999;max-width:260px;
+      background:linear-gradient(145deg,#1e293b 0%,#0f172a 50%,#1e3a5f 100%);
+      color:#fff;padding:16px 18px;border-radius:12px;
+      box-shadow:0 8px 32px rgba(15,22,41,.35);
+      font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+      border:1px solid rgba(255,255,255,.08)">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#60a5fa;margin-bottom:6px">ISM 2.0 · As of March 2026</div>
+      <div style="font-size:22px;font-weight:800;color:#fff;line-height:1.1">10 units</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.7);margin-top:4px">approved · ₹1.60 lakh cr committed</div>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.1);font-size:12px;line-height:1.6;color:rgba(255,255,255,.75)">
+        <strong style="color:#fff">2 operational</strong> (Micron, Kaynes)<br>
+        <strong style="color:#fff">3 ramping</strong> (Tata Jagiroad, Tata Dholera, CG Semi)<br>
+        <strong style="color:#fff">1 under construction</strong> (HCL-Foxconn Jewar)<br>
+        <strong style="color:#dc2626">~100% import</strong> dependency upstream
+      </div>
+    </div>
+    
+    
+    <div style="position:fixed;bottom:20px;left:20px;z-index:9999;
+      font:11px/1.4 -apple-system,BlinkMacSystemFont,sans-serif;color:#64748b;
+      background:rgba(255,255,255,.92);padding:6px 10px;border-radius:6px;
+      box-shadow:0 1px 4px rgba(0,0,0,.08)">
+      Map: CartoDB · Data: ISM, Tata Electronics, Micron, PIB (2025-26)
+    </div>
+    
+    
+            <div class="folium-map" id="map_5900fa5ad4483e5384faf38fd4b85843" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_5900fa5ad4483e5384faf38fd4b85843 = L.map(
+                "map_5900fa5ad4483e5384faf38fd4b85843",
+                {
+                    center: [23.5, 80.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 5,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_5900fa5ad4483e5384faf38fd4b85843);
+
+            
+
+        
+    
+            var tile_layer_03fd0411c81139780387a07976836953 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_03fd0411c81139780387a07976836953.addTo(map_5900fa5ad4483e5384faf38fd4b85843);
+        
+    
+            var circle_5297a0812138504b3cefe389fa17d6fd = L.circle(
+                [23.0, 72.4],
+                {"bubblingMouseEvents": true, "color": "#2563eb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2563eb", "fillOpacity": 0.06, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 75000, "stroke": true, "weight": 2}
+            ).addTo(map_5900fa5ad4483e5384faf38fd4b85843);
+        
+    
+            circle_5297a0812138504b3cefe389fa17d6fd.bindTooltip(
+                `<div>
+                     Gujarat Semiconductor Cluster — Dholera + Sanand
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            ant_path_91eeb3a8a1dcdb7a81484e9897865258 = L.polyline.antPath(
+              [[35.912, 136.167], [22.25, 72.5]],
+              {
+  "stroke": true,
+  "color": "#dc2626",
+  "weight": 2,
+  "opacity": 0.5,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+8,
+16,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#dc2626",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 3000,
+  "pulseColor": "#FFFFFF",
+}
+        ).addTo(map_5900fa5ad4483e5384faf38fd4b85843);
+        
+    
+            ant_path_91eeb3a8a1dcdb7a81484e9897865258.bindTooltip(
+                `<div>
+                     IMPORT: Shin-Etsu wafers (Japan) → Tata Dholera
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            ant_path_c95b26996cce189539c879e9e8083fff = L.polyline.antPath(
+              [[33.27, 129.874], [22.25, 72.5]],
+              {
+  "stroke": true,
+  "color": "#dc2626",
+  "weight": 2,
+  "opacity": 0.5,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+8,
+16,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#dc2626",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 3000,
+  "pulseColor": "#FFFFFF",
+}
+        ).addTo(map_5900fa5ad4483e5384faf38fd4b85843);
+        
+    
+            ant_path_c95b26996cce189539c879e9e8083fff.bindTooltip(
+                `<div>
+                     IMPORT: SUMCO wafers (Japan) → Tata Dholera
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            ant_path_af6f391b43b3ae75778f1ecc3b0e1d48 = L.polyline.antPath(
+              [[48.165, 12.82], [22.25, 72.5]],
+              {
+  "stroke": true,
+  "color": "#dc2626",
+  "weight": 2,
+  "opacity": 0.5,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+8,
+16,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#dc2626",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 3000,
+  "pulseColor": "#FFFFFF",
+}
+        ).addTo(map_5900fa5ad4483e5384faf38fd4b85843);
+        
+    
+            ant_path_af6f391b43b3ae75778f1ecc3b0e1d48.bindTooltip(
+                `<div>
+                     IMPORT: Siltronic wafers (Germany) → Tata Dholera (potential)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            ant_path_4cdfb7d775bcba3e47edd2bd218011e5 = L.polyline.antPath(
+              [[35.527, 139.716], [22.25, 72.5]],
+              {
+  "stroke": true,
+  "color": "#dc2626",
+  "weight": 2,
+  "opacity": 0.5,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+8,
+16,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#dc2626",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 3000,
+  "pulseColor": "#FFFFFF",
+}
+        ).addTo(map_5900fa5ad4483e5384faf38fd4b85843);
+        
+    
+            ant_path_4cdfb7d775bcba3e47edd2bd218011e5.bindTooltip(
+                `<div>
+                     IMPORT: TOK/JSR photoresist (Japan) → Tata Dholera
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            ant_path_1931a5a690f06c4474d3f9f98f27c96b = L.polyline.antPath(
+              [[51.443, 5.478], [22.25, 72.5]],
+              {
+  "stroke": true,
+  "color": "#dc2626",
+  "weight": 2,
+  "opacity": 0.5,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+8,
+16,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#dc2626",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 3000,
+  "pulseColor": "#FFFFFF",
+}
+        ).addTo(map_5900fa5ad4483e5384faf38fd4b85843);
+        
+    
+            ant_path_1931a5a690f06c4474d3f9f98f27c96b.bindTooltip(
+                `<div>
+                     IMPORT: ASML lithography (Netherlands) → Tata Dholera
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            ant_path_b8f5f664d52327a0dad1e90b6ec0276d = L.polyline.antPath(
+              [[37.353, -121.955], [22.25, 72.5]],
+              {
+  "stroke": true,
+  "color": "#dc2626",
+  "weight": 2,
+  "opacity": 0.5,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+8,
+16,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#dc2626",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 3000,
+  "pulseColor": "#FFFFFF",
+}
+        ).addTo(map_5900fa5ad4483e5384faf38fd4b85843);
+        
+    
+            ant_path_b8f5f664d52327a0dad1e90b6ec0276d.bindTooltip(
+                `<div>
+                     IMPORT: Applied Materials (US) → Tata Dholera
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            ant_path_0522e10ebd01f658da95c48c01b3b305 = L.polyline.antPath(
+              [[48.877, 2.305], [22.25, 72.5]],
+              {
+  "stroke": true,
+  "color": "#dc2626",
+  "weight": 2,
+  "opacity": 0.5,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+8,
+16,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#dc2626",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 3000,
+  "pulseColor": "#FFFFFF",
+}
+        ).addTo(map_5900fa5ad4483e5384faf38fd4b85843);
+        
+    
+            ant_path_0522e10ebd01f658da95c48c01b3b305.bindTooltip(
+                `<div>
+                     IMPORT: Air Liquide gases (France) → Tata Dholera
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            ant_path_e68ae5bb2ecc3548b0b5d2b53df7ee7d = L.polyline.antPath(
+              [[43.577, -116.558], [23.018, 72.32]],
+              {
+  "stroke": true,
+  "color": "#dc2626",
+  "weight": 2,
+  "opacity": 0.45,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+8,
+16,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#dc2626",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 3000,
+  "pulseColor": "#FFFFFF",
+}
+        ).addTo(map_5900fa5ad4483e5384faf38fd4b85843);
+        
+    
+            ant_path_e68ae5bb2ecc3548b0b5d2b53df7ee7d.bindTooltip(
+                `<div>
+                     IMPORT: Micron wafers (Boise, USA) → Micron Sanand ATMP
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            ant_path_ee7b54a91f0dc158ce359d3b5dec13be = L.polyline.antPath(
+              [[26.075, 92.16], [32.9, -117.241]],
+              {
+  "stroke": true,
+  "color": "#d97706",
+  "weight": 2,
+  "opacity": 0.55,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+10,
+20,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#d97706",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 1500,
+  "pulseColor": "#FFFFFF",
+}
+        ).addTo(map_5900fa5ad4483e5384faf38fd4b85843);
+        
+    
+            ant_path_ee7b54a91f0dc158ce359d3b5dec13be.bindTooltip(
+                `<div>
+                     Qualcomm ← Tata Jagiroad (automotive modules)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var feature_group_20155e4220b15960b437b88ad5c644d6 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            feature_group_20155e4220b15960b437b88ad5c644d6.addTo(map_5900fa5ad4483e5384faf38fd4b85843);
+        
+    
+            var feature_group_b708e280a34a3eb3c88fc9d37a6259a2 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            feature_group_b708e280a34a3eb3c88fc9d37a6259a2.addTo(map_5900fa5ad4483e5384faf38fd4b85843);
+        
+    
+            var feature_group_0bfaf0a73174947dad5b23b0c1b5a88b = L.featureGroup(
+                {
+}
+            );
+        
+    
+            feature_group_0bfaf0a73174947dad5b23b0c1b5a88b.addTo(map_5900fa5ad4483e5384faf38fd4b85843);
+        
+    
+            var feature_group_446a946a5d7cd1946b17194860511314 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_263fc32257a30e079125559ef6a2a8a7 = L.marker(
+                [22.25, 72.5],
+                {
+}
+            ).addTo(feature_group_446a946a5d7cd1946b17194860511314);
+        
+    
+            var div_icon_c79d9c5d3ea569bf1adb8fbba6ab9d14 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#2563eb;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT3\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_47ad0c06b7b9513a0228a8932db60448 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_607445b7d462d7b046131f88031c98b5 = $(`<div id="html_607445b7d462d7b046131f88031c98b5" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#2563eb;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T3 · Front-End Fabs</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Tata Electronics–PSMC Fab — Dholera, Gujarat</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">India's first commercial wafer fabrication plant. Joint venture: Tata Electronics + Powerchip Semiconductor (Taiwan). Covers analog and logic at 28, 40, 55, 90, 110 nm nodes.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">FRONT-END: patterns bare silicon wafers into circuits. This is the first time India will actually *make* chips on home soil at scale.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">India's first domestic wafer fab. ₹91,000 cr (~$11B) — the largest single semiconductor investment in India's history. 50,000 wafers/month capacity at full ramp.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">First commercial silicon: late 2026. Tool-in milestones underway. Technology transfer from Taiwan's PSMC. 20,000 direct + indirect jobs.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>   <div style="margin-top:10px;font-size:11px;color:#64748b"><em>Source: Tata Electronics, ISM</em></div> </div> </div>`)[0];
+                popup_47ad0c06b7b9513a0228a8932db60448.setContent(html_607445b7d462d7b046131f88031c98b5);
+            
+        
+
+        marker_263fc32257a30e079125559ef6a2a8a7.bindPopup(popup_47ad0c06b7b9513a0228a8932db60448)
+        ;
+
+        
+    
+    
+            marker_263fc32257a30e079125559ef6a2a8a7.bindTooltip(
+                `<div>
+                     Tata-PSMC Dholera — India's first large-scale fab (28-110nm)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_263fc32257a30e079125559ef6a2a8a7.setIcon(div_icon_c79d9c5d3ea569bf1adb8fbba6ab9d14);
+            
+    
+            var marker_398f61e88dba69efb94b500bea3ad33c = L.marker(
+                [30.705, 76.709],
+                {
+}
+            ).addTo(feature_group_446a946a5d7cd1946b17194860511314);
+        
+    
+            var div_icon_a08fcbe2b5062617d99d83dfe62f7dda = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#2563eb;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT3\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_5eb3ee23afb941043829d63a002b747f = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_a91d88e82741f0b9991271eb5645ec01 = $(`<div id="html_a91d88e82741f0b9991271eb5645ec01" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#2563eb;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T3 · Front-End Fabs</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">SCL Mohali — legacy 180nm (strategic/research)</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Semi-Conductor Laboratory, a government research fab near Chandigarh. Legacy 180nm process, primarily for ISRO, DRDO, and strategic defense chips.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Not a commercial fab — it's India's strategic sovereign silicon capability. Being modernized under ISM.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Historically India's only actual fab. A tiny but symbolic anchor.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Under Department of Space. Node: 180nm. Modernization plans in progress.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_5eb3ee23afb941043829d63a002b747f.setContent(html_a91d88e82741f0b9991271eb5645ec01);
+            
+        
+
+        marker_398f61e88dba69efb94b500bea3ad33c.bindPopup(popup_5eb3ee23afb941043829d63a002b747f)
+        ;
+
+        
+    
+    
+            marker_398f61e88dba69efb94b500bea3ad33c.bindTooltip(
+                `<div>
+                     SCL Mohali — legacy fab for ISRO/strategic chips
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_398f61e88dba69efb94b500bea3ad33c.setIcon(div_icon_a08fcbe2b5062617d99d83dfe62f7dda);
+            
+    
+            feature_group_446a946a5d7cd1946b17194860511314.addTo(map_5900fa5ad4483e5384faf38fd4b85843);
+        
+    
+            var feature_group_9da2b8529539ae37c931f61111cb9633 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_fa14d13b845d3fcd0179230e33a1785c = L.marker(
+                [23.018, 72.32],
+                {
+}
+            ).addTo(feature_group_9da2b8529539ae37c931f61111cb9633);
+        
+    
+            var div_icon_9321641e1809c06c744fa808156eb716 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#d97706;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT4\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_99442110a82882cbf28e564ec8558562 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_a998cd0b3d9e2547fb65d291af06bf92 = $(`<div id="html_a998cd0b3d9e2547fb65d291af06bf92" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#d97706;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T4 · OSAT / Back-End</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Micron ATMP — Sanand, Gujarat (OPERATIONAL)</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Micron's semiconductor Assembly, Test, Marking & Packaging facility. Converts DRAM and NAND wafers (imported from Micron's global fabs) into finished memory modules.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">BACK-END: receives wafers from outside India, dices them into chips, packages and tests them. No patterning done here.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">India's first operational semiconductor facility. Opened by PM Modi Feb 28, 2026. Target: tens of millions of chips in 2026, hundreds of millions in 2027.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">$2.75B total ($825M Micron + $1.93B govt subsidies). 500,000 sq ft cleanroom — one of the world's largest single-floor cleanrooms.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>   <div style="margin-top:10px;font-size:11px;color:#64748b"><em>Source: Micron press, PIB</em></div> </div> </div>`)[0];
+                popup_99442110a82882cbf28e564ec8558562.setContent(html_a998cd0b3d9e2547fb65d291af06bf92);
+            
+        
+
+        marker_fa14d13b845d3fcd0179230e33a1785c.bindPopup(popup_99442110a82882cbf28e564ec8558562)
+        ;
+
+        
+    
+    
+            marker_fa14d13b845d3fcd0179230e33a1785c.bindTooltip(
+                `<div>
+                     Micron Sanand — INDIA'S FIRST OSAT (commercial production Feb 2026)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fa14d13b845d3fcd0179230e33a1785c.setIcon(div_icon_9321641e1809c06c744fa808156eb716);
+            
+    
+            var marker_3b613ba448743e5807792758d5271873 = L.marker(
+                [22.987, 72.3],
+                {
+}
+            ).addTo(feature_group_9da2b8529539ae37c931f61111cb9633);
+        
+    
+            var div_icon_0382eab1279599a4efd7797816cc579c = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#d97706;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT4\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_30a77e8f77608aa958fcd435f57e957f = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_a84d412d3dc86d920ce75a9a4568e0fe = $(`<div id="html_a84d412d3dc86d920ce75a9a4568e0fe" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#d97706;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T4 · OSAT / Back-End</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Kaynes Semicon — Sanand, Gujarat (OPERATIONAL)</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Indian-owned OSAT (Kaynes Technology subsidiary). Wire-bond, flip-chip, and system-in-package (SiP) assembly.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Assembles packaged chips from externally-sourced wafers for Indian + export customers.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">India's **second operational** semiconductor facility. ₹3,300 cr (~$400M). Target: 6.3 million chips/day (2.3 billion/year).</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Commercial production opened Mar 31, 2026. Ramp: 1.5M/day Q1 2026 → full capacity later. First Indian-owned OSAT online.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>   <div style="margin-top:10px;font-size:11px;color:#64748b"><em>Source: Kaynes Semicon, Communications Today</em></div> </div> </div>`)[0];
+                popup_30a77e8f77608aa958fcd435f57e957f.setContent(html_a84d412d3dc86d920ce75a9a4568e0fe);
+            
+        
+
+        marker_3b613ba448743e5807792758d5271873.bindPopup(popup_30a77e8f77608aa958fcd435f57e957f)
+        ;
+
+        
+    
+    
+            marker_3b613ba448743e5807792758d5271873.bindTooltip(
+                `<div>
+                     Kaynes Semicon Sanand — commercial production Mar 2026
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3b613ba448743e5807792758d5271873.setIcon(div_icon_0382eab1279599a4efd7797816cc579c);
+            
+    
+            var marker_ce55556788236632beb53888fd5cb8c7 = L.marker(
+                [23.035, 72.305],
+                {
+}
+            ).addTo(feature_group_9da2b8529539ae37c931f61111cb9633);
+        
+    
+            var div_icon_7600f9893a7246664feb2074612a2841 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#d97706;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT4\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_31be698f6d027636ace38174934fd3a9 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_f291d5617eb479b2dda0bbc33109bd9b = $(`<div id="html_f291d5617eb479b2dda0bbc33109bd9b" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#d97706;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T4 · OSAT / Back-End</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">CG Semi — Sanand, Gujarat (pilot production)</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Joint venture: CG Power + Renesas Electronics (Japan) + Stars Microelectronics (Thailand). Legacy + automotive packaging.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Adds a third OSAT to the Sanand cluster, targeting automotive + industrial customers.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">CG Power + Renesas partnership gives India immediate access to Japanese automotive design wins.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Capex: ~₹7,600 cr (~$900M). Commercial production imminent (announced March 2026).</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_31be698f6d027636ace38174934fd3a9.setContent(html_f291d5617eb479b2dda0bbc33109bd9b);
+            
+        
+
+        marker_ce55556788236632beb53888fd5cb8c7.bindPopup(popup_31be698f6d027636ace38174934fd3a9)
+        ;
+
+        
+    
+    
+            marker_ce55556788236632beb53888fd5cb8c7.bindTooltip(
+                `<div>
+                     CG Semi Sanand — pilot, commercial imminent
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ce55556788236632beb53888fd5cb8c7.setIcon(div_icon_7600f9893a7246664feb2074612a2841);
+            
+    
+            var marker_8aeb8e5827a4f4441db8e5d236471d17 = L.marker(
+                [26.075, 92.16],
+                {
+}
+            ).addTo(feature_group_9da2b8529539ae37c931f61111cb9633);
+        
+    
+            var div_icon_8ab3e0197d1552fb449ebb65f6e5d90b = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#d97706;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT4\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_666652487f71e76e4df34646149df5d3 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_921732dbf4b1edc3ee0836073253b0c6 = $(`<div id="html_921732dbf4b1edc3ee0836073253b0c6" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#d97706;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T4 · OSAT / Back-End</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Tata Semiconductor Assembly & Test — Jagiroad, Assam</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Tata Electronics' flagship OSAT in Assam. Wire-bond + flip-chip + SiP. Qualcomm automotive modules will be assembled here.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">India's largest OSAT by capex — anchors the North-East as a semiconductor region.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">₹27,000 cr (~$3.6B), 48 million chips/day target, 25,000 jobs. Qualcomm automotive modules deal (Feb 2026) is the first big export customer.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Commissioning April 2026. Construction began 2024.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>   <div style="margin-top:10px;font-size:11px;color:#64748b"><em>Source: Tata Electronics, PIB</em></div> </div> </div>`)[0];
+                popup_666652487f71e76e4df34646149df5d3.setContent(html_921732dbf4b1edc3ee0836073253b0c6);
+            
+        
+
+        marker_8aeb8e5827a4f4441db8e5d236471d17.bindPopup(popup_666652487f71e76e4df34646149df5d3)
+        ;
+
+        
+    
+    
+            marker_8aeb8e5827a4f4441db8e5d236471d17.bindTooltip(
+                `<div>
+                     Tata Jagiroad — commissioning April 2026 ($3.6B, 48M chips/day)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8aeb8e5827a4f4441db8e5d236471d17.setIcon(div_icon_8ab3e0197d1552fb449ebb65f6e5d90b);
+            
+    
+            var marker_761fc95683e3264c64b0588e365ed73a = L.marker(
+                [28.125, 77.55],
+                {
+}
+            ).addTo(feature_group_9da2b8529539ae37c931f61111cb9633);
+        
+    
+            var div_icon_12e53a2b5753bf5b11760e70aabb7c18 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#d97706;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT4\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_bc7c998d345d6977137146a71fa3f695 = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_6de10015ac11651e3e98c142415ef78f = $(`<div id="html_6de10015ac11651e3e98c142415ef78f" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#d97706;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T4 · OSAT / Back-End</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">HCL–Foxconn OSAT — Jewar, UP (under construction)</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">India Chip Private Limited (60% HCL, 40% Foxconn). Display driver chips for mobile, laptop, automotive, consumer electronics.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Specialized OSAT focused on one narrow but high-volume product category.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">₹3,706 cr (~$445M). 20,000 wafers/month input → 36 million chips/month output. Near Jewar airport (Noida international).</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Groundbreaking Feb 2026 by PM Modi. Operational 2028. Subsidy covers 60-70%.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">Medium (construction just started)</strong>   </div>    </div> </div>`)[0];
+                popup_bc7c998d345d6977137146a71fa3f695.setContent(html_6de10015ac11651e3e98c142415ef78f);
+            
+        
+
+        marker_761fc95683e3264c64b0588e365ed73a.bindPopup(popup_bc7c998d345d6977137146a71fa3f695)
+        ;
+
+        
+    
+    
+            marker_761fc95683e3264c64b0588e365ed73a.bindTooltip(
+                `<div>
+                     HCL-Foxconn Jewar — display drivers, operational 2028
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_761fc95683e3264c64b0588e365ed73a.setIcon(div_icon_12e53a2b5753bf5b11760e70aabb7c18);
+            
+    
+            feature_group_9da2b8529539ae37c931f61111cb9633.addTo(map_5900fa5ad4483e5384faf38fd4b85843);
+        
+    
+            var feature_group_bb5ee51543673367a3a295dfbb3a2949 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_713265613d4587164fc07cc8513ec88a = L.marker(
+                [12.971, 77.594],
+                {
+}
+            ).addTo(feature_group_bb5ee51543673367a3a295dfbb3a2949);
+        
+    
+            var div_icon_e611fca52028031fcfef2f93ec53433f = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#db2777;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT5\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_7d37ffb70b15ad432ed0c87fa77ebe5d = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_67762203ebdb3b9a2cdf68d1f7ae66a9 = $(`<div id="html_67762203ebdb3b9a2cdf68d1f7ae66a9" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#db2777;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T5 · Design & Customers</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Bangalore design cluster — Qualcomm / Intel / Nvidia / AMD / Arm India</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">India's largest chip design ecosystem. Qualcomm Bangalore, Intel Bangalore, Nvidia Bangalore, AMD Bangalore, Arm India, and dozens of fabless startups (Signalchip, InCore, Saankhya Labs) are here.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">India is ~20% of global chip design labor. Most MNC design centers do verification + implementation for advanced nodes (3nm, 2nm).</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">India's existing strength. The fabs/OSATs are new; the design capability is already world-class.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">~80,000 semiconductor design engineers across Bangalore. 24 chip design projects approved under DLI scheme as of Jan 2026.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_7d37ffb70b15ad432ed0c87fa77ebe5d.setContent(html_67762203ebdb3b9a2cdf68d1f7ae66a9);
+            
+        
+
+        marker_713265613d4587164fc07cc8513ec88a.bindPopup(popup_7d37ffb70b15ad432ed0c87fa77ebe5d)
+        ;
+
+        
+    
+    
+            marker_713265613d4587164fc07cc8513ec88a.bindTooltip(
+                `<div>
+                     Bangalore — India's chip design capital (~80,000 engineers)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_713265613d4587164fc07cc8513ec88a.setIcon(div_icon_e611fca52028031fcfef2f93ec53433f);
+            
+    
+            var marker_8d5addc093c439c2dedbd0710b533d44 = L.marker(
+                [17.385, 78.487],
+                {
+}
+            ).addTo(feature_group_bb5ee51543673367a3a295dfbb3a2949);
+        
+    
+            var div_icon_7b3b6c6b4ef9299cb343b2a0ae19cfe2 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#db2777;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT5\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_70f6a54a99968cc6eb59004ba4b6cbee = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_7beafae933cd39ec6b1ccf85e743a9ab = $(`<div id="html_7beafae933cd39ec6b1ccf85e743a9ab" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#db2777;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T5 · Design & Customers</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">Hyderabad design cluster — AMD / Qualcomm / Synopsys</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">India's second-largest design center. AMD has ~1,500 engineers; Qualcomm, Synopsys, Cadence all present.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Co-equal to Bangalore for physical design + verification.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Concentrated AMD + EDA presence; talent pool for future design startups.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Telangana government pushing aggressive fab-adjacent incentives.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_70f6a54a99968cc6eb59004ba4b6cbee.setContent(html_7beafae933cd39ec6b1ccf85e743a9ab);
+            
+        
+
+        marker_8d5addc093c439c2dedbd0710b533d44.bindPopup(popup_70f6a54a99968cc6eb59004ba4b6cbee)
+        ;
+
+        
+    
+    
+            marker_8d5addc093c439c2dedbd0710b533d44.bindTooltip(
+                `<div>
+                     Hyderabad — 2nd-largest chip design cluster
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8d5addc093c439c2dedbd0710b533d44.setIcon(div_icon_7b3b6c6b4ef9299cb343b2a0ae19cfe2);
+            
+    
+            var marker_3e7299dd8d72411943aa3a12a8e59edf = L.marker(
+                [13.083, 80.27],
+                {
+}
+            ).addTo(feature_group_bb5ee51543673367a3a295dfbb3a2949);
+        
+    
+            var div_icon_e1ad3f64181882570fb8728bd0539db7 = L.divIcon({
+  "html": "\n        \u003cdiv style=\"\n          width:28px;height:28px;border-radius:50%;\n          background:#db2777;border:2px solid #fff;\n          box-shadow:0 2px 8px rgba(15,22,41,.35);\n          display:flex;align-items:center;justify-content:center;\n          color:#fff;font-weight:700;font-size:11px;\n          font-family:-apple-system,BlinkMacSystemFont,sans-serif;\n          \"\u003eT5\u003c/div\u003e\n        ",
+  "iconSize": [28, 28],
+  "iconAnchor": [14, 14],
+  "className": "empty",
+});
+        
+    
+        var popup_658bd49bf40aaeada12aeaa7b0c1088d = L.popup({
+  "maxWidth": 360,
+});
+
+        
+            
+                var html_4924b33d178af292b5c71dc7e139d81b = $(`<div id="html_4924b33d178af292b5c71dc7e139d81b" style="width: 100.0%; height: 100.0%;"> <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:320px;line-height:1.55;color:#0f172a">   <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">     <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#db2777;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">T5 · Design & Customers</span>   </div>   <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px">IIT Madras — RISC-V Shakti processor</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">What this is</div>   <div style="font-size:13px;color:#475569;margin-top:2px">IIT Madras's Shakti project: an open-source, indigenous RISC-V processor family. E-class (IoT) through C-class (servers).</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Role in the chain</div>   <div style="font-size:13px;color:#475569;margin-top:2px">India's sovereign CPU IP. Doesn't depend on Arm licensing.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Why it matters</div>   <div style="font-size:13px;color:#475569;margin-top:2px">If India wants a sovereign chip stack, indigenous IP is foundational. Shakti is the real candidate.</div>    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#db2777;margin-top:10px">Key facts</div>   <div style="font-size:13px;color:#475569;margin-top:2px">Taped-out on SCL Mohali 180nm silicon. Used in ISRO test chips.</div>    <div style="margin-top:10px;font-size:11px;color:#94a3b8">     Confidence: <strong style="color:#475569">High</strong>   </div>    </div> </div>`)[0];
+                popup_658bd49bf40aaeada12aeaa7b0c1088d.setContent(html_4924b33d178af292b5c71dc7e139d81b);
+            
+        
+
+        marker_3e7299dd8d72411943aa3a12a8e59edf.bindPopup(popup_658bd49bf40aaeada12aeaa7b0c1088d)
+        ;
+
+        
+    
+    
+            marker_3e7299dd8d72411943aa3a12a8e59edf.bindTooltip(
+                `<div>
+                     IIT Madras — indigenous RISC-V CPU (Shakti)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3e7299dd8d72411943aa3a12a8e59edf.setIcon(div_icon_e1ad3f64181882570fb8728bd0539db7);
+            
+    
+            feature_group_bb5ee51543673367a3a295dfbb3a2949.addTo(map_5900fa5ad4483e5384faf38fd4b85843);
+        
+    
+            var layer_control_5ae5ae6532ad3db97629244093b0b5e5_layers = {
+                base_layers : {
+                    "cartodbpositron" : tile_layer_03fd0411c81139780387a07976836953,
+                },
+                overlays :  {
+                    "T0 \u2014 Raw Materials" : feature_group_20155e4220b15960b437b88ad5c644d6,
+                    "T1 \u2014 Refined Inputs" : feature_group_b708e280a34a3eb3c88fc9d37a6259a2,
+                    "T2 \u2014 Equipment" : feature_group_0bfaf0a73174947dad5b23b0c1b5a88b,
+                    "T3 \u2014 Front-End Fabs" : feature_group_446a946a5d7cd1946b17194860511314,
+                    "T4 \u2014 OSAT / Back-End" : feature_group_9da2b8529539ae37c931f61111cb9633,
+                    "T5 \u2014 Design \u0026 Customers" : feature_group_bb5ee51543673367a3a295dfbb3a2949,
+                },
+            };
+            let layer_control_5ae5ae6532ad3db97629244093b0b5e5 = L.control.layers(
+                layer_control_5ae5ae6532ad3db97629244093b0b5e5_layers.base_layers,
+                layer_control_5ae5ae6532ad3db97629244093b0b5e5_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_5900fa5ad4483e5384faf38fd4b85843);
+
+        
+</script>
+</html>
