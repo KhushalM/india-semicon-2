@@ -275,6 +275,253 @@ def build_tsmc_map() -> folium.Map:
         key_facts="Dual-listed US (NYSE:LIN) after 2018 merger.",
         confidence="High",
     )
+    # ── T1 Sputtering targets ──
+    add_entity(
+        fgs["T1"], lat=35.676, lng=139.770,
+        name="JX Nippon Mining & Metals — Tokyo, Japan",
+        tier="T1",
+        tooltip="JX Nippon — sputtering target leader (copper, tantalum, ruthenium)",
+        what_is_it="Sputtering targets are solid metal or compound 'pucks' that get atom-blasted inside deposition tools to lay down the thin metal films of a chip (copper interconnects, tungsten plugs, tantalum barriers, etc.). JX Nippon is the global leader.",
+        role="Every metal layer of every chip involves a sputtering target. TSMC, Samsung, Intel all source from JX Nippon for leading-edge copper + ruthenium.",
+        why_matters="Sputtering-target market ~$1.8B (2024) → $3.1B by 2032. Japan + US duopoly in high-purity grades.",
+        key_facts="Competes with Materion (USA), Plansee (Austria), Mitsui Mining.",
+        confidence="High", source="Verified Market Research",
+    )
+    add_entity(
+        fgs["T1"], lat=41.485, lng=-81.741,
+        name="Materion — Mayfield Heights, OH, USA",
+        tier="T1",
+        tooltip="Materion — specialty sputtering targets + photomask materials",
+        what_is_it="US specialty materials firm (formerly Brush Engineered Materials). Makes sputtering targets for copper/cobalt/ruthenium barrier layers, plus photomask raw materials.",
+        role="Alternative to Japanese targets for US-based fabs. Strategic for Arizona Fab 21, Intel Ohio.",
+        why_matters="Domestic US supply option for Micron, Intel, GlobalFoundries.",
+        key_facts="Revenue ~$1.7B. NYSE:MTRN.",
+        confidence="High",
+    )
+    # ── T1 CMP Slurries ──
+    add_entity(
+        fgs["T1"], lat=42.535, lng=-71.279,
+        name="Entegris / CMC Materials — Billerica, MA",
+        tier="T1",
+        tooltip="Entegris (CMC Materials) — CMP slurry leader (30%+ share)",
+        what_is_it="CMP (Chemical Mechanical Planarization) slurries are liquid abrasives used to polish wafer surfaces between layers, leveling atomic-scale bumps so the next layer can be patterned cleanly. Entegris (after acquiring CMC Materials) is global #1.",
+        role="Every layer of a modern chip is planarized via CMP. Slurry chemistry must match metal (copper, tungsten, cobalt) and dielectric (oxide, low-k) being polished.",
+        why_matters=">30% market share. Long-term supply contracts with Intel, TSMC, Samsung. Without slurry, yield collapses.",
+        key_facts="CMC was acquired by Entegris for $6.5B in 2022. DuPont 22%, Fujimi 15% are next-largest competitors.",
+        confidence="High", source="Business Research Insights",
+    )
+    add_entity(
+        fgs["T1"], lat=35.181, lng=136.906,
+        name="Fujimi Incorporated — Nagoya, Japan",
+        tier="T1",
+        tooltip="Fujimi — high-purity CMP abrasives (~15% share)",
+        what_is_it="Japanese specialty abrasives maker focused on high-purity CMP slurries and polishing compounds for silicon wafers and chip CMP steps.",
+        role="Supplies abrasives (alumina, silica, ceria) used to polish wafer substrates at Shin-Etsu/SUMCO before chips are made, plus layer-level CMP slurries.",
+        why_matters="~15% CMP slurry share. Critical input at multiple supply-chain points.",
+        key_facts="Also supplies polishing powders for optics and precision tooling.",
+        confidence="High",
+    )
+    # ── T1 Wet Chemicals ──
+    add_entity(
+        fgs["T1"], lat=34.693, lng=135.502,
+        name="Stella Chemifa — Osaka, Japan",
+        tier="T1",
+        tooltip="Stella Chemifa — ultra-pure hydrofluoric acid for chips",
+        what_is_it="Japanese specialty chemical maker focused on ultra-high-purity hydrofluoric acid (HF), used to etch silicon oxide during chip manufacturing.",
+        role="Semiconductor-grade HF (parts-per-trillion impurity level) is used at multiple etch steps. Stella Chemifa is one of two global leaders (with Morita Chemical).",
+        why_matters="When South Korea–Japan trade dispute hit in 2019, HF supply to Samsung became a national crisis.",
+        key_facts="Also makes fluorine gas (F2) and BOE (buffered oxide etchant).",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T1"], lat=49.493, lng=8.445,
+        name="BASF — Ludwigshafen, Germany",
+        tier="T1",
+        tooltip="BASF — semiconductor-grade wet chemicals + H2SO4",
+        what_is_it="German specialty chemicals giant. Supplies hydrogen peroxide, sulfuric acid, and planarization chemistry at semiconductor grade.",
+        role="Competing with Mitsubishi Chemical in wet chemicals. Breaking ground on a new semi-grade sulfuric acid plant in Ludwigshafen (2027 ops).",
+        why_matters="BASF + Mitsubishi Chemical combined: ~25% wet chemicals share. European sovereign supply option.",
+        key_facts="Market 2024: $4.78B; growing to $8.65B by 2032 (6.8% CAGR).",
+        confidence="High", source="OpenPR / SNS Insider",
+    )
+    add_entity(
+        fgs["T1"], lat=35.696, lng=139.739,
+        name="Mitsubishi Chemical — Tokyo, Japan",
+        tier="T1",
+        tooltip="Mitsubishi Chemical — wet chemicals + specialty materials",
+        what_is_it="Japanese specialty chemicals giant. Wet chemicals (HF, H2O2, H2SO4, NH4OH, BOE) at sub-ppb purity for fabs.",
+        role="Along with BASF, a top-2 wet chemicals supplier. Also supplies polymer materials for packaging.",
+        why_matters="Vertical integration across wet chemicals gives Japan a sovereign wet-process supply chain.",
+        key_facts="Combined Mitsubishi Chemical Group includes Nippon Polyester, Japan Polyethylene.",
+        confidence="High",
+    )
+    # ── T1 Photomasks & Mask Blanks ──
+    add_entity(
+        fgs["T1"], lat=41.473, lng=-73.411,
+        name="Photronics — Brookfield, CT, USA",
+        tier="T1",
+        tooltip="Photronics — merchant photomask leader",
+        what_is_it="A photomask is the 'stencil' through which lithography tools project circuit patterns onto wafers. Photronics is the largest merchant (non-captive) photomask supplier — fabs without their own mask shops buy from Photronics.",
+        role="Every new chip design requires a mask set ($200k–$30M+ depending on node). Photronics makes masks for TSMC, UMC, Samsung, GlobalFoundries at 28nm and older.",
+        why_matters="Leading-edge masks (EUV) are typically made in-house at TSMC/Samsung/Intel; Photronics dominates everything else.",
+        key_facts="NYSE:PLAB. Photomask market: $4.8B (2024) → $6.6B by 2031.",
+        confidence="High", source="Mordor Intelligence",
+    )
+    add_entity(
+        fgs["T1"], lat=35.695, lng=139.771,
+        name="Toppan / Tekscend — Tokyo, Japan",
+        tier="T1",
+        tooltip="Toppan (Tekscend) — EUV + advanced photomasks",
+        what_is_it="Japanese printing-origin conglomerate. Tekscend (Toppan subsidiary) is a top-tier photomask maker for advanced nodes including EUV.",
+        role="Supplies EUV photomasks to TSMC, Samsung, Intel. Runs multibeam writer fleets and phase-shift mask capability.",
+        why_matters="Together with DNP and Photronics, forms the top-3 mask makers. Japan ~60% of market share.",
+        key_facts="Partner with ASML on pellicle compatibility for high-NA EUV.",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T1"], lat=35.703, lng=139.750,
+        name="Dai Nippon Printing (DNP) — Tokyo, Japan",
+        tier="T1",
+        tooltip="DNP — photomasks + mask blanks + metal masks",
+        what_is_it="Japanese printing / materials giant. Photomask operations rival Toppan. Also makes FMMs (fine metal masks) for OLED displays.",
+        role="Mask supplier to every major foundry. Also a major player in semiconductor lead frames and advanced substrates.",
+        why_matters="Japan's mask duopoly with Toppan gives Japan structural control over a critical fab input.",
+        key_facts="Public on Tokyo Stock Exchange.",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T1"], lat=35.659, lng=139.703,
+        name="Hoya Corporation — Tokyo, Japan",
+        tier="T1",
+        tooltip="Hoya — EUV photomask blanks (world leader)",
+        what_is_it="Japanese optics + materials firm (founded as an optical glass maker). Makes the blank mask substrate (quartz + multilayer reflective coating) that mask shops then pattern with circuit designs.",
+        role="For EUV, the blank is a stack of 40+ alternating molybdenum/silicon layers on ultra-flat quartz. Hoya + AGC = near-monopoly on EUV blanks.",
+        why_matters="Without Hoya blanks, no EUV masks. Without EUV masks, no EUV-patterned chips.",
+        key_facts="Tripling EUV blank output at Kumamoto plant (2024–2025 actions).",
+        confidence="High", source="Photo-Sciences, Wikipedia",
+    )
+    # ── T2 Additions: lithography alternatives, diffusion, test, metrology, implant ──
+    add_entity(
+        fgs["T2"], lat=35.676, lng=139.773,
+        name="Canon — Tokyo, Japan",
+        tier="T2",
+        tooltip="Canon — DUV lithography + nanoimprint (FPA-1200NZ2C)",
+        what_is_it="Japanese camera/optics giant. Second-largest lithography maker (after ASML). Makes DUV i-line, KrF, and ArF immersion scanners, plus the new nanoimprint lithography (NIL) tools (FPA-1200NZ2C).",
+        role="Supplies lithography at 28nm+ nodes where EUV isn't needed — most automotive, analog, power, and industrial chips.",
+        why_matters="Only non-ASML alternative for advanced DUV. Nanoimprint is Canon's long-shot play at sub-EUV costs for memory.",
+        key_facts="Sold first FPA-1200NZ2C to Kioxia/Western Digital (2024) for NAND production.",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T2"], lat=35.691, lng=139.770,
+        name="Nikon — Tokyo, Japan",
+        tier="T2",
+        tooltip="Nikon — DUV lithography (legacy leader)",
+        what_is_it="Japanese precision optics maker. Historical lithography leader before ASML overtook them in the 2000s. Still supplies DUV i-line and KrF tools.",
+        role="Secondary lithography option at mature nodes. Major legacy install base in Japan + Korea.",
+        why_matters="Shrinking market share (ASML dominates) but strategically relevant as a sovereign option for partner countries.",
+        key_facts="NASDAQ:NINOY / TSE:7731.",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T2"], lat=35.706, lng=139.751,
+        name="Kokusai Electric — Tokyo, Japan",
+        tier="T2",
+        tooltip="Kokusai Electric — LP-CVD + ALD + diffusion furnaces",
+        what_is_it="Japanese equipment maker (Hitachi spinoff). Specializes in batch thermal processes: low-pressure CVD, atomic layer deposition (ALD), oxidation, annealing, diffusion furnaces.",
+        role="Every silicon oxide layer, every nitride, every polysilicon gate starts in a Kokusai furnace. Critical complement to TEL and Applied Materials.",
+        why_matters="Near-monopoly in vertical batch furnaces for 300mm fabs.",
+        key_facts="TSE:6525. Went public 2023.",
+        confidence="High", source="Kokusai Electric",
+    )
+    add_entity(
+        fgs["T2"], lat=35.011, lng=135.768,
+        name="Screen Holdings — Kyoto, Japan",
+        tier="T2",
+        tooltip="Screen Holdings — wafer cleaning + photoresist coaters",
+        what_is_it="Japanese equipment maker. Dominant in single-wafer cleaning tools; also makes coat/develop tools (competing with TEL).",
+        role="Wafer cleaning happens dozens of times during chip manufacturing. Screen + TEL split this market.",
+        why_matters="Alternate to TEL for coat/develop at leading-edge fabs.",
+        key_facts="TSE:7735.",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T2"], lat=35.683, lng=139.772,
+        name="Advantest — Tokyo, Japan",
+        tier="T2",
+        tooltip="Advantest — semiconductor test equipment leader ('ASML of test')",
+        what_is_it="Japanese test equipment maker. Makes the huge machines (testers) that verify every finished chip works before shipping. Leader in SoC, DRAM, HBM testing.",
+        role="Every AI chip from Nvidia, every Apple SoC, every HBM stack gets tested on Advantest (or Teradyne) before OSAT.",
+        why_matters="Advantest + Teradyne + Cohu = ~55% of test equipment market. Advantest is #1 by revenue in leading-edge.",
+        key_facts="Test equipment market: $16B (2026) → $21.6B by 2031.",
+        confidence="High", source="Fortune Business Insights, Mordor",
+    )
+    add_entity(
+        fgs["T2"], lat=42.575, lng=-71.063,
+        name="Teradyne — North Reading, MA, USA",
+        tier="T2",
+        tooltip="Teradyne — test equipment #2 + Technoprobe stake",
+        what_is_it="US test equipment maker. Second-largest ATE (automated test equipment) supplier after Advantest. Also owns robotics (Universal Robots).",
+        role="Test platforms for digital, analog, RF, image sensors. Major customer of every fabless company.",
+        why_matters="Bought 10% of Technoprobe for $516M in April 2025 — vertical integration into probe cards.",
+        key_facts="NYSE:TER.",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T2"], lat=37.676, lng=-121.771,
+        name="FormFactor — Livermore, CA",
+        tier="T2",
+        tooltip="FormFactor — probe cards (wafer-level test)",
+        what_is_it="US maker of probe cards — the precision arrays of thousands of tiny needles that touch every die on a wafer during wafer-level test, before dicing.",
+        role="No probe card, no wafer test. FormFactor is partnered with Advantest and dominates leading-edge probe cards.",
+        why_matters="Probe cards scale with pin count — at 3nm+ nodes pin counts exceed 10,000 channels per card.",
+        key_facts="Doubled Taiwan service capacity May 2025. NYSE:FORM.",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T2"], lat=42.539, lng=-70.880,
+        name="Axcelis Technologies — Beverly, MA",
+        tier="T2",
+        tooltip="Axcelis — ion implant leader",
+        what_is_it="US specialty equipment maker focused on ion implantation — shooting dopant atoms (boron, phosphorus, arsenic) into silicon to give it electrical properties.",
+        role="Every transistor in every chip involves 10+ implant steps. Axcelis + Applied Materials + Sumitomo Heavy = the global market.",
+        why_matters="Specialist in power and mature-node implant (silicon carbide, image sensors, automotive).",
+        key_facts="NASDAQ:ACLS.",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T2"], lat=42.612, lng=-71.258,
+        name="Onto Innovation — Wilmington, MA",
+        tier="T2",
+        tooltip="Onto Innovation — metrology + inspection (after Rudolph+Nanometrics merger)",
+        what_is_it="US metrology firm formed by merger of Rudolph Technologies + Nanometrics. Optical metrology, overlay inspection, film thickness measurement.",
+        role="Alternative to KLA for process control metrology. Growing fast with advanced packaging demand.",
+        why_matters="2nd-tier metrology player behind KLA. NASDAQ:ONTO.",
+        key_facts="Revenue ~$1B.",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T2"], lat=35.667, lng=139.619,
+        name="Ebara Corporation — Tokyo, Japan",
+        tier="T2",
+        tooltip="Ebara — CMP tools + dry vacuum pumps",
+        what_is_it="Japanese industrial machinery maker. Two big semiconductor businesses: CMP polishers (competing with Applied Materials) and dry vacuum pumps (used inside every deposition/etch tool).",
+        role="Vacuum pumps are the unseen utility of every fab — thousands per fab. Ebara + Edwards split this market.",
+        why_matters="Dual role as tool maker + critical sub-supplier.",
+        key_facts="TSE:6361.",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T2"], lat=51.762, lng=-0.208,
+        name="Edwards Vacuum (Atlas Copco) — Crawley, UK",
+        tier="T2",
+        tooltip="Edwards — vacuum pumps + abatement systems",
+        what_is_it="British vacuum-technology firm (now part of Swedish Atlas Copco). Dry vacuum pumps for CVD, etch, implant, plus abatement systems that burn toxic effluent gases.",
+        role="Every process chamber in every fab has Edwards pumps. Abatement handles the dangerous gases before they reach the atmosphere.",
+        why_matters="Duopoly with Ebara on vacuum; near-monopoly on advanced abatement.",
+        key_facts="Private (owned by Atlas Copco NASDAQ:ATLKF).",
+        confidence="High",
+    )
 
     # ── T2 Equipment ──
     add_entity(
@@ -487,6 +734,63 @@ def build_tsmc_map() -> folium.Map:
         why_matters="Europe's answer to supply shocks; EU's first advanced-mature-node fab.",
         key_facts="40,000 wafers/month capacity; fully operational 2029.",
         confidence="Medium (still under construction)",
+    )
+
+    # ── T4 ABF Substrates (packaging consumables — top 5 = 74%) ──
+    add_entity(
+        fgs["T4"], lat=24.993, lng=121.440,
+        name="Unimicron — Taoyuan, Taiwan",
+        tier="T4",
+        tooltip="Unimicron — ABF substrate leader (22% share)",
+        what_is_it="ABF (Ajinomoto Build-up Film) substrate is the tiny high-density printed circuit board that sits underneath a chip die, connecting it to the motherboard. Unimicron is the global #1 ABF substrate maker.",
+        role="Every advanced-package CPU, GPU, AI accelerator needs an ABF substrate. Supply is chronically tight; 2021–22 was a global bottleneck.",
+        why_matters="22% global share. Taiwan alone produces >45% of global ABF substrates.",
+        key_facts="Expanded 150,000 sq-m/month Taiwan capacity in 2023. Market $4.9B (2024) → $9.5B by 2032.",
+        confidence="High", source="Market Growth Reports",
+    )
+    add_entity(
+        fgs["T4"], lat=35.430, lng=136.461,
+        name="Ibiden — Ogaki, Japan",
+        tier="T4",
+        tooltip="Ibiden — ABF substrate #2 (AI/HPC focus)",
+        what_is_it="Japanese ceramics/substrate maker, now one of the top ABF substrate makers. Strong at highest-layer-count substrates for AI and HPC processors.",
+        role="Supplies Intel, AMD, Nvidia with substrates for top-end datacenter processors.",
+        why_matters="Intel's Ponte Vecchio, Nvidia Blackwell packages use Ibiden substrates.",
+        key_facts="TSE:4062. Ogaki plant in Gifu Prefecture.",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T4"], lat=36.244, lng=138.010,
+        name="Shinko Electric Industries — Nagano, Japan",
+        tier="T4",
+        tooltip="Shinko — ABF substrates + lead frames (new Osaka plant 2026)",
+        what_is_it="Japanese packaging-materials firm (Fujitsu subsidiary). Makes ABF substrates, lead frames, and test sockets.",
+        role="Top-3 ABF substrate supplier alongside Unimicron and Ibiden.",
+        why_matters="New Osaka plant +30% output (2024), plus additional ABF facility coming online 2026.",
+        key_facts="TSE:6967.",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T4"], lat=47.380, lng=15.098,
+        name="AT&S — Leoben, Austria",
+        tier="T4",
+        tooltip="AT&S — European ABF substrate (Intel + AMD supplier)",
+        what_is_it="Austrian printed-circuit-board maker. Only major European ABF substrate producer. Rapidly expanding capacity in Malaysia.",
+        role="Strategic European sovereign option for advanced packaging. Supplies Intel's Meteor Lake and similar.",
+        why_matters="The only non-Asian top-5 ABF substrate player.",
+        key_facts="Public on Vienna Stock Exchange.",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T4"], lat=35.009, lng=135.750,
+        name="Kyocera — Kyoto, Japan",
+        tier="T4",
+        tooltip="Kyocera — ceramic substrates (military/aerospace)",
+        what_is_it="Japanese ceramics giant. Makes ceramic substrates (alumina, aluminum nitride) for high-power, high-reliability applications.",
+        role="Packaging substrates for power electronics, defense, automotive power modules. Complements the ABF organic substrate market.",
+        why_matters="Niche leader at the ceramic/high-reliability end.",
+        key_facts="TSE:6971. Also makes solar cells, phones, and cutting tools.",
+        confidence="High",
     )
 
     # ── T4 OSAT ──
