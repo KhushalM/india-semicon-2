@@ -1026,7 +1026,42 @@ def build_india_map() -> folium.Map:
         tooltip="Gujarat Semiconductor Cluster — Dholera + Sanand",
     ).add_to(m)
 
+    # ── T1: INOX + Linde India (first local specialty gas for semis) ──
+    add_entity(
+        fgs["T1"], lat=22.260, lng=72.510,
+        name="INOX Air Products Specialty Gas Hub — Dholera, Gujarat",
+        tier="T1",
+        tooltip="INOX Air Products Dholera — India's first semi-grade specialty gas hub (₹500 cr)",
+        what_is_it="Electronic Specialty Gas Hub under construction in Dholera. Ultra-High Purity nitrogen, oxygen, argon, hydrogen for the semiconductor ecosystem anchored around Tata Electronics.",
+        role="First Indian-built specialty gas supply for fabs. Without local gas supply, every Indian fab imports every gas at 3–4× cost + 6–8 week lead times.",
+        why_matters="₹500 cr commitment. Construction started 2025; operational in 12–18 months. Proof point that Indian firms CAN enter T1.",
+        key_facts="INOX Group (Siddharth Jain MD). Positioned as both production and fulfillment centre.",
+        confidence="High", source="Indian Chemical News, ProjectX Media",
+    )
+    add_entity(
+        fgs["T1"], lat=22.255, lng=72.505,
+        name="Linde India Dholera — Gujarat",
+        tier="T1",
+        tooltip="Linde India — semiconductor gas plant (under negotiation)",
+        what_is_it="Linde (global #1 industrial gas) is in advanced-stage discussions with Tata and other Dholera customers to set up a dedicated semiconductor gas plant on-site.",
+        role="Co-located gas supply is standard for fabs. Linde's existing India operations need a retrofit to serve semiconductor-grade demand.",
+        why_matters="Second foreign-partner gas plant in Dholera after INOX. Evidence that the Gujarat cluster is attracting real upstream participation.",
+        key_facts="Partnership model with Tata Electronics + other ecosystem customers.",
+        confidence="Medium",
+    )
+
     # ── T3 front-end fabs ──
+    add_entity(
+        fgs["T3"], lat=20.270, lng=85.840,
+        name="RIR Power Electronics SiC Fab — Bhubaneswar, Odisha",
+        tier="T3",
+        tooltip="RIR Power — India's first Silicon Carbide semiconductor fab (₹618 cr)",
+        what_is_it="India's first Silicon Carbide (SiC) semiconductor fabrication facility. Produces high-voltage SiC MOSFETs, IGBTs, diodes (3.3 kV to 20 kV) for EVs, renewable energy, industrial automation.",
+        role="SiC is the next-gen wide-bandgap semiconductor for power electronics. Complementary to silicon — not a replacement.",
+        why_matters="₹618 cr. First SiC fab in India. Epitaxy wafer production expected March 2026, then phased commercial launch.",
+        key_facts="750 direct+indirect jobs. Partner: ProAsia Semiconductor (Taiwan) already shipping 1200V SiC diodes from Taiwan pre-ramp.",
+        confidence="High", source="RIR Power, DIGITIMES, EQ Magpro",
+    )
     add_entity(
         fgs["T3"], lat=22.250, lng=72.500,
         name="Tata Electronics–PSMC Fab — Dholera, Gujarat",
@@ -1095,6 +1130,18 @@ def build_india_map() -> folium.Map:
         key_facts="Commissioning April 2026. Construction began 2024.",
         confidence="High", source="Tata Electronics, PIB",
     )
+    # India PCB / substrate makers (T4 adjacent)
+    add_entity(
+        fgs["T4"], lat=16.515, lng=80.632,
+        name="Syrma SGS–Shinhyup PCB Facility — Andhra Pradesh",
+        tier="T4",
+        tooltip="Syrma SGS × Shinhyup — India's largest multi-layer PCB + CCL facility (₹1,800 cr)",
+        what_is_it="India's largest multi-layer PCB and Copper Clad Laminate (CCL) manufacturing facility. Joint venture with South Korean Shinhyup Electronics. Critical substrate supply for OSAT and packaging customers.",
+        role="Bridges the substrate gap for India's OSATs. Multi-layer PCBs are the step between bare die and finished product board-level assembly.",
+        why_matters="₹1,800 cr. Phase 1 expected December 2026; fully operational 2027.",
+        key_facts="India's bare PCB market: $3.5B (2024) → $8.2B by 2030. CCL: $135M → $335M.",
+        confidence="High", source="IBEF, Business Standard",
+    )
     add_entity(
         fgs["T4"], lat=28.125, lng=77.550,
         name="HCL–Foxconn OSAT — Jewar, UP (under construction)",
@@ -1139,6 +1186,185 @@ def build_india_map() -> folium.Map:
         role="India's sovereign CPU IP. Doesn't depend on Arm licensing.",
         why_matters="If India wants a sovereign chip stack, indigenous IP is foundational. Shakti is the real candidate.",
         key_facts="Taped-out on SCL Mohali 180nm silicon. Used in ISRO test chips.",
+        confidence="High",
+    )
+    # ── Indian fabless startups ──
+    add_entity(
+        fgs["T5"], lat=13.008, lng=80.235,
+        name="Mindgrove Technologies — Chennai",
+        tier="T5",
+        tooltip="Mindgrove — India's first indigenous commercial MCU ($8M Series A)",
+        what_is_it="Chennai-based fabless SoC startup founded 2021. Uses Shakti RISC-V cores. Launched India's first indigenously-designed commercial high-performance MCU chip.",
+        role="Shipping commercial chips to CCTV, dashcam, ADAS, smart TV customers. DLI-approved (₹15 cr for Vision SoC).",
+        why_matters="$8M Series A Dec 2024 (Rocketship.vc + Speciale Invest). Proof that Indian startups can now ship real silicon at RISC-V.",
+        key_facts="Co-founder: Shashwath TR (IIT Madras alumnus).",
+        confidence="High", source="Business Standard, Design & Reuse",
+    )
+    add_entity(
+        fgs["T5"], lat=13.013, lng=80.238,
+        name="InCore Semiconductors — IIT Madras Research Park, Chennai",
+        tier="T5",
+        tooltip="InCore — RISC-V processor IP solutions ($3M seed, Peak XV)",
+        what_is_it="RISC-V-based processor IP solutions company founded 2018 by the creators of IIT Madras's SHAKTI project. Generates SoC from concept to FPGA in <10 minutes.",
+        role="Commercial IP spinout of Shakti. Target: license RISC-V cores to Indian + global fabless customers.",
+        why_matters="$3M seed 2023 from Peak XV (Sequoia Capital India). One of the earliest commercial RISC-V spinouts from India.",
+        key_facts="Headquartered at IIT Madras Research Park.",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T5"], lat=12.972, lng=77.594,
+        name="Saankhya Labs — Bangalore",
+        tier="T5",
+        tooltip="Saankhya Labs — 5G / AI / defense chips (DLI approved for 5G SoC)",
+        what_is_it="Bangalore-based fabless semi startup. AI processors for defense and telecom; 5G modems. Received DLI approval Feb 2024 to develop 5G telecom SoC.",
+        role="Defense and telecom-focused sovereign chip supplier. Partnered with BEL, ISRO, and strategic customers.",
+        why_matters="~$18M total funding. Multi-decade India-based fabless track record.",
+        key_facts="Founded 2007. Now part of Tejas Networks (Tata Group acquired Tejas 2021).",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T5"], lat=12.975, lng=77.597,
+        name="SignalChip — Bangalore",
+        tier="T5",
+        tooltip="SignalChip — India's first indigenous 4G/5G modem chipsets",
+        what_is_it="Bangalore-based fabless startup (founded 2010). India's first company to successfully design and develop indigenous 4G LTE and 5G modem chipsets from the ground up.",
+        role="Sovereign cellular modem capability. Critical for BSNL 5G and defense telecom use cases.",
+        why_matters="Multi-generation indigenous baseband processor development — rare capability globally.",
+        key_facts="Substantial backing from private investors + government programs.",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T5"], lat=12.977, lng=77.570,
+        name="Calligo Technologies — Bangalore",
+        tier="T5",
+        tooltip="Calligo — 8-core Posit RISC-V CPU (TUNGA) for HPC/AI",
+        what_is_it="Bangalore-based fabless startup for high-performance computing, Big Data, and AI/ML workloads. Unveiled an 8-core Posit-enabled RISC-V CPU 'TUNGA' in June 2024.",
+        role="India's answer to the AI datacenter chip race. Posit arithmetic is a floating-point alternative gaining traction.",
+        why_matters="Indian HPC+AI silicon attempt — rare at this performance tier.",
+        key_facts="Posit arithmetic = real-valued computing alternative to IEEE 754.",
+        confidence="Medium",
+    )
+    add_entity(
+        fgs["T5"], lat=8.524, lng=76.937,
+        name="Netrasemi — Trivandrum, Kerala",
+        tier="T5",
+        tooltip="Netrasemi — Edge AI SoC ($14.6M, Zoho + Unicorn India)",
+        what_is_it="Kerala-based Edge AI semiconductor startup (founded 2020). Building SoCs for smart IoT products with a power-efficient deep-neural AI acceleration core (NPU).",
+        role="Validates Kerala as a credible chip design hub beyond Bangalore/Hyderabad/Chennai.",
+        why_matters="Series A ₹107 cr (~$14.6M total) July 2025 led by Zoho Corporation + Unicorn India Ventures.",
+        key_facts="Rich portfolio of silicon IPs. Geographic diversification of Indian chip design.",
+        confidence="High", source="Special Invest blog",
+    )
+    add_entity(
+        fgs["T5"], lat=12.972, lng=77.587,
+        name="Morphing Machines — IISc Bangalore",
+        tier="T5",
+        tooltip="Morphing Machines — REDEFINE many-core processor",
+        what_is_it="Incubated at IISc Bangalore since 2006. Developing REDEFINE — a many-core processor for data analysis, AI, telecom.",
+        role="One of India's longest-running fabless chip design startups. Dense many-core architecture.",
+        why_matters="Raised Series A within 18 months of seed; long-horizon deep-tech.",
+        key_facts="IISc research-origin commercial spinout.",
+        confidence="Medium",
+    )
+    # ── Research / academic ──
+    add_entity(
+        fgs["T5"], lat=13.010, lng=80.235,
+        name="Bharat Semiconductor Research Centre — IIT Madras + SCL Mohali",
+        tier="T5",
+        tooltip="BSRC — India's answer to IMEC / ITRI ($8B over 5 years)",
+        what_is_it="Government-backed semiconductor research centre, co-located at IIT Madras and SCL Mohali. Modeled on IMEC (Belgium), ITRI (Taiwan), MIT Microelectronics Lab.",
+        role="Long-term R&D engine for India's sovereign semiconductor stack — process R&D, advanced packaging, compound semi, talent pipeline.",
+        why_matters="₹66,500 cr ($8B) investment over 5 years. Announced 2023, establishing from 2024. SCL Mohali also modernized with $2B.",
+        key_facts="Partnerships with industry, academia, startups. IMEC-style 'shared cleanroom' model.",
+        confidence="Medium", source="Business Standard, GKToday",
+    )
+    add_entity(
+        fgs["T5"], lat=12.944, lng=77.572,
+        name="CeNSE IISc Bangalore — Centre for Nano Science & Engineering",
+        tier="T5",
+        tooltip="CeNSE IISc — India's flagship nanoelectronics research center",
+        what_is_it="The Centre for Nano Science and Engineering at IISc Bangalore. One of six Centres of Excellence in Nanoelectronics (CEN) established 2006 (IISc + IITB) under MeitY.",
+        role="Coordinates INUP-i2i (Indian Nanoelectronics Users' Programme — Idea to Innovation) across six nanoelectronics centers.",
+        why_matters="Anchor of India's research-grade nanoelectronics fabrication capacity. Has taped out processors, MEMS, photonics.",
+        key_facts="Nodes at IITB, IITD, IITG, IITKgp, IITM — all under INUP-i2i umbrella.",
+        confidence="High", source="inup.cense.iisc.ac.in",
+    )
+    add_entity(
+        fgs["T5"], lat=19.133, lng=72.915,
+        name="IITB Nanofabrication Facility — Mumbai",
+        tier="T5",
+        tooltip="IIT Bombay Nanofab — academic clean room + CEN node",
+        what_is_it="IIT Bombay's in-house nanofabrication cleanroom. One of the six CEN nanoelectronics centers under MeitY.",
+        role="Research-scale tape-outs, PhD training, industry partnerships. Where many Indian semiconductor PhDs are trained.",
+        why_matters="Academic feeder to the fabs and OSATs now coming online.",
+        key_facts="Partner in INUP-i2i nanoelectronics program.",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T5"], lat=28.545, lng=77.192,
+        name="IIT Delhi — CEN Nanoelectronics node",
+        tier="T5",
+        tooltip="IIT Delhi CEN — nanoelectronics research",
+        what_is_it="IIT Delhi's Centre of Excellence in Nanoelectronics (added to the program in 2011). Fabrication + device research for CMOS, MEMS, compound semiconductors.",
+        role="Research-grade capability in Delhi NCR; talent feeder to Noida-area semiconductor companies.",
+        why_matters="Part of INUP-i2i; industry-academia partnerships.",
+        key_facts="Also IIT Guwahati CEN (added 2015) for the North-East.",
+        confidence="High",
+    )
+    # ── Global design GCCs in India ──
+    add_entity(
+        fgs["T5"], lat=12.929, lng=77.637,
+        name="Intel India Design Centers — Bangalore + Hyderabad",
+        tier="T5",
+        tooltip="Intel India — 13,000 engineers (design center since 1988)",
+        what_is_it="Intel opened its India R&D center in 1988. Today design centers in Hyderabad and Bengaluru employ 13,000 engineers on AI-integrated data center processors and IoT chips.",
+        role="One of Intel's largest design facilities outside the United States. Critical for their AI accelerator and networking SoC roadmap.",
+        why_matters="The oldest and largest semiconductor multinational presence in India — older than ISM by 35 years.",
+        key_facts="Hyderabad + Bangalore + other sites.",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T5"], lat=12.977, lng=77.593,
+        name="AMD India — Bangalore (largest global campus)",
+        tier="T5",
+        tooltip="AMD Bangalore — $400M 500k sq ft AMD's largest global campus",
+        what_is_it="AMD's largest design campus globally (500,000 sq ft, opened November 2023). Focus: 3D stacking, AI chip technologies.",
+        role="AMD's MI-series AI accelerators, Ryzen, EPYC — significant engineering done here.",
+        why_matters="$400M capital invested. Signal that AMD is betting on India for flagship product development, not just verification.",
+        key_facts="Hyderabad also has major AMD presence (~1,500 engineers).",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T5"], lat=12.957, lng=77.702,
+        name="Nvidia India — Bangalore/Hyderabad/Pune/Gurugram",
+        tier="T5",
+        tooltip="Nvidia India — 3,800+ employees across 4 cities",
+        what_is_it="Nvidia's engineering development centers in Gurugram, Hyderabad, Pune, Bangalore. 3,800+ employees.",
+        role="Deep learning frameworks, CUDA libraries, SoC engineering, automotive (DRIVE platform).",
+        why_matters="Nvidia's AI accelerator roadmap has significant Indian engineering contribution.",
+        key_facts="Hiring aggressively in 2026.",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T5"], lat=28.607, lng=77.376,
+        name="Arm India — Noida",
+        tier="T5",
+        tooltip="Arm Noida — CPU IP engineering",
+        what_is_it="Arm's India operations centered in Noida. Design, verification, and physical-IP work for Cortex and Neoverse families.",
+        role="Complements Arm Cambridge HQ; handles significant portion of IP qualification work for customers across Asia.",
+        why_matters="If India wants to license Arm or work on competitive alternatives, Arm Noida talent pool is foundational.",
+        key_facts="Co-located with HCLTech operations in Noida.",
+        confidence="High",
+    )
+    add_entity(
+        fgs["T5"], lat=17.446, lng=78.351,
+        name="Qualcomm India — Hyderabad (flagship R&D)",
+        tier="T5",
+        tooltip="Qualcomm Hyderabad — one of Qualcomm's largest R&D centers globally",
+        what_is_it="One of Qualcomm's largest R&D centers worldwide. 5G modem development, AI workloads, automotive SoCs, RF front-end.",
+        role="Qualcomm Snapdragon SoCs (8 Gen series) have significant Indian engineering contribution.",
+        why_matters="Major anchor of Hyderabad semiconductor ecosystem (along with AMD).",
+        key_facts="Partners with Tata Electronics on Jagiroad automotive module supply.",
         confidence="High",
     )
 

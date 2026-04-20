@@ -264,9 +264,13 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
       <a class="nav-link" href="index.html">← Main</a>
       <a class="nav-link active" href="#s0">Overview</a>
       <a class="nav-link" href="#s1">Taxonomy</a>
-      <a class="nav-link" href="#s2">TSMC Map</a>
-      <a class="nav-link" href="#s3">India Map</a>
+      <a class="nav-link" href="#s2">TSMC</a>
+      <a class="nav-link" href="#s3">India</a>
       <a class="nav-link" href="#s4">Bottlenecks</a>
+      <a class="nav-link" href="#s35">Startups</a>
+      <a class="nav-link" href="#s36">R&amp;D</a>
+      <a class="nav-link" href="#s37">Talent</a>
+      <a class="nav-link" href="#s38">Follow</a>
       <a class="nav-link" href="#s5">Synthesis</a>
     </div>
     <div class="nav-actions">
@@ -485,12 +489,306 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
 
     <!-- India tier-count summary cards -->
     <div class="g3" style="margin-top:1.25rem;gap:.85rem">
-      <div class="p-card p-compact p-tone-accent"><div class="p-head"><p class="p-kicker">T3 · Front-end Fabs</p><h3 class="p-title">2<span class="dim"> sites</span></h3><p class="p-body"><strong style="color:#fff">Tata-PSMC Dholera</strong> (28-110nm, ₹91,000 cr, first silicon late 2026) + <strong style="color:#fff">SCL Mohali</strong> (legacy 180nm, strategic/ISRO).</p></div></div>
+      <div class="p-card p-compact p-tone-accent"><div class="p-head"><p class="p-kicker">T3 · Front-end Fabs</p><h3 class="p-title">3<span class="dim"> sites</span></h3><p class="p-body"><strong style="color:#fff">Tata-PSMC Dholera</strong> (28-110nm, ₹91,000 cr, first silicon late 2026) + <strong style="color:#fff">RIR Power SiC</strong> (Bhubaneswar, India's first SiC fab, ₹618 cr, epitaxy Mar 2026) + <strong style="color:#fff">SCL Mohali</strong> (legacy 180nm, strategic/ISRO).</p></div></div>
       <div class="p-card p-compact p-tone-warn"><div class="p-head"><p class="p-kicker">T4 · OSAT / ATMP</p><h3 class="p-title">5<span class="dim"> sites</span></h3><p class="p-body">Micron Sanand (oper.), Kaynes Sanand (oper.), CG Semi Sanand (pilot), Tata Jagiroad (Apr-26 commission), HCL-Foxconn Jewar (2028).</p></div></div>
-      <div class="p-card p-compact p-tone-lead"><div class="p-head"><p class="p-kicker">T5 · Design clusters</p><h3 class="p-title">3<span class="dim"> hubs</span></h3><p class="p-body"><strong style="color:#fff">Bangalore</strong> (~80k engineers: Qualcomm, Intel, Nvidia, AMD, Arm), <strong style="color:#fff">Hyderabad</strong> (AMD flagship), <strong style="color:#fff">IIT Madras</strong> (Shakti RISC-V).</p></div></div>
+      <div class="p-card p-compact p-tone-lead"><div class="p-head"><p class="p-kicker">T5 · Design clusters</p><h3 class="p-title">5<span class="dim"> hubs</span></h3><p class="p-body"><strong style="color:#fff">Bangalore</strong> + <strong style="color:#fff">Hyderabad</strong> (Intel 13k, Nvidia 3.8k, AMD $400M, Qualcomm flagship, Arm Noida) + <strong style="color:#fff">Chennai</strong> (IIT Madras, Mindgrove, InCore) + <strong style="color:#fff">Kerala</strong> (Netrasemi) + <strong style="color:#fff">Noida</strong>.</p></div></div>
       <div class="p-card p-compact p-tone-violet"><div class="p-head"><p class="p-kicker">ISM Projects total</p><h3 class="p-title">10<span class="dim"> units</span></h3><p class="p-body">2 fabs + 8 OSAT/ATMP approved. ₹1.60 lakh cr ($19B) committed across 6 states. DLI: 24 chip design projects backed.</p></div></div>
       <div class="p-card p-compact p-tone-lead"><div class="p-head"><p class="p-kicker">Operational today</p><h3 class="p-title">2<span class="dim"> / 10</span></h3><p class="p-body">Commercial production: Micron Sanand (Feb-26), Kaynes Sanand (Mar-26). Tata Jagiroad commissioning Apr-26 (3rd).</p></div></div>
-      <div class="p-card p-compact p-tone-critical"><div class="p-head"><p class="p-kicker">Upstream imports (T0–T2)</p><h3 class="p-title">~100<span class="dim">%</span></h3><p class="p-body">Wafers (Japan), photoresist (Japan), lithography (NL), specialty gases (FR/JP), equipment (US/NL/JP). Eight import routes visible.</p></div></div>
+      <div class="p-card p-compact p-tone-critical"><div class="p-head"><p class="p-kicker">Upstream imports (T0–T2)</p><h3 class="p-title">~100<span class="dim">%</span></h3><p class="p-body">Wafers (Japan), photoresist (Japan), lithography (NL), specialty gases (FR/JP), equipment (US/NL/JP). <strong style="color:#fff">INOX Air Products</strong> (₹500 cr Dholera gas hub, 2026) is the first Indian T1 entrant.</p></div></div>
+    </div>
+
+    <!-- India sub-tier taxonomy: what India actually has per tier -->
+    <div class="section-head" style="margin-top:4.5rem">
+      <div>
+        <div class="section-label">03a — India by tier</div>
+        <h2 class="section-title">What India has, <em>per tier</em></h2>
+      </div>
+      <p class="section-sub">Mapping every Indian-built capability against the six tiers. The further up you go (T0 / T1 / T2), the sparser India's footprint. T4 and T5 are where India's real mass sits today.</p>
+    </div>
+
+    <div class="g3" style="gap:.85rem">
+      <div class="p-card p-compact" style="--tier-c:#a78358"><div class="p-head"><p class="p-kicker" style="color:#c19670">T0 · Raw materials</p><h3 class="p-title">Near <em>zero</em></h3><p class="p-body">No domestic neon / xenon / krypton / semi-grade quartz production. Imports 100% of electronic specialty gases + rare gases.</p></div></div>
+      <div class="p-card p-compact" style="--tier-c:#2dd4bf"><div class="p-head"><p class="p-kicker" style="color:#2dd4bf">T1 · Refined inputs</p><h3 class="p-title">1<span class="dim"> emerging</span></h3><p class="p-body"><strong style="color:#fff">INOX Air Products</strong> Dholera gas hub (₹500 cr, 2026). <strong style="color:#fff">Linde India</strong> in negotiation. Reliance, Aarti, Deepak Nitrite, Navin Fluorine could enter specialty chemicals. No domestic wafers, resist, CMP slurries, or masks yet.</p></div></div>
+      <div class="p-card p-compact" style="--tier-c:#a78bfa"><div class="p-head"><p class="p-kicker" style="color:#c4b5fd">T2 · Equipment</p><h3 class="p-title">0<span class="dim"> makers</span></h3><p class="p-body">Zero domestic equipment manufacturing. All lithography, deposition, etch, implant, metrology imported from US, NL, Japan.</p></div></div>
+      <div class="p-card p-compact" style="--tier-c:#60a5fa"><div class="p-head"><p class="p-kicker" style="color:#60a5fa">T3 · Fabs</p><h3 class="p-title">3<span class="dim"> sites</span></h3><p class="p-body"><strong style="color:#fff">Tata-PSMC Dholera</strong> (28-110nm, Gujarat), <strong style="color:#fff">RIR Power SiC</strong> (Bhubaneswar, Odisha — India's first SiC fab), <strong style="color:#fff">SCL Mohali</strong> (legacy 180nm, ISRO/strategic).</p></div></div>
+      <div class="p-card p-compact" style="--tier-c:#fbbf24"><div class="p-head"><p class="p-kicker" style="color:#fcd34d">T4 · OSAT + substrates</p><h3 class="p-title">5 + <em>2</em></h3><p class="p-body">5 OSATs: Micron, Kaynes, CG Semi (Sanand), Tata Jagiroad, HCL-Foxconn Jewar. Plus <strong style="color:#fff">Syrma SGS</strong> × Shinhyup PCB (Andhra Pradesh, ₹1,800 cr) and <strong style="color:#fff">Kaynes Circuits</strong>.</p></div></div>
+      <div class="p-card p-compact" style="--tier-c:#f472b6"><div class="p-head"><p class="p-kicker" style="color:#f472b6">T5 · Design</p><h3 class="p-title">~125k <em>engineers</em></h3><p class="p-body"><strong style="color:#fff">Global GCCs:</strong> Intel 13k, Nvidia 3.8k, AMD $400M Bangalore, Qualcomm flagship Hyderabad, Arm Noida, NXP 2,500. <strong style="color:#fff">Indian startups:</strong> Mindgrove, InCore, Netrasemi, Saankhya, SignalChip, Calligo.</p></div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── 04 INDIAN STARTUPS ── -->
+<section class="section" id="s35">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-label">04 — Indian startups</div>
+        <h2 class="section-title">The fabless <em>founders</em> shipping silicon</h2>
+      </div>
+      <p class="section-sub">Twenty-four DLI-approved chip design projects + a wave of Series-A fundraises in 2024–2025 mark the first generation of Indian-founded, India-headquartered fabless companies actually taping out and shipping product.</p>
+    </div>
+
+    <div class="g3" style="gap:.85rem">
+      <div class="p-card p-compact p-tone-lead"><div class="p-badge">SERIES A · $8M</div><div class="p-head"><p class="p-kicker">Mindgrove Technologies</p><h3 class="p-title">Chennai · <em>SoC</em> + RISC-V</h3><p class="p-body">India's first indigenously-designed commercial high-performance MCU. Uses Shakti RISC-V cores. Dec 2024 Series A led by Rocketship.vc + Speciale Invest. DLI: ₹15 cr for Vision SoC.</p></div></div>
+      <div class="p-card p-compact p-tone-lead"><div class="p-badge">SEED · $3M</div><div class="p-head"><p class="p-kicker">InCore Semiconductors</p><h3 class="p-title">Chennai · <em>RISC-V IP</em></h3><p class="p-body">RISC-V processor IP solutions spun out of IIT Madras SHAKTI (2018). Concept-to-FPGA in <10 minutes. $3M seed from Peak XV (ex-Sequoia India).</p></div></div>
+      <div class="p-card p-compact p-tone-lead"><div class="p-badge">SERIES A · $14.6M</div><div class="p-head"><p class="p-kicker">Netrasemi</p><h3 class="p-title">Kerala · <em>Edge AI</em> SoC</h3><p class="p-body">Edge AI semiconductor startup (founded 2020). Power-efficient NPU + silicon IP portfolio. July 2025 ₹107 cr Series A led by Zoho + Unicorn India Ventures. Validates Kerala as a chip hub.</p></div></div>
+      <div class="p-card p-compact p-tone-accent"><div class="p-badge">$18M · DLI</div><div class="p-head"><p class="p-kicker">Saankhya Labs</p><h3 class="p-title">Bangalore · <em>5G</em> + defense</h3><p class="p-body">AI processors for defense and telecom; 5G modems. DLI-approved Feb 2024 for 5G telecom SoC. Part of Tejas Networks (Tata Group acquired 2021).</p></div></div>
+      <div class="p-card p-compact p-tone-accent"><div class="p-badge">FOUNDED 2010</div><div class="p-head"><p class="p-kicker">SignalChip</p><h3 class="p-title">Bangalore · <em>4G / 5G</em> modems</h3><p class="p-body">India's first company to design indigenous 4G LTE and 5G modem chipsets from the ground up. Sovereign cellular modem capability — rare globally.</p></div></div>
+      <div class="p-card p-compact p-tone-violet"><div class="p-badge">RISC-V · HPC</div><div class="p-head"><p class="p-kicker">Calligo Technologies</p><h3 class="p-title">Bangalore · <em>TUNGA</em> CPU</h3><p class="p-body">8-core Posit-enabled RISC-V CPU "TUNGA" unveiled June 2024. Targets HPC, Big Data, AI/ML workloads. India's highest-performance fabless silicon attempt.</p></div></div>
+      <div class="p-card p-compact p-tone-violet"><div class="p-badge">IISc · 2006</div><div class="p-head"><p class="p-kicker">Morphing Machines</p><h3 class="p-title">Bangalore · <em>REDEFINE</em> many-core</h3><p class="p-body">Many-core processor (REDEFINE) for data analysis, AI, telecom. Incubated at IISc since 2006. Series A within 18 months of seed. Long-horizon deep-tech.</p></div></div>
+      <div class="p-card p-compact" style="--tier-c:#f472b6"><div class="p-badge">DLI APPROVED</div><div class="p-head"><p class="p-kicker" style="color:#f472b6">Chipspirit</p><h3 class="p-title">Bangalore · <em>ASIC</em> services</h3><p class="p-body">Services + solutions provider in the semiconductor space (founded 2018). ASIC design services with special focus on turnkey projects. DLI beneficiary.</p></div></div>
+      <div class="p-card p-compact" style="--tier-c:#f472b6"><div class="p-badge">Tata Group</div><div class="p-head"><p class="p-kicker" style="color:#f472b6">Mindgrove + InCore at IIT-M Park</p><h3 class="p-title">IIT Madras <em>Research Park</em></h3><p class="p-body">Two of the three commercial Shakti-family RISC-V startups are co-located at IIT Madras Research Park — a proof point for the academic-to-commercial pipeline.</p></div></div>
+    </div>
+
+    <div class="callout" style="margin-top:1.5rem">
+      <div class="callout-title">Funding momentum · 2024–2025</div>
+      <p>Indian chip design startups received approximately <strong>₹380 crore ($45M)</strong> in funding in 2024. 24 DLI projects approved by Jan 2026. Biggest milestones: <strong>Mindgrove</strong> shipping MCU commercially; <strong>Netrasemi</strong> validating Kerala as a chip hub; <strong>Calligo</strong> unveiling a Posit RISC-V CPU. Pattern: IIT-M RISC-V lineage, Bangalore/Hyderabad design talent, government DLI + private Series-A layering.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── 05 R&D LANDSCAPE ── -->
+<section class="section section-alt" id="s36">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-label">05 — R&D landscape</div>
+        <h2 class="section-title">The <em>research engines</em> behind the buildout</h2>
+      </div>
+      <p class="section-sub">Six Centres of Excellence in Nanoelectronics (CEN) at IIT/IISc, plus the new Bharat Semiconductor Research Centre at IIT Madras + SCL Mohali. $8B committed to research infrastructure over five years.</p>
+    </div>
+
+    <div class="g2" style="gap:1rem">
+      <div class="p-card p-tone-accent">
+        <div class="p-badge">FLAGSHIP · $8B / 5 yr</div>
+        <div class="p-head">
+          <p class="p-kicker">Bharat Semiconductor Research Centre</p>
+          <h3 class="p-title">India's <em>IMEC</em>, under construction</h3>
+          <p class="p-body">Government-backed semiconductor research centre modeled on IMEC (Belgium), ITRI (Taiwan), MIT Microelectronics Lab. Co-located at IIT Madras and SCL Mohali; potential split into a standalone research org.</p>
+        </div>
+        <div class="p-content">
+          <p style="font-size:.88rem;line-height:1.7;color:rgba(255,255,255,.78);margin:0">
+            <strong style="color:#fff">Investment:</strong> ₹66,500 cr ($8B) over 5 years. SCL Mohali separately modernized with $2B. Establishment began 2024.<br><br>
+            <strong style="color:#fff">Research focus:</strong> Process R&D, advanced packaging, compound semi, talent pipeline, and pre-competitive IP shared across industry, academia, startups.<br><br>
+            <strong style="color:#fff">Why it matters:</strong> India's first attempt at a world-class shared-cleanroom research institution — the institutional missing piece between academic research and commercial fabs.
+          </p>
+        </div>
+        <div class="p-foot">Source: GKToday, Business Standard.</div>
+      </div>
+
+      <div class="p-card p-tone-lead">
+        <div class="p-badge">6 CENTRES · MeitY</div>
+        <div class="p-head">
+          <p class="p-kicker">INUP-i2i · Nanoelectronics network</p>
+          <h3 class="p-title">Six labs, <em>one program</em></h3>
+          <p class="p-body">Indian Nanoelectronics Users' Programme — Idea to Innovation (INUP-i2i). Brings together all six CEN centers under a single umbrella for external researchers + startups.</p>
+        </div>
+        <div class="p-content">
+          <ul style="list-style:none;padding:0;margin:0;display:grid;gap:.5rem;font-size:.85rem;color:rgba(255,255,255,.82);line-height:1.55">
+            <li><strong style="color:#fff">CeNSE IISc Bangalore</strong> (2006) — flagship nanoelectronics center</li>
+            <li><strong style="color:#fff">IIT Bombay Nanofab</strong> (2006) — the other founding center</li>
+            <li><strong style="color:#fff">IIT Delhi CEN</strong> (2011) — Delhi NCR node</li>
+            <li><strong style="color:#fff">IIT Madras CEN</strong> (2011) — co-located with BSRC</li>
+            <li><strong style="color:#fff">IIT Kharagpur CEN</strong> (2011) — East India node</li>
+            <li><strong style="color:#fff">IIT Guwahati CEN</strong> (2015) — North-East node</li>
+          </ul>
+          <p style="font-size:.82rem;margin-top:1rem;color:rgba(255,255,255,.65);line-height:1.6">Research-grade tape-outs, PhD training, industry partnerships. Where many Indian semiconductor PhDs come from.</p>
+        </div>
+      </div>
+
+      <div class="p-card p-tone-warn">
+        <div class="p-badge">SCL · STRATEGIC</div>
+        <div class="p-head">
+          <p class="p-kicker">SCL Mohali</p>
+          <h3 class="p-title">Legacy fab <em>being modernized</em></h3>
+          <p class="p-body">Semi-Conductor Laboratory, Mohali. Under the Department of Space. Legacy 180nm process for ISRO, DRDO, and strategic defense chips. $2B modernization under ISM — being upgraded to at least 45nm.</p>
+        </div>
+        <div class="p-content">
+          <p style="font-size:.88rem;line-height:1.7;color:rgba(255,255,255,.78);margin:0">
+            SCL was established in 1984 — before TSMC. A devastating 1989 fire (₹60 cr in equipment lost, cause unclear) set India back decades. In 2026 it serves as the research-scale silicon pipeline for Shakti RISC-V, satellite payload chips, and strategic electronics.
+          </p>
+        </div>
+      </div>
+
+      <div class="p-card p-tone-violet">
+        <div class="p-badge">DLI · 24 projects</div>
+        <div class="p-head">
+          <p class="p-kicker">Design-Linked Incentive</p>
+          <h3 class="p-title">Funding the <em>design</em> layer</h3>
+          <p class="p-body">DLI scheme provides up to 50% capex support + 6% net sales incentive over 5 years for approved Indian semiconductor design projects.</p>
+        </div>
+        <div class="p-content">
+          <p style="font-size:.88rem;line-height:1.7;color:rgba(255,255,255,.78);margin:0">
+            <strong style="color:#fff">24 projects</strong> approved as of January 2026 — microprocessors, satellite communication, energy metering, surveillance, IoT SoCs.<br><br>
+            <strong style="color:#fff">72 companies</strong> have active EDA tool access through government-subsidized licenses.<br><br>
+            DLI + ISM 2.0 together form the "design layer + fab layer" stack that the ecosystem needs.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 06 TALENT ── -->
+<section class="section" id="s37">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-label">06 — Talent</div>
+        <h2 class="section-title">The <em>workforce</em> reality</h2>
+      </div>
+      <p class="section-sub">India produces ~600,000 electronics graduates per year but faces a projected shortfall of 250,000–300,000 semiconductor professionals by 2027. The gap is qualitative, not quantitative — only 5–15% of graduates are industry-ready for fabs/OSATs/design centers.</p>
+    </div>
+
+    <div class="g2" style="gap:1rem">
+      <div class="p-card p-tone-critical">
+        <div class="p-badge">THE GAP</div>
+        <div class="p-head">
+          <p class="p-kicker">Projected shortfall by 2027</p>
+          <h3 class="p-title">300,000 <em>professionals</em></h3>
+          <p class="p-body">Critical shortages in process engineering, physical design, analog/RF, verification, and packaging. These are slow-to-train roles — 5–7 years of mentored experience before someone is genuinely productive.</p>
+        </div>
+        <div class="p-content">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:.5rem">
+            <div><div style="font-family:var(--mono);font-size:.62rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.25rem">Annual output</div><div style="font-family:var(--serif);font-size:1.5rem;color:#fff;font-weight:500">600k</div><div style="font-size:.75rem;color:rgba(255,255,255,.55);margin-top:.2rem">Electronics graduates</div></div>
+            <div><div style="font-family:var(--mono);font-size:.62rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.25rem">Industry-ready</div><div style="font-family:var(--serif);font-size:1.5rem;color:#fff;font-weight:500">5–15%</div><div style="font-size:.75rem;color:rgba(255,255,255,.55);margin-top:.2rem">~70% lack chip-design tool exposure</div></div>
+            <div><div style="font-family:var(--mono);font-size:.62rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.25rem">Design workforce</div><div style="font-family:var(--serif);font-size:1.5rem;color:#fff;font-weight:500">~125k</div><div style="font-size:.75rem;color:rgba(255,255,255,.55);margin-top:.2rem">~20% of global chip designers</div></div>
+            <div><div style="font-family:var(--mono);font-size:.62rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.25rem">Salary range</div><div style="font-family:var(--serif);font-size:1.5rem;color:#fff;font-weight:500">₹25–50L</div><div style="font-size:.75rem;color:rgba(255,255,255,.55);margin-top:.2rem">4–7 yr experience (Bangalore)</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card p-tone-lead">
+        <div class="p-badge">TARGET · 2030</div>
+        <div class="p-head">
+          <p class="p-kicker">ISM 2.0 talent target</p>
+          <h3 class="p-title">1 million <em>chip-ready engineers</em></h3>
+          <p class="p-body">Government target under ISM 2.0, aligned with state-level semiconductor curricula in Gujarat, Karnataka, Tamil Nadu, Telangana. Private training programs filling the gap.</p>
+        </div>
+        <div class="p-content">
+          <ul style="list-style:none;padding:0;margin:.5rem 0 0;display:grid;gap:.55rem;font-size:.87rem;color:rgba(255,255,255,.82);line-height:1.5">
+            <li><strong style="color:#fff">MOSart Labs</strong> — 1,000 industry-ready VLSI engineers by 2026. Telangana govt MoU as official VLSI Training Partner.</li>
+            <li><strong style="color:#fff">Takshila VLSI</strong> — Focused VLSI training + placement services for freshers + industry lateral hires.</li>
+            <li><strong style="color:#fff">KeenSemi × VLSI Expert</strong> — Industry-academic partnership for chip-design skills.</li>
+            <li><strong style="color:#fff">State curricula</strong> — Gujarat, Karnataka, TN, Telangana semiconductor-specific university programs.</li>
+            <li><strong style="color:#fff">GCC internships</strong> — Intel, Nvidia, AMD, Qualcomm hiring fresh grads into process-specific bootcamps.</li>
+          </ul>
+        </div>
+        <div class="p-foot">Precedent: Taiwan's ITRI model, Israel's Talpiot. A ₹2,000–5,000 cr investment over 10 years in semi-focused institutes could close the gap.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 07 WHO TO FOLLOW ── -->
+<section class="section section-alt" id="s38">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-label">07 — Who to follow</div>
+        <h2 class="section-title">The <em>Twitter / X</em> ecosystem</h2>
+      </div>
+      <p class="section-sub">Voices shaping the conversation on India's semiconductor story — journalists, researchers, industry bodies, government. Not exhaustive, but a solid starting point for anyone tracking the space.</p>
+    </div>
+
+    <div class="g3" style="gap:.85rem">
+      <div class="p-card p-compact p-tone-accent">
+        <div class="p-badge">@nano_arun</div>
+        <div class="p-head">
+          <p class="p-kicker">Journalist · Expert</p>
+          <h3 class="p-title">Arun <em>Mampazhy</em></h3>
+          <p class="p-body">IIT-M + UMD alumnus, 10+ years in semi fabrication. India's most consistent semiconductor journalist — Swarajya, Deccan Herald, Gulf News, Moneycontrol. The go-to for deep analysis of ISM.</p>
+        </div>
+      </div>
+      <div class="p-card p-compact p-tone-accent">
+        <div class="p-badge">@pranaykotas</div>
+        <div class="p-head">
+          <p class="p-kicker">Think tank · Author</p>
+          <h3 class="p-title">Pranay <em>Kotasthane</em></h3>
+          <p class="p-body">Deputy Director, Takshashila Institution. Chairs High Tech Geopolitics Programme. Co-author of "When the Chips Are Down" and "Missing in Action." Best-in-India on chip geopolitics.</p>
+        </div>
+      </div>
+      <div class="p-card p-compact p-tone-accent">
+        <div class="p-badge">Carnegie India</div>
+        <div class="p-head">
+          <p class="p-kicker">Policy · Research</p>
+          <h3 class="p-title">Konark <em>Bhandari</em></h3>
+          <p class="p-body">Carnegie India fellow. Authored "Geopolitics of the Semiconductor Industry and India's Place in It." Former CCI. Sharp on export controls and digital antitrust.</p>
+        </div>
+      </div>
+      <div class="p-card p-compact p-tone-lead">
+        <div class="p-badge">@AshwiniVaishnaw</div>
+        <div class="p-head">
+          <p class="p-kicker">Minister · Govt</p>
+          <h3 class="p-title">Ashwini <em>Vaishnaw</em></h3>
+          <p class="p-body">Union Minister for Electronics & IT, Railways, I&B. Most active government account on semiconductor policy announcements. Source for ISM 2.0 news, fab inaugurations, foreign JV signings.</p>
+        </div>
+      </div>
+      <div class="p-card p-compact p-tone-lead">
+        <div class="p-badge">@IndiaSemiMission</div>
+        <div class="p-head">
+          <p class="p-kicker">ISM · Official</p>
+          <h3 class="p-title">India Semiconductor <em>Mission</em></h3>
+          <p class="p-body">Official ISM account (LinkedIn primarily; X presence growing). Led by CEO Amitesh Kumar Sinha (Additional Secretary, MeitY). Authoritative for approvals, disbursements, and policy updates.</p>
+        </div>
+      </div>
+      <div class="p-card p-compact p-tone-lead">
+        <div class="p-badge">@MeitY_Official</div>
+        <div class="p-head">
+          <p class="p-kicker">MeitY · Govt</p>
+          <h3 class="p-title">Ministry of <em>Electronics &amp; IT</em></h3>
+          <p class="p-body">Ministry account. Cross-posts ISM updates, PLI scheme announcements, DLI approvals. Pair with @AshwiniVaishnaw for full official coverage.</p>
+        </div>
+      </div>
+      <div class="p-card p-compact p-tone-warn">
+        <div class="p-badge">@IESA_India</div>
+        <div class="p-head">
+          <p class="p-kicker">Industry body</p>
+          <h3 class="p-title">IESA — India Electronics <em>&amp; Semi Assoc.</em></h3>
+          <p class="p-body">India's primary semiconductor industry association. Represents domestic + MNC voices. Active on conferences (SEMICON India, VLSI Design), policy advocacy, and workforce programs.</p>
+        </div>
+      </div>
+      <div class="p-card p-compact p-tone-warn">
+        <div class="p-badge">@TataElectronics</div>
+        <div class="p-head">
+          <p class="p-kicker">Tata · Manufacturing</p>
+          <h3 class="p-title">Tata <em>Electronics</em></h3>
+          <p class="p-body">Official Tata Electronics account. Updates on Dholera fab construction, Jagiroad OSAT commissioning, Qualcomm partnership. The single most important corporate voice in Indian semi.</p>
+        </div>
+      </div>
+      <div class="p-card p-compact p-tone-violet">
+        <div class="p-badge">@MicronTech</div>
+        <div class="p-head">
+          <p class="p-kicker">Micron · MNC</p>
+          <h3 class="p-title">Micron <em>Technology</em></h3>
+          <p class="p-body">Micron's corporate X. Active on Sanand ATMP (India's first operational semi facility), DRAM roadmap, and HBM announcements. Follow for MNC-India manufacturing perspective.</p>
+        </div>
+      </div>
+      <div class="p-card p-compact p-tone-violet">
+        <div class="p-badge">@semiglobal</div>
+        <div class="p-head">
+          <p class="p-kicker">SEMI · Global</p>
+          <h3 class="p-title">SEMI <em>Association</em></h3>
+          <p class="p-body">Global semiconductor industry association. Publishes SEMICON India, World Fab Forecast, equipment shipment data. Best single source for global context on India's fab buildout.</p>
+        </div>
+      </div>
+      <div class="p-card p-compact" style="--tier-c:#f472b6">
+        <div class="p-badge">@IIT_Madras</div>
+        <div class="p-head">
+          <p class="p-kicker" style="color:#f472b6">Academia · Research</p>
+          <h3 class="p-title">IIT <em>Madras</em></h3>
+          <p class="p-body">Home of Shakti RISC-V, InCore Semiconductors, Mindgrove alumni network, Bharat Semiconductor Research Centre (upcoming). Most active academic account on chip design.</p>
+        </div>
+      </div>
+      <div class="p-card p-compact" style="--tier-c:#f472b6">
+        <div class="p-badge">@mindgrove_tech</div>
+        <div class="p-head">
+          <p class="p-kicker" style="color:#f472b6">Startup · RISC-V</p>
+          <h3 class="p-title">Mindgrove <em>Technologies</em></h3>
+          <p class="p-body">The most prominent Indian fabless startup on X. Updates on commercial MCU ship dates, DLI milestones, RISC-V advocacy. Good signal for where Indian startup ecosystem is heading.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
