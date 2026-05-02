@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-accent="blue">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>Venture Concepts & Roadmaps — India Semicon 2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#edf2f7;--bg-2:#e6ecf3;--bg-contrast:#ffffff;
+  --text:#0f172a;--text-2:#475569;--text-3:#94a3b8;
+  --border:rgba(15,23,42,.08);--border-strong:rgba(15,23,42,.12);
+  --accent:#2563eb;--accent-soft:rgba(37,99,235,.08);--accent-ink:#1d4ed8;--accent-glow:96,165,250;
+  --card-bg:#0a0f1a;--card-border:rgba(255,255,255,.08);
+  --card-shadow:0 8px 32px rgba(0,0,0,.35);--card-shadow-hover:0 20px 60px rgba(0,0,0,.5);
+  --r:20px;--r-sm:10px;--sec-pad:4.5rem;--card-pad:1.5rem;
+  --sans:'Geist',ui-sans-serif,system-ui,sans-serif;
+  --serif:'Fraunces',ui-serif,Georgia,serif;
+  --mono:'Geist Mono',ui-monospace,monospace;
+}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+
+/* Progress bar */
+.progress-bar{position:fixed;top:0;left:0;right:0;height:2px;background:transparent;z-index:200;pointer-events:none}
+.progress-bar-inner{height:100%;background:var(--accent);width:0;transition:width .08s linear;box-shadow:0 0 10px rgba(var(--accent-glow),.6)}
+
+/* Nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;-webkit-backdrop-filter:saturate(180%) blur(14px);backdrop-filter:saturate(180%) blur(14px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1320px;margin:0 auto;padding:.85rem 2rem;display:flex;align-items:center;gap:1.25rem}
+.nav-brand{display:flex;align-items:center;gap:.6rem;font-weight:800;letter-spacing:-.01em;font-size:.95rem;color:var(--text);text-decoration:none}
+.nav-brand-mark{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;box-shadow:0 2px 10px rgba(15,22,41,.22);flex-shrink:0;overflow:hidden}
+.nav-links{display:flex;gap:.15rem;flex:1;overflow:visible;margin:0 .5rem;min-width:0;flex-wrap:wrap}
+.nav-link{font-family:var(--sans);font-size:.82rem;font-weight:500;color:var(--text-2);padding:.45rem .85rem;border-radius:999px;white-space:nowrap;cursor:pointer;transition:all .15s;background:transparent;border:none;letter-spacing:-.005em;text-decoration:none}
+.nav-link:hover{color:var(--text);background:var(--accent-soft)}
+.nav-link.active{color:var(--accent);background:var(--accent-soft);font-weight:600}
+.nav-actions{display:flex;gap:.4rem;align-items:center;flex-shrink:0}
+.nav-btn{width:38px;height:38px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:#0a0a0a;color:#fff;cursor:pointer;display:grid;place-items:center;transition:all .2s;flex-shrink:0}
+.nav-btn:hover{border-color:rgba(255,255,255,.28);background:#1a1a1a;transform:translateY(-1px)}
+
+/* Hero */
+.hero{position:relative;min-height:100vh;padding:7rem 2rem 5rem;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;isolation:isolate;background:#dbeaf7}
+.hero-bg{position:absolute;inset:0;z-index:-2;background:url('assets/hero-bg.jpg') center 35%/cover no-repeat;will-change:transform;filter:saturate(1.15) contrast(1.02) brightness(1.08)}
+.hero-tint{position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(110% 70% at 75% 15%,rgba(255,255,255,.32) 0%,rgba(210,230,250,.08) 45%,transparent 70%),linear-gradient(180deg,rgba(120,170,220,.15) 0%,rgba(180,210,240,.2) 40%,rgba(200,222,244,.6) 75%,var(--bg) 100%),linear-gradient(90deg,rgba(40,80,130,.45) 0%,rgba(80,130,180,.2) 40%,transparent 65%)}
+.hero-fade{position:absolute;left:0;right:0;bottom:0;height:30%;background:linear-gradient(180deg,transparent 0%,var(--bg) 100%);z-index:-1;pointer-events:none}
+.hero-inner{max-width:1320px;margin:0 auto;width:100%;display:grid;grid-template-columns:minmax(0,1fr);gap:3rem;align-items:end}
+.hero-meta{display:flex;align-items:center;gap:.75rem;margin-bottom:1.2rem}
+.hero-label{font-family:var(--mono);font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:.16em;color:var(--accent)}
+.hero-label-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft);animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero-title{font-family:var(--sans);font-weight:500;font-size:clamp(2.75rem,7.5vw,5.75rem);letter-spacing:-.04em;line-height:.98;color:#0b1e3a;max-width:18ch;text-wrap:balance;text-shadow:0 2px 30px rgba(255,255,255,.35)}
+.hero-title em{font-family:var(--serif);font-style:italic;font-weight:400;color:#1e3a5f}
+.hero-sub{font-size:clamp(1rem,1.2vw,1.1rem);color:#2e4a6e;max-width:62ch;margin-top:1.75rem;font-weight:450;line-height:1.6;text-wrap:pretty;text-shadow:0 1px 16px rgba(255,255,255,.4)}
+.hero-footline{display:flex;gap:.85rem;align-items:center;margin-top:2rem;font-family:var(--mono);font-size:.72rem;color:#4a6687;letter-spacing:.02em;flex-wrap:wrap}
+.hero-footline .dot{color:#8aa5c4;opacity:.6}
+.scroll-cue{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#4a6687;display:flex;flex-direction:column;align-items:center;gap:.5rem;animation:bob 2.5s ease-in-out infinite;font-family:var(--mono)}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,6px)}}
+
+/* Container + Section */
+.container{max-width:1320px;margin:0 auto;padding:0 2rem}
+.section{padding:var(--sec-pad) 0;position:relative;scroll-margin-top:70px}
+.section-alt{background:var(--bg-2)}
+.section-head{margin-bottom:2.5rem;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:end}
+.section-label{font-family:var(--mono);font-size:.68rem;font-weight:600;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:.7rem}
+.section-title{font-family:var(--serif);font-weight:500;font-size:clamp(1.8rem,3.5vw,2.75rem);letter-spacing:-.025em;line-height:1.05;color:var(--text);text-wrap:balance}
+.section-title em{font-style:italic;color:var(--accent-ink)}
+.section-sub{font-size:.92rem;color:var(--text);max-width:62ch;margin-top:.75rem;line-height:1.6;text-wrap:pretty;opacity:.92}
+
+/* Stats strip */
+.stats{max-width:1320px;margin:-4rem auto 0;padding:0 2rem;position:relative;z-index:3;display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem}
+.stat{background:#0a0f1a;border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:1.5rem 1.4rem;color:#fff;box-shadow:0 8px 32px rgba(0,0,0,.35);transition:transform .25s,box-shadow .25s,border-color .25s;display:flex;flex-direction:column;position:relative;overflow:hidden;min-height:200px}
+.stat:hover{transform:translateY(-3px);box-shadow:0 20px 60px rgba(0,0,0,.5);border-color:rgba(255,255,255,.14)}
+.stat-label{font-family:var(--mono);font-size:.64rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1rem}
+.stat-value{font-family:var(--serif);font-size:clamp(2.1rem,3vw,2.7rem);font-weight:500;letter-spacing:-.03em;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+.stat-value .dim{font-weight:400;color:rgba(255,255,255,.4)}
+.stat-detail{font-size:.78rem;color:rgba(255,255,255,.6);margin-top:.65rem;line-height:1.5;font-family:var(--serif)}
+.stat-trend{display:inline-flex;align-items:center;gap:.25rem;font-family:var(--mono);font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .6rem;border-radius:999px;margin-top:auto;align-self:flex-start;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1)}
+.trend-up{color:#86efac;background:rgba(74,222,128,.14);border-color:rgba(74,222,128,.3)}
+.trend-hot{color:#93c5fd;background:rgba(96,165,250,.14);border-color:rgba(96,165,250,.3)}
+.stats .stat:nth-child(1){background:radial-gradient(800px 400px at 0% 0%,rgba(96,165,250,.08),transparent 50%),#0a0f1a;border-color:rgba(96,165,250,.18)}
+.stats .stat:nth-child(2){background:radial-gradient(800px 400px at 0% 0%,rgba(167,139,250,.08),transparent 50%),#0a0f1a;border-color:rgba(167,139,250,.2)}
+.stats .stat:nth-child(3){background:radial-gradient(800px 400px at 0% 0%,rgba(248,113,113,.08),transparent 50%),#0a0f1a;border-color:rgba(248,113,113,.18)}
+.stats .stat:nth-child(4){background:radial-gradient(800px 400px at 0% 0%,rgba(74,222,128,.08),transparent 50%),#0a0f1a;border-color:rgba(74,222,128,.18)}
+
+/* p-card */
+.p-card{position:relative;display:flex;flex-direction:column;background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--r);color:#fff;overflow:hidden;box-shadow:var(--card-shadow);transition:transform .25s,box-shadow .25s,border-color .25s;min-height:280px}
+.p-card::before{content:'';position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:radial-gradient(600px circle at var(--mx,50%) var(--my,0%),rgba(var(--accent-glow),.1),transparent 40%);opacity:0;transition:opacity .3s}
+.p-card:hover{transform:translateY(-3px);box-shadow:var(--card-shadow-hover);border-color:rgba(255,255,255,.14)}
+.p-card:hover::before{opacity:1}
+.p-card .p-head{padding:1.75rem 1.75rem 0;display:flex;flex-direction:column;gap:.85rem;flex-shrink:0}
+.p-card .p-kicker{font-family:var(--mono);font-size:.66rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);margin:0}
+.p-card .p-title{font-family:var(--serif);font-size:1.85rem;font-weight:500;line-height:1.1;letter-spacing:-.02em;color:#fff;margin:0;text-wrap:balance}
+.p-card .p-title em{font-style:italic;color:rgb(var(--accent-glow))}
+.p-card .p-title .dim{color:rgba(255,255,255,.4)}
+.p-card .p-body{font-size:.88rem;line-height:1.6;color:rgba(255,255,255,.75);max-width:62ch;margin:0}
+.p-card .p-badge{position:absolute;top:1.4rem;right:1.4rem;z-index:2;font-family:var(--mono);font-size:.58rem;font-weight:600;letter-spacing:.1em;padding:.3rem .6rem;border-radius:999px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.1);text-transform:uppercase}
+.p-card .p-content{padding:1.25rem 1.75rem 0;flex:1;min-width:0}
+.p-card .p-content:last-child{padding-bottom:1.75rem}
+.p-card .p-foot{padding:1rem 1.75rem 1.25rem;margin-top:auto;font-size:.78rem;color:rgba(255,255,255,.55);font-style:italic;line-height:1.5;border-top:1px solid rgba(255,255,255,.06)}
+
+.p-card.p-tone-lead{background:radial-gradient(800px 400px at 0% 0%,rgba(74,222,128,.08),transparent 50%),#0a0f1a;border-color:rgba(74,222,128,.18)}
+.p-card.p-tone-warn{background:radial-gradient(800px 400px at 0% 0%,rgba(251,191,36,.08),transparent 50%),#0a0f1a;border-color:rgba(251,191,36,.18)}
+.p-card.p-tone-critical{background:radial-gradient(800px 400px at 0% 0%,rgba(248,113,113,.08),transparent 50%),#0a0f1a;border-color:rgba(248,113,113,.2)}
+.p-card.p-tone-accent{background:radial-gradient(800px 400px at 0% 0%,rgba(96,165,250,.08),transparent 50%),#0a0f1a;border-color:rgba(96,165,250,.2)}
+.p-card.p-tone-violet{background:radial-gradient(800px 400px at 0% 0%,rgba(167,139,250,.08),transparent 50%),#0a0f1a;border-color:rgba(167,139,250,.2)}
+.p-card.p-tone-lead .p-badge{background:rgba(74,222,128,.15);border-color:rgba(74,222,128,.3);color:#86efac}
+.p-card.p-tone-warn .p-badge{background:rgba(251,191,36,.15);border-color:rgba(251,191,36,.3);color:#fcd34d}
+.p-card.p-tone-critical .p-badge{background:rgba(248,113,113,.15);border-color:rgba(248,113,113,.3);color:#fca5a5}
+.p-card.p-tone-accent .p-badge{background:rgba(96,165,250,.15);border-color:rgba(96,165,250,.3);color:#93c5fd}
+.p-card.p-tone-violet .p-badge{background:rgba(167,139,250,.15);border-color:rgba(167,139,250,.3);color:#c4b5fd}
+.p-card.p-compact{min-height:220px}
+.p-card.p-compact .p-head{padding:1.25rem 1.25rem 0;gap:.6rem}
+.p-card.p-compact .p-title{font-size:1.35rem}
+.p-card.p-compact .p-content{padding:1rem 1.25rem 0}
+.p-card.p-compact .p-content:last-child{padding-bottom:1.25rem}
+.p-card.p-prose .p-content{padding:1.25rem 2rem 2rem}
+.p-card.p-prose{min-height:0}
+.p-card.p-prose p{font-size:.95rem;line-height:1.78;color:rgba(255,255,255,.82);margin-bottom:1em}
+.p-card.p-prose p:last-child{margin-bottom:0}
+.p-card.p-prose p.lede{font-family:var(--serif);font-size:1.1rem;line-height:1.55;color:#fff;font-weight:400;margin-bottom:1.2em;font-style:italic}
+.p-card.p-prose strong{color:#fff;font-weight:600}
+.p-card.p-prose em{font-style:italic}
+.p-card.p-prose a{color:rgb(var(--accent-glow));text-decoration:underline;text-decoration-color:rgba(var(--accent-glow),.35);text-underline-offset:3px;transition:text-decoration-color .2s}
+.p-card.p-prose a:hover{text-decoration-color:rgb(var(--accent-glow))}
+.p-card.p-prose h4{font-family:var(--mono);font-size:.66rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:rgb(var(--accent-glow));margin:1.2rem 0 .5rem}
+
+/* Grids */
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+
+/* Roadmap timeline */
+.rm{display:grid;gap:.85rem;margin-top:.5rem}
+.rm-step{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-left:3px solid var(--accent);border-radius:10px;padding:.85rem 1rem}
+.rm-step.s1{border-left-color:#60a5fa}.rm-step.s2{border-left-color:#a78bfa}.rm-step.s3{border-left-color:#fbbf24}.rm-step.s4{border-left-color:#86efac}
+.rm-step-h{display:flex;align-items:baseline;justify-content:space-between;gap:.75rem;margin-bottom:.4rem;flex-wrap:wrap}
+.rm-month{font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.rm-phase{font-family:var(--serif);font-size:.95rem;font-weight:500;color:#fff;letter-spacing:-.005em}
+.rm-target{font-family:var(--mono);font-size:.7rem;color:rgb(var(--accent-glow));font-weight:600}
+.rm-step-body{font-size:.82rem;line-height:1.55;color:rgba(255,255,255,.72)}
+
+/* Mini stat row inside cards */
+.mini-row{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:1rem 0}
+.mini-row .mini{padding:.6rem 0}
+.mini-row .mini-k{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.2rem}
+.mini-row .mini-v{font-family:var(--serif);font-size:1.4rem;color:#fff;font-weight:500;line-height:1.05;letter-spacing:-.015em}
+.mini-row .mini-d{font-size:.72rem;color:rgba(255,255,255,.55);margin-top:.15rem}
+
+/* Connection diagram */
+.flow{display:grid;gap:.85rem;margin-top:1.5rem}
+.flow-row{display:grid;grid-template-columns:auto 1fr auto;gap:.85rem;align-items:center;padding:.85rem 1.1rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px}
+.flow-num{font-family:var(--mono);font-size:1.05rem;font-weight:600;color:rgb(var(--accent-glow));min-width:42px}
+.flow-text{font-size:.92rem;color:rgba(255,255,255,.85);line-height:1.55}
+.flow-text strong{color:#fff;font-weight:600}
+.flow-arrow{font-family:var(--mono);font-size:1.2rem;color:rgba(255,255,255,.4)}
+
+/* Source list */
+.src-list{font-size:.78rem;color:rgba(255,255,255,.65);line-height:1.7;margin:0;padding-left:1.2rem}
+.src-list li{margin-bottom:.3em}
+.src-list a{color:rgb(var(--accent-glow));text-decoration:underline;text-decoration-color:rgba(var(--accent-glow),.35);text-underline-offset:3px}
+.src-list a:hover{text-decoration-color:rgb(var(--accent-glow))}
+
+/* Footer */
+.footer{padding:3rem 0 2.5rem;color:var(--text-3);font-size:.78rem;border-top:1px solid var(--border);margin-top:3rem}
+.footer-inner{max-width:1320px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.footer a{color:var(--accent);text-decoration:none}
+.footer a:hover{color:var(--accent-ink)}
+.footer-update{display:inline-flex;align-items:center;gap:.45rem;padding:.3rem .65rem;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:.7rem;font-weight:600}
+.footer-update .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);animation:pulse 2.2s ease-in-out infinite}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.v{opacity:1;transform:translateY(0)}
+
+@media(max-width:1100px){.nav-links{overflow-x:auto;flex-wrap:nowrap}}
+@media(max-width:900px){
+  .hero{padding:6rem 1.25rem 3rem;min-height:auto}
+  .hero-inner{grid-template-columns:1fr;gap:2rem}
+  .section-head{grid-template-columns:1fr;gap:1rem}
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr);margin-top:-2rem}
+  .container{padding:0 1.25rem}
+  .nav-inner{padding:.75rem 1.25rem}
+  .mini-row{grid-template-columns:1fr}
+}
+@media(max-width:560px){.stats{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-bar-inner" id="progressBar"></div></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">
+      <span class="nav-brand-mark" aria-label="India Semicon 2.0 wafer mark">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <defs><linearGradient id="waferGradNav" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF9933"/><stop offset=".5" stop-color="#ffffff"/><stop offset="1" stop-color="#138808"/></linearGradient></defs>
+          <circle cx="16" cy="16" r="14" fill="url(#waferGradNav)"/>
+          <circle cx="16" cy="16" r="14" fill="none" stroke="rgba(0,0,0,.12)" stroke-width="1"/>
+          <path d="M 16 2 L 14 5 L 18 5 Z" fill="#edf2f7" stroke="rgba(0,0,0,.1)" stroke-width=".5"/>
+          <g stroke="rgba(0,0,40,.22)" stroke-width=".5" fill="none">
+            <line x1="6" y1="16" x2="26" y2="16"/><line x1="16" y1="6" x2="16" y2="26"/>
+            <line x1="10" y1="10" x2="22" y2="10"/><line x1="10" y1="22" x2="22" y2="22"/>
+            <line x1="10" y1="10" x2="10" y2="22"/><line x1="22" y1="10" x2="22" y2="22"/>
+          </g>
+          <circle cx="16" cy="16" r="2.3" fill="none" stroke="#0a3c7f" stroke-width=".8"/>
+          <circle cx="16" cy="16" r=".9" fill="#0a3c7f"/>
+        </svg>
+      </span>
+      <span>India Semicon 2.0</span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="index.html">← Main</a>
+      <a class="nav-link" href="supply-chain.html">Supply Chain</a>
+      <a class="nav-link active" href="#s0">Overview</a>
+      <a class="nav-link" href="#s1">Map</a>
+      <a class="nav-link" href="#s2">Intelligence</a>
+      <a class="nav-link" href="#s3">Supply Chain OS</a>
+      <a class="nav-link" href="#s4">Chip Design</a>
+      <a class="nav-link" href="#s5">Talent Bridge</a>
+      <a class="nav-link" href="#s6">Connect</a>
+    </div>
+    <div class="nav-actions">
+      <button class="nav-btn" id="searchBtn" title="Search" aria-label="Search">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="s0">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-tint"></div>
+  <div class="hero-fade"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-meta">
+        <span class="hero-label-dot"></span>
+        <span class="hero-label">Venture Concepts · Roadmaps · April 2026</span>
+      </div>
+      <h1 class="hero-title">Where to <em>build</em>, given everything above.</h1>
+      <p class="hero-sub">Four distinct ventures that can be founded today, ranked by capital intensity and time-to-revenue. Each one is its own first-principles bet on India's semiconductor decade. Two of them — the lowest-capital — naturally bootstrap the other two.</p>
+      <div class="hero-footline">
+        <span>4 venture concepts</span><span class="dot">·</span>
+        <span>Researched in parallel</span><span class="dot">·</span>
+        <span>Phased roadmaps in months</span><span class="dot">·</span>
+        <span>~20 min read</span>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue">Scroll<svg width="12" height="18" viewBox="0 0 12 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 1v14M1 10l5 5 5-5"/></svg></div>
+</section>
+
+<!-- 4-stat strip -->
+<div class="stats" data-stat-style="portrait">
+  <div class="stat">
+    <div class="stat-label">Lowest capital</div>
+    <div class="stat-value">$0.3<span class="dim">M</span></div>
+    <div class="stat-detail">Talent &amp; Capital Bridge — bootstrappable from advisory retainers</div>
+    <span class="stat-trend trend-up">12 months to revenue</span>
+  </div>
+  <div class="stat">
+    <div class="stat-label">Highest upside</div>
+    <div class="stat-value">$50<span class="dim">M+</span></div>
+    <div class="stat-detail">Agentic Chip Design — boutique ASIC studio at TSMC N5</div>
+    <span class="stat-trend trend-hot">Series B path</span>
+  </div>
+  <div class="stat">
+    <div class="stat-label">Most defensible</div>
+    <div class="stat-value">2<span class="dim"> data flywheels</span></div>
+    <div class="stat-detail">Supply Chain OS + Intelligence — both compound through customer data</div>
+    <span class="stat-trend trend-up">Network effects</span>
+  </div>
+  <div class="stat">
+    <div class="stat-label">Fastest revenue</div>
+    <div class="stat-value">~$25<span class="dim">k mo 3</span></div>
+    <div class="stat-detail">Chip Intelligence newsletter — 3 months to first paid subscribers</div>
+    <span class="stat-trend trend-hot">Capital-light</span>
+  </div>
+</div>
+
+<!-- 01 MAP -->
+<section class="section" id="s1">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-label">01 — The map</div>
+        <h2 class="section-title">Four ventures, <em>one ecosystem</em></h2>
+      </div>
+      <p class="section-sub">Distinct concepts mapped against capital intensity and technical risk. The two lowest-capital plays — Intelligence and Talent Bridge — generate cash flow + relationships that bootstrap the higher-capital plays. SemiAnalysis followed exactly this pattern: newsletter first, venture fund later.</p>
+    </div>
+
+    <div class="g4" style="gap:.85rem">
+      <div class="p-card p-compact p-tone-accent">
+        <div class="p-badge">VENTURE 1</div>
+        <div class="p-head">
+          <p class="p-kicker">Information layer</p>
+          <h3 class="p-title">India Chip <em>Intelligence</em></h3>
+          <p class="p-body">SemiAnalysis-style premium research and intelligence platform. Newsletter as funnel, enterprise data as revenue, global capital as customer.</p>
+        </div>
+      </div>
+      <div class="p-card p-compact p-tone-violet">
+        <div class="p-badge">VENTURE 2</div>
+        <div class="p-head">
+          <p class="p-kicker">Software platform</p>
+          <h3 class="p-title">Supply <em>Chain OS</em></h3>
+          <p class="p-body">Vertical AI workflow platform for India's semiconductor supply chain. Greenfield advantage — design with AI baked in before legacy ERP locks in.</p>
+        </div>
+      </div>
+      <div class="p-card p-compact p-tone-critical">
+        <div class="p-badge">VENTURE 3</div>
+        <div class="p-head">
+          <p class="p-kicker">Silicon</p>
+          <h3 class="p-title">Agentic <em>Chip Design</em></h3>
+          <p class="p-body">Boutique ASIC studio designing chiplets specifically for AI agent workloads — high parallelism, ultra-low tail latency, retrieval-tuned memory.</p>
+        </div>
+      </div>
+      <div class="p-card p-compact p-tone-lead">
+        <div class="p-badge">VENTURE 4</div>
+        <div class="p-head">
+          <p class="p-kicker">Network</p>
+          <h3 class="p-title">Talent &amp; <em>Capital Bridge</em></h3>
+          <p class="p-body">Structured advisory + curated talent network connecting India's chip-design engineers to global AI hardware startups. Lowest capital intensity.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 INDIA CHIP INTELLIGENCE -->
+<section class="section section-alt" id="s2">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-label">02 — Venture 1</div>
+        <h2 class="section-title">India Chip <em>Intelligence</em></h2>
+      </div>
+      <p class="section-sub">India's semiconductor build-out is ~$18B committed, but no domestic outlet produces SemiAnalysis-grade ground-truth research. Dylan Patel went from a 2021 Substack to a reported $100M+ ARR in 5 years selling data and consulting to hyperscalers — the same playbook is open for India.</p>
+    </div>
+
+    <div class="g2" style="gap:1rem">
+      <div class="p-card p-prose p-tone-accent">
+        <div class="p-badge">TL;DR</div>
+        <div class="p-head">
+          <p class="p-kicker">The thesis</p>
+          <h3 class="p-title">A SemiAnalysis <em>for India</em>, sold to global capital</h3>
+        </div>
+        <div class="p-content">
+          <p class="lede">~₹1.6 lakh crore (~$18B) of approved Indian semi capex across 10 ISM projects, 2 OSATs operational in Sanand (Q1 2026), $300B market projected by 2035 — yet no outlet ships fab-level operational research. Sell to global PE/VC, MNCs doing China+1, sovereign wealth, equipment makers.</p>
+          <p>The newsletter creates <strong>access</strong>. When you're the trusted public voice on Gujarat's corridor, MeitY officials brief you, Kaynes plants invite you for tours, PLI applicants share roadmaps off the record. That access compounds into a research moat nobody can replicate by hiring analysts.</p>
+          <h4>SemiAnalysis revenue stack (estimated)</h4>
+          <p>Newsletter subs are &lt;5% of revenue. Bulk is custom data/models ($50K–$500K+ enterprise contracts), bespoke consulting, conferences (AI Datacenter Anatomy event), and shareholder positions in ~20 portfolio companies. Newsletter is the marketing funnel for data products.</p>
+          <h4>The Indian gap today</h4>
+          <p>Arun Mampazhy (op-eds, episodic), Pranay Kotasthane (policy/geopolitical, free), Konark Bhandari (Carnegie quarterly papers), Inc42 (press-release-driven volume). No single source ships ground-truth fab/OSAT operational data, capex/equipment tracking, supplier qualification timelines at the cadence and rigor a $50M+ AUM China+1 fund will pay for.</p>
+        </div>
+      </div>
+
+      <div class="p-card p-tone-accent">
+        <div class="p-badge">REVENUE MODEL</div>
+        <div class="p-head">
+          <p class="p-kicker">Tiered customer pricing</p>
+          <h3 class="p-title">~$5.5M ARR <em>by Year 3</em></h3>
+        </div>
+        <div class="p-content">
+          <div class="mini-row">
+            <div class="mini"><div class="mini-k">Free tier</div><div class="mini-v">50k subs</div><div class="mini-d">Substack — earned reach, funnel</div></div>
+            <div class="mini"><div class="mini-k">Pro tier</div><div class="mini-v">$500/yr</div><div class="mini-d">1,000 paid by Y2; full archive + tracker</div></div>
+            <div class="mini"><div class="mini-k">Enterprise data</div><div class="mini-v">$25–100k</div><div class="mini-d">30 logos by Y3; IndiaFabBook + analyst hour</div></div>
+            <div class="mini"><div class="mini-k">Strategic</div><div class="mini-v">$100–500k</div><div class="mini-d">10 logos by Y3; retained advisory</div></div>
+          </div>
+          <h4 style="font-family:var(--mono);font-size:.66rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:rgb(var(--accent-glow));margin:1.2rem 0 .5rem">Customer universe (estimated)</h4>
+          <ul style="font-size:.82rem;line-height:1.7;color:rgba(255,255,255,.75);padding-left:1.1rem;margin:0">
+            <li><strong style="color:#fff">~150–200 PE/VC funds</strong> with India + semi exposure</li>
+            <li><strong style="color:#fff">~80–120 equipment/materials makers</strong> selling into India</li>
+            <li><strong style="color:#fff">~200–300 MNCs</strong> doing China+1 supply chain plans</li>
+            <li><strong style="color:#fff">~15–25 sovereign wealth</strong> / development banks</li>
+            <li><strong style="color:#fff">~20–40 consulting practices</strong> doing market entry</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="g2" style="gap:1rem;margin-top:1rem">
+      <div class="p-card p-tone-accent">
+        <div class="p-badge">ROADMAP · MONTHS</div>
+        <div class="p-head">
+          <p class="p-kicker">Phased execution</p>
+          <h3 class="p-title">From Substack <em>to platform</em></h3>
+        </div>
+        <div class="p-content">
+          <div class="rm">
+            <div class="rm-step s1">
+              <div class="rm-step-h"><span class="rm-month">M0–3 · Foundation</span><span class="rm-target">~$25k revenue</span></div>
+              <div class="rm-step-body">Launch Substack 2x/week. Cover all 10 ISM projects with technical primers. File RTIs on disbursements. Attend Gujarat SemiConnect, Semicon India. <strong style="color:#fff">5k free / 50 paid / 3 named scoops.</strong></div>
+            </div>
+            <div class="rm-step s2">
+              <div class="rm-step-h"><span class="rm-month">M3–9 · Traction</span><span class="rm-target">~$350k ARR</span></div>
+              <div class="rm-step-body">First IndiaFabBook v0.1 quarterly — capex tracker, equipment PO tracker (customs data), supplier qual tracker. Hire 2 analysts. <strong style="color:#fff">15k free / 250 paid / 5 enterprise logos avg $40k.</strong></div>
+            </div>
+            <div class="rm-step s3">
+              <div class="rm-step-h"><span class="rm-month">M9–18 · Scale</span><span class="rm-target">~$1.7M ARR</span></div>
+              <div class="rm-step-body">Annual <em>India Fab Capex Summit</em> (Q1 Y2, ~150 attendees). Hire data engineering + talent-flow analytics. <strong style="color:#fff">30k free / 600 paid / 15 enterprise / 2 strategic at $200k each.</strong></div>
+            </div>
+            <div class="rm-step s4">
+              <div class="rm-step-h"><span class="rm-month">M18–36 · Platform</span><span class="rm-target">~$6–8M ARR</span></div>
+              <div class="rm-step-body">Headcount 12–18. Adjacent verticals: EMS, batteries/EV semi, defense. <em>India Semi Capex Model</em> ($25k/seat). Possible $5–10M raise. Considered acquisition target by SemiAnalysis or Bloomberg.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card p-tone-critical">
+        <div class="p-badge">RISKS · WHY NOW</div>
+        <div class="p-head">
+          <p class="p-kicker">Constraints</p>
+          <h3 class="p-title">Access risk, <em>SEBI risk</em>, paywall risk</h3>
+        </div>
+        <div class="p-content">
+          <h4>Risks to manage</h4>
+          <ul style="font-size:.82rem;line-height:1.65;color:rgba(255,255,255,.75);padding-left:1.1rem;margin:.4rem 0 0">
+            <li><strong style="color:#fff">Government access risk.</strong> Too critical → MeitY stops returning calls. Mitigation: separate operational reportage (factual) from policy critique (sparingly).</li>
+            <li><strong style="color:#fff">SEBI Research Analyst Regulations.</strong> Writing about listed companies (Tata Elxsi, Kaynes, CG Power, Dixon, Syrma) without RA registration = legal risk. Mitigation: register or hire RA, keep coverage descriptive not directional.</li>
+            <li><strong style="color:#fff">Indian content paywalls historically fail.</strong> WTP is global. Revenue model international from day one.</li>
+            <li><strong style="color:#fff">Bloomberg/Nikkei pivot in.</strong> Mitigation: Gujarat physical presence — incumbents won't match the "fly to Sanand and tour Kaynes" cost.</li>
+          </ul>
+          <h4>Why now (April 2026)</h4>
+          <ul style="font-size:.82rem;line-height:1.65;color:rgba(255,255,255,.75);padding-left:1.1rem;margin:.4rem 0 0">
+            <li>Operational milestones: Micron Sanand (Feb 28), Kaynes Sanand (Mar 31). First commercial silicon to report on, not just promises.</li>
+            <li>ISM 2.0 launched in Budget 2026-27. New cohort of approvals = 2–3 year window of dense announcement-to-execution cycles.</li>
+            <li>FDI structural unlock (Press Note 2/2026): controlled Chinese capital + Japanese chemical firms expanding (5,205 sites, +400 in 3 years).</li>
+            <li>$15B+ committed, $300B market by 2035 — global allocators must underwrite Indian semi positions in 2026–27.</li>
+          </ul>
+        </div>
+        <div class="p-foot">Source: Carnegie Endowment · The Information · SemiAnalysis FAQ · India Briefing · ISM portal</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 SUPPLY CHAIN OS -->
+<section class="section" id="s3">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-label">03 — Venture 2</div>
+        <h2 class="section-title">Supply <em>Chain OS</em></h2>
+      </div>
+      <p class="section-sub">India's semiconductor supply chain is being built from scratch right now. That's a rare advantage — design with AI-native tooling baked in from day one, rather than retrofit legacy ERP. With 5+ design-partner-grade customers physically committed to Indian soil, this is a 24-month window before legacy stacks lock in.</p>
+    </div>
+
+    <div class="g2" style="gap:1rem">
+      <div class="p-card p-prose p-tone-violet">
+        <div class="p-badge">TL;DR</div>
+        <div class="p-head">
+          <p class="p-kicker">The thesis</p>
+          <h3 class="p-title">Vertical AI workflow <em>for fabs &amp; OSATs</em></h3>
+        </div>
+        <div class="p-content">
+          <p class="lede">Not a Manufacturing Execution System (MES) — a workflow product that sits above MES (whichever they pick) and below ERP, specifically for chemical, gas, and photoresist procurement plus supplier qualification. ACV $100–250k starter, $500k–1M expansion, $1–2M full platform with data licensing.</p>
+          <h4>The greenfield advantage</h4>
+          <p>Western fabs run 25-year-old SAP and Oracle with thousands of custom ABAP modules layered with MES from Applied SmartFactory or Camstar. Every new feature has to clear 6–18 months of integration and change-control. Tata Electronics signed PSMC tech transfer in 2024, started civil construction in 2025, and has not yet picked an enterprise stack — the procurement-and-traceability layer is open for native solution rather than retrofit.</p>
+          <h4>Product wedge</h4>
+          <p><strong>"Supplier Qualification &amp; Specialty-Material Traceability Copilot."</strong> Three pillars: (1) agentic supplier qualification compressing 6–18 months of audit/sample/yield to 3–6 months. (2) PCN intake automation (JEDEC 90-day rule) — every PCN parsed, classified, routed by LLM. (3) Lot-level traceability from supplier shipment → fab WIP → wafer-level yield, joining incoming inspection to yield outcomes.</p>
+          <h4>Competitive landscape</h4>
+          <p>Resilinc (Gartner Leader, agentic launched May 2025) — US-centric supplier graph, weak on Indian Tier-2/3, $250k+ ACV priced for global enterprise. Critical Manufacturing (ASMPT-acquired) — pure MES, no AI risk layer. Applied SmartFactory — closed AMAT ecosystem, opaque pricing. The white space: India-domiciled, AI-native, semi-specific layer above MES below ERP.</p>
+        </div>
+      </div>
+
+      <div class="p-card p-tone-violet">
+        <div class="p-badge">ECONOMICS</div>
+        <div class="p-head">
+          <p class="p-kicker">Customer + ACV</p>
+          <h3 class="p-title">5 logos = <em>$4–6M</em> ARR</h3>
+        </div>
+        <div class="p-content">
+          <div class="mini-row">
+            <div class="mini"><div class="mini-k">Buyers</div><div class="mini-v">2 committee</div><div class="mini-d">Head of Supply Chain (COO) + VP Manufacturing/Fab Ops</div></div>
+            <div class="mini"><div class="mini-k">Sales cycle</div><div class="mini-v">9–12 mo</div><div class="mini-d">First contract; 4–6 mo after marquee logo</div></div>
+            <div class="mini"><div class="mini-k">Year 1 ACV</div><div class="mini-v">$150–250k</div><div class="mini-d">First module — supplier qualification + PCN</div></div>
+            <div class="mini"><div class="mini-k">Year 3 expansion</div><div class="mini-v">$500k–1M</div><div class="mini-d">Add traceability + risk module</div></div>
+            <div class="mini"><div class="mini-k">Year 5 ACV</div><div class="mini-v">$1–2M</div><div class="mini-d">Full platform + data licensing</div></div>
+            <div class="mini"><div class="mini-k">Concentration</div><div class="mini-v">~60%</div><div class="mini-d">Top-3 customers through Series A — accept-able for deep-tech</div></div>
+          </div>
+          <h4 style="font-family:var(--mono);font-size:.66rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:#c4b5fd;margin:1.2rem 0 .5rem">Indian buyer universe</h4>
+          <p style="font-size:.82rem;line-height:1.65;color:rgba(255,255,255,.75);margin:0">Tata Electronics (Dholera + Jagiroad), Micron Sanand, Kaynes Semicon, CG Power-Renesas, RIR Power Odisha, Tower Semi, HCL-Foxconn UP — ~10 viable buyers in India for next 36 months.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="g2" style="gap:1rem;margin-top:1rem">
+      <div class="p-card p-tone-violet">
+        <div class="p-badge">DATA FLYWHEEL</div>
+        <div class="p-head">
+          <p class="p-kicker">Long-term moat</p>
+          <h3 class="p-title">From <em>tenant data</em> to global product</h3>
+        </div>
+        <div class="p-content">
+          <p style="font-size:.88rem;line-height:1.7;color:rgba(255,255,255,.78);margin:0 0 1em">
+            <strong style="color:#fff">Phase 1 (M0–18):</strong> single-tenant. Each fab/OSAT keeps private data. Product must be valuable on day 1 with one customer.
+          </p>
+          <p style="font-size:.88rem;line-height:1.7;color:rgba(255,255,255,.78);margin:0 0 1em">
+            <strong style="color:#fff">Phase 2 (M18–30):</strong> federated benchmarking. "Your N2 purity excursion rate is 2.3σ worse than median" — without revealing competitors. Federated GNN architecture (academic precedent) keeps raw data on customer tenant.
+          </p>
+          <p style="font-size:.88rem;line-height:1.7;color:rgba(255,255,255,.78);margin:0">
+            <strong style="color:#fff">Phase 3 (M30–48):</strong> external data product. Anonymized real-time intelligence on India supply-chain health, sold to global chipmakers doing China+1 ($250k–1M per global subscriber). Differential privacy + contractual opt-in. <strong style="color:rgb(var(--accent-glow))">Mirror's Resilinc's "100M data sources" pitch but built bottoms-up from Indian fab transactions.</strong>
+          </p>
+        </div>
+      </div>
+
+      <div class="p-card p-tone-violet">
+        <div class="p-badge">ROADMAP · MONTHS</div>
+        <div class="p-head">
+          <p class="p-kicker">Phased execution</p>
+          <h3 class="p-title">Design partner <em>to data product</em></h3>
+        </div>
+        <div class="p-content">
+          <div class="rm">
+            <div class="rm-step s1">
+              <div class="rm-step-h"><span class="rm-month">M0–6 · Founding</span><span class="rm-target">1 design partner</span></div>
+              <div class="rm-step-body">Founding team: semi process eng + AI/ML lead + enterprise SaaS GTM. Sign 1 design partner (mid-OSAT — Kaynes or CG Power). Initial scope: PCN intake + supplier qualification.</div>
+            </div>
+            <div class="rm-step s2">
+              <div class="rm-step-h"><span class="rm-month">M6–12 · First revenue</span><span class="rm-target">$150–250k ACV</span></div>
+              <div class="rm-step-body">MVP shipped, first paying customer. Seed raise $3–5M on signed contract. Add specialty-gas/chemical traceability module.</div>
+            </div>
+            <div class="rm-step s3">
+              <div class="rm-step-h"><span class="rm-month">M12–24 · Network effect</span><span class="rm-target">$3–5M ARR</span></div>
+              <div class="rm-step-body">Land Tata or Micron as marquee logo. 5 paying customers. Federated benchmarking opt-in launches. Series A $12–20M.</div>
+            </div>
+            <div class="rm-step s4">
+              <div class="rm-step-h"><span class="rm-month">M24–48 · Data product</span><span class="rm-target">$20–30M ARR</span></div>
+              <div class="rm-step-body">External data product launches (cross-customer aggregated intel sold globally). Geographic expansion to 1 SE Asia market. Series B.</div>
+            </div>
+          </div>
+        </div>
+        <div class="p-foot">Source: Carnegie Endowment · Resilinc · Critical Manufacturing · Stack AI Series A · ORF analysis</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 AGENTIC CHIP DESIGN -->
+<section class="section section-alt" id="s4">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-label">04 — Venture 3</div>
+        <h2 class="section-title">Agentic <em>Chip Design Studio</em></h2>
+      </div>
+      <p class="section-sub">AI agents have a fundamentally different compute profile than training or batch inference — thousands of parallel small contexts, ultra-low tail latency per tool call, retrieval-heavy memory patterns. No chip on the market is purpose-built for it. India's ~50,000 senior chip-design engineers (Qualcomm, AMD, Intel, Nvidia) are world-class but mostly employees, not founders.</p>
+    </div>
+
+    <div class="g2" style="gap:1rem">
+      <div class="p-card p-prose p-tone-critical">
+        <div class="p-badge">TL;DR</div>
+        <div class="p-head">
+          <p class="p-kicker">The thesis</p>
+          <h3 class="p-title">A chip <em>fixed for agents</em>, not transformers</h3>
+        </div>
+        <div class="p-content">
+          <p class="lede">India-HQ boutique fabless. Designs chiplets at TSMC N5/N3 specifically for agentic inference (RAG, tool calls, parallel small contexts). Not a fab — pure design + tapeout. Funded ~$50M seed, ~$150M Series A. First chiplet in 30–36 months.</p>
+          <h4>The agentic compute thesis (real, increasingly load-bearing)</h4>
+          <p><strong>KV cache is now the bottleneck, not matmul.</strong> Recent research (CacheFlow, NVFP4 KV Cache, SideQuest 2026) converges: agentic inference is memory-hierarchy-bound, not matmul-bound. H100/B200 spend ~80% of die area on tensor cores — wrong target.</p>
+          <p><strong>Tool-call tail latency compounds geometrically.</strong> 30ms vs 150ms per tool call × 20-step agent = 2.4s vs 12s user experience. Anthropic and OpenAI both explicitly preserve latency in their newest models — implying it's a hard constraint they design around.</p>
+          <p><strong>Cache-hit patterns favor specialized hardware.</strong> Agentic workloads achieve 80.5% cache hit vs 66.5% on LRU — structured reuse exploitable by ASIC dataflow, the way TPU exploited matmul regularity a decade ago.</p>
+          <p><strong>SambaNova + Nvidia/Groq deal admission.</strong> Nvidia's $20B Groq aqui-hire (Dec 2025) and Groq 3 LPX inside Vera Rubin = explicit admission that GPU-only inference is incomplete.</p>
+          <h4>The chiplet wedge</h4>
+          <p>Monolithic 5nm AI accelerator: $200–400M total NRE. Single 100–150mm² chiplet at N5 reusing IP: <strong>~$25–40M NRE</strong>. Chiplets break this in two ways — smaller die = lower mask cost + higher yield + more tapeout iterations; specialization = ship one chiplet (retrieval/embedding accelerator) that slots into customer packages via UCIe. UCIe Consortium passed 120+ members in 2026; UCIe 2.0 ratified Aug 2024.</p>
+        </div>
+      </div>
+
+      <div class="p-card p-tone-critical">
+        <div class="p-badge">COMPETITIVE LANDSCAPE</div>
+        <div class="p-head">
+          <p class="p-kicker">AI accelerator startups</p>
+          <h3 class="p-title">Nobody is <em>agent-fixed</em></h3>
+        </div>
+        <div class="p-content">
+          <ul style="font-size:.78rem;line-height:1.7;color:rgba(255,255,255,.78);padding-left:0;margin:0;list-style:none">
+            <li style="margin-bottom:.6em"><strong style="color:#fff">Etched</strong> — $625M total at ~$5B. Sohu ASIC. <em style="color:#fca5a5">Transformer-fixed, not agent-fixed.</em></li>
+            <li style="margin-bottom:.6em"><strong style="color:#fff">Groq</strong> — $750M Sep 2025 at $6.9B; ~$20B Nvidia aqui-hire Dec 2025. <em style="color:#fca5a5">Adjacent — low-latency, batch-oriented.</em></li>
+            <li style="margin-bottom:.6em"><strong style="color:#fff">Cerebras</strong> — $1B Series H Feb 2026 at $23B; pre-IPO. <em style="color:#fca5a5">Training/large-batch inference.</em></li>
+            <li style="margin-bottom:.6em"><strong style="color:#fff">MatX</strong> — $500M Series B Feb 2026 (~$1B+ val). <em style="color:#fca5a5">Explicitly LLM training.</em></li>
+            <li style="margin-bottom:.6em"><strong style="color:#fff">Positron AI</strong> — $230M Series B Feb 2026. <em style="color:#fca5a5">Adjacent — efficient inference, not agent-specific.</em></li>
+            <li style="margin-bottom:.6em"><strong style="color:#fff">Tenstorrent</strong> — Bezos+Samsung; $3.2B. <em style="color:#fca5a5">Generalist anti-Nvidia.</em></li>
+            <li style="margin-bottom:.6em"><strong style="color:#fff">Lightmatter</strong> — $850M total. <em style="color:#fca5a5">Photonic interconnect layer.</em></li>
+            <li style="margin-bottom:.6em"><strong style="color:#fff">Rebellions/FuriosaAI</strong> — Korean, $400M+ rounds. <em style="color:#fca5a5">Generalist inference.</em></li>
+          </ul>
+          <p style="font-size:.85rem;line-height:1.6;color:rgb(var(--accent-glow));margin-top:1rem;font-weight:500">→ Verdict: clean white space for agent-fixed silicon.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="g3" style="gap:1rem;margin-top:1rem">
+      <div class="p-card p-tone-critical">
+        <div class="p-badge">WHY INDIA</div>
+        <div class="p-head">
+          <p class="p-kicker">Talent + cost</p>
+          <h3 class="p-title">~50k senior <em>chip designers</em></h3>
+        </div>
+        <div class="p-content">
+          <p style="font-size:.85rem;line-height:1.65;color:rgba(255,255,255,.78);margin:0 0 .8em"><strong style="color:#fff">Qualcomm Hyderabad</strong> 18,000+ engineers, largest R&amp;D outside San Diego. <strong style="color:#fff">AMD Bengaluru</strong> $400M Technostar campus, 9,000+ India total. <strong style="color:#fff">Intel</strong> ~13,000. <strong style="color:#fff">Nvidia</strong> 3,800+. Marvell, MediaTek, NXP, Broadcom, Synopsys, Cadence ~50,000 more.</p>
+          <p style="font-size:.85rem;line-height:1.65;color:rgba(255,255,255,.78);margin:0">Senior physical-design engineer Bengaluru: ₹35–60L (~$42–72K). Bay Area equivalent: $250K–400K base + RSUs. <strong style="color:rgb(var(--accent-glow))">4–6× cost arbitrage on the largest line item of an ASIC project.</strong> An 80-person team that costs $80M/yr in San Jose costs $15–18M/yr in Bengaluru.</p>
+        </div>
+      </div>
+
+      <div class="p-card p-tone-critical">
+        <div class="p-badge">FIRST PRODUCT</div>
+        <div class="p-head">
+          <p class="p-kicker">What to ship</p>
+          <h3 class="p-title">Retrieval &amp; <em>embedding</em> chiplet</h3>
+        </div>
+        <div class="p-content">
+          <p style="font-size:.85rem;line-height:1.65;color:rgba(255,255,255,.78);margin:0 0 .8em"><strong style="color:#fff">(a) Retrieval/embedding chiplet</strong> ← recommended. 80–120mm² at N5; ~$25–35M NRE. RAG and tool-augmented agent traces hit this primitive every step. Highest defensibility.</p>
+          <p style="font-size:.85rem;line-height:1.65;color:rgba(255,255,255,.78);margin:0 0 .8em"><strong style="color:#fff">(b) Inference accelerator</strong> with custom dataflow — 150–250mm² at N5, $50–80M NRE. Direct frontal vs Etched/Positron/MatX. <em style="color:#fca5a5">Don't recommend as v1.</em></p>
+          <p style="font-size:.85rem;line-height:1.65;color:rgba(255,255,255,.78);margin:0"><strong style="color:#fff">(c) MCU-class agent runtime chip</strong> at 12nm — Cortex-M + tiny NPU + secure enclave. ~$8–15M NRE, 12–18 month time-to-market. <strong style="color:rgb(var(--accent-glow))">Compelling as v0.5 demo while v1 (a) is in flight.</strong></p>
+        </div>
+      </div>
+
+      <div class="p-card p-tone-critical">
+        <div class="p-badge">CAPITAL</div>
+        <div class="p-head">
+          <p class="p-kicker">Total to first revenue</p>
+          <h3 class="p-title">~$150–200M <em>raise</em></h3>
+        </div>
+        <div class="p-content">
+          <div class="mini-row">
+            <div class="mini"><div class="mini-k">Seed (M0–18)</div><div class="mini-v">$25–40M</div><div class="mini-d">~30 engineers, RTL, micro-arch, EDA licenses</div></div>
+            <div class="mini"><div class="mini-k">Series A (M18–24)</div><div class="mini-v">$100–150M</div><div class="mini-d">N5 tapeout, 60+ engineers, customer LOIs</div></div>
+            <div class="mini"><div class="mini-k">Series B (M30–42)</div><div class="mini-v">$250–500M</div><div class="mini-d">HVM ramp + v2 chiplet at N3</div></div>
+            <div class="mini"><div class="mini-k">Capital efficiency</div><div class="mini-v">&lt;2.0×</div><div class="mini-d">$ raised / $ spent to first silicon</div></div>
+          </div>
+          <p style="font-size:.78rem;line-height:1.6;color:rgba(255,255,255,.7);margin-top:.5rem">Investors fit: Khosla, Founders Fund (pattern: Etched/Positron); Peak XV, Lightspeed India, Celesta Capital (semi-focused); Vinod Khosla personal.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="g2" style="gap:1rem;margin-top:1rem">
+      <div class="p-card p-tone-critical">
+        <div class="p-badge">ROADMAP · MONTHS</div>
+        <div class="p-head">
+          <p class="p-kicker">Phased execution</p>
+          <h3 class="p-title">From <em>thesis</em> to HVM</h3>
+        </div>
+        <div class="p-content">
+          <div class="rm">
+            <div class="rm-step s1">
+              <div class="rm-step-h"><span class="rm-month">M0–6 · Founding team</span><span class="rm-target">5–8 design partners</span></div>
+              <div class="rm-step-body">CEO + Chief Architect (US, ex-TPU/MTIA/Hopper) + VP Eng (India, ex-AMD/Qualcomm). 5–8 design-partner conversations (Anthropic, Mistral, Cohere, Krutrim, Sarvam). $5M pre-seed.</div>
+            </div>
+            <div class="rm-step s2">
+              <div class="rm-step-h"><span class="rm-month">M6–18 · Seed + v0.5</span><span class="rm-target">First silicon (12nm MCU)</span></div>
+              <div class="rm-step-body">$25–35M seed. Build Bengaluru office to ~30 engineers. Tape out v0.5 MCU at 12nm (~$8M NRE). RTL freeze on chiplet. First customer LOIs.</div>
+            </div>
+            <div class="rm-step s3">
+              <div class="rm-step-h"><span class="rm-month">M18–30 · Series A + tapeout</span><span class="rm-target">N5 tapeout</span></div>
+              <div class="rm-step-body">$100–150M Series A. Tapeout v1 chiplet at TSMC N5 (~$30M). Hire to ~80 engineers. Bring-up boards. CES/Hot Chips demos.</div>
+            </div>
+            <div class="rm-step s4">
+              <div class="rm-step-h"><span class="rm-month">M30–48 · HVM + Series B</span><span class="rm-target">$250–500M raise</span></div>
+              <div class="rm-step-body">First silicon back. Post-silicon validation. Reference design with UCIe-attached general accelerator. Royalty deals with hyperscalers. Begin v2 at N3.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card p-tone-critical">
+        <div class="p-badge">RISKS</div>
+        <div class="p-head">
+          <p class="p-kicker">What can kill it</p>
+          <h3 class="p-title">Thesis collapse, <em>TSMC capacity</em></h3>
+        </div>
+        <div class="p-content">
+          <ul style="font-size:.82rem;line-height:1.65;color:rgba(255,255,255,.75);padding-left:1.1rem;margin:0">
+            <li style="margin-bottom:.6em"><strong style="color:#fff">Thesis collapses into Nvidia's roadmap.</strong> Blackwell Ultra + Rubin add specialized inference; Groq 3 LPX = the "low-latency companion die" thesis being absorbed. <em style="color:#fca5a5">Mitigation:</em> go narrower — UCIe chiplet that <em>attaches to</em> Nvidia/AMD packages, sold as complement not replacement.</li>
+            <li style="margin-bottom:.6em"><strong style="color:#fff">TSMC capacity allocation.</strong> N3/N3P slots rationed for Apple, Nvidia, AMD, Broadcom. Pre-revenue startup gets late expensive shuttles. <em style="color:#fca5a5">Mitigation:</em> start at N5 (more available, sufficient for v1); MPW shuttles for risk-reduction.</li>
+            <li style="margin-bottom:.6em"><strong style="color:#fff">Customer concentration / 2–3 yr qualification cycles.</strong> Anchor with Indian foundation-model labs (Krutrim, Sarvam, Ola) + 1 US lab.</li>
+            <li style="margin-bottom:.6em"><strong style="color:#fff">IP escape / employee-mobility risk.</strong> Engineers come from Qualcomm/AMD/Nvidia carrying NDAs. Clean-room RTL practices, IP audit at hire, hire from non-overlapping product lines.</li>
+            <li><strong style="color:#fff">Indian fab access is irrelevant for v1.</strong> Tata 28nm doesn't help a 5nm chiplet. "Made in India fab" narrative is 2030-era, not 2027.</li>
+          </ul>
+        </div>
+        <div class="p-foot">Source: Semianalysis · TechCrunch · BusinessWire · Alphawave · UCIe Consortium · arXiv 2602.22603</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 TALENT BRIDGE -->
+<section class="section" id="s5">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-label">05 — Venture 4</div>
+        <h2 class="section-title">Talent &amp; <em>Capital Bridge</em></h2>
+      </div>
+      <p class="section-sub">India houses ~125,000 chip-design engineers (~20% of global IC-design workforce). Global AI hardware startups are starving for senior RTL, verification, and physical-design talent. Lowest capital intensity of the four; fastest path to revenue. The moat is relationship density.</p>
+    </div>
+
+    <div class="g2" style="gap:1rem">
+      <div class="p-card p-prose p-tone-lead">
+        <div class="p-badge">TL;DR</div>
+        <div class="p-head">
+          <p class="p-kicker">The thesis</p>
+          <h3 class="p-title">Curated <em>talent network</em> with equity upside</h3>
+        </div>
+        <div class="p-content">
+          <p class="lede">Not a recruiting firm. A structured advisory + curated talent network: places India-based chip designers into AI-hardware startups, advises those startups on India hiring/R&amp;D setup, and accumulates equity stakes (cash retainer + 0.25–0.5% common + warrant). Cash funds OpEx; equity is asymmetric upside. Spinout into VC fund by Year 3.</p>
+          <h4>The talent pool</h4>
+          <p>~125,000 IC-design engineers, ~20% of global. Heavy concentration in MNC GCCs: Intel India ~13,000, AMD ~6,500–7,000, Qualcomm ~12,000–15,000, Nvidia ~4,000–5,000. Indian fabless = ~1,500–2,000 engineers (1.5% of pool). <strong>~15,000–20,000 with 10+ years and frontier-node experience; ~3,000–5,000 realistically poach-able.</strong> The senior layer is the scarcest slice — and the slice AI hardware startups need most.</p>
+          <h4>Why the existing market hasn't filled the gap</h4>
+          <p><strong>Korn Ferry / Heidrick</strong> charge ~33% of first-year cash with $80K minimums — economics work only for VP/CTO roles. Won't run a 6-month search for a Principal Verification Engineer at a 30-person Series-A. <strong>Indian recruitment shops</strong> have volume but no signal — keyword-indexed, not "has this person actually taped out a 5nm SoC?" <strong>US niche semi recruiters (Blue Signal, JMJ Phillip)</strong> have signal but no India footprint, no Gujarati/diaspora network. The gap is <strong>specificity × speed × dual-coast presence × peer-network credibility</strong> — none scales with recruiter headcount.</p>
+        </div>
+      </div>
+
+      <div class="p-card p-tone-lead">
+        <div class="p-badge">DEMAND SIDE</div>
+        <div class="p-head">
+          <p class="p-kicker">Hiring AI hardware</p>
+          <h3 class="p-title">~10 <em>desperate</em> startups</h3>
+        </div>
+        <div class="p-content">
+          <ul style="font-size:.78rem;line-height:1.7;color:rgba(255,255,255,.78);padding-left:0;margin:0;list-style:none">
+            <li style="margin-bottom:.5em"><strong style="color:#fff">Cerebras</strong> — IPO Apr 2026, ~708 (S-1). Bangalore office small. <em style="color:#86efac">Aggressive ramp post-IPO.</em></li>
+            <li style="margin-bottom:.5em"><strong style="color:#fff">Tenstorrent</strong> — Series D ~$2B. Bangalore: <strong style="color:#86efac">~36 employees as of Mar 2024</strong> — dramatically under-built.</li>
+            <li style="margin-bottom:.5em"><strong style="color:#fff">Groq</strong> — Nvidia license + key-talent deal Dec 2025. <em style="color:#86efac">Many ex-Groq engineers now in market.</em></li>
+            <li style="margin-bottom:.5em"><strong style="color:#fff">Etched</strong> — ~35 engineers, Sohu shipping 2025–26. <em style="color:#86efac">Desperate for verification.</em></li>
+            <li style="margin-bottom:.5em"><strong style="color:#fff">Rebellions (KR)</strong> — $400M pre-IPO Mar 2026. Plans US/ME/Asia expansion.</li>
+            <li style="margin-bottom:.5em"><strong style="color:#fff">MatX</strong> — $80M Series A 2024. ~30–40 engineers. Stealthy.</li>
+            <li style="margin-bottom:.5em"><strong style="color:#fff">Lightmatter</strong> — $850M total. ~150–200. Photonics — niche skills, severe scarcity.</li>
+            <li style="margin-bottom:.5em"><strong style="color:#fff">Rivos → Meta ($2B Oct 2025)</strong> — released hundreds of frontier engineers into market.</li>
+            <li style="margin-bottom:.5em"><strong style="color:#fff">Positron AI</strong> — $230M Series B Feb 2026. ~50–80. Atlas shipping; will scale verification/PD.</li>
+            <li><strong style="color:#fff">FuriosaAI</strong> — Series C $125M; ~130 targeting 200.</li>
+          </ul>
+          <p style="font-size:.85rem;line-height:1.6;color:rgb(var(--accent-glow));margin-top:1rem;font-weight:500">→ Almost every name on this list is US/Korea-HQ with no real India footprint, despite India having the deepest mid-senior digital design talent outside US/Taiwan.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="g2" style="gap:1rem;margin-top:1rem">
+      <div class="p-card p-tone-lead">
+        <div class="p-badge">REVENUE MODEL</div>
+        <div class="p-head">
+          <p class="p-kicker">Cash + equity</p>
+          <h3 class="p-title">Year 2 = <em>~$2.7M</em> cash run-rate</h3>
+        </div>
+        <div class="p-content">
+          <h4>Three retainer tiers</h4>
+          <p style="font-size:.85rem;line-height:1.65;color:rgba(255,255,255,.78);margin:0 0 .8em"><strong style="color:#fff">Light</strong> ($5–10k/mo, 3–6 months) — map India market, source 5–10 candidates. <strong style="color:#fff">Standard</strong> ($20–30k/mo, 6–12 months) — stand up India design center end-to-end. <strong style="color:#fff">Deep</strong> ($40k+/mo + equity, 12–24 months) — fractional Head of India.</p>
+          <h4>Year 2 cash bottoms-up</h4>
+          <ul style="font-size:.82rem;line-height:1.7;color:rgba(255,255,255,.75);padding-left:1.1rem;margin:0 0 .8em">
+            <li>8 Light × $7.5k × 4 mo = $240k</li>
+            <li>4 Standard × $25k × 9 mo = $900k</li>
+            <li>1 Deep × $50k × 12 mo = $600k</li>
+            <li>25 placements × $40k = $1.0M</li>
+            <li><strong style="color:#fff">Cash run-rate ~$2.7M Year 2</strong></li>
+          </ul>
+          <h4>Equity layer (the long game)</h4>
+          <p style="font-size:.85rem;line-height:1.65;color:rgba(255,255,255,.78);margin:0">Per advisory: 0.10–0.25% common, 2-yr vest. Per Hub-build: 0.25–0.50% + warrant for $50–100k cash investment at next round. Per syndicated angel: pro-rata into SPV, ~10–15 investments/yr by Y2–3. <strong style="color:rgb(var(--accent-glow))">If 2 of 25 hit 10x and 5 hit 3x, MOIC at Year 7 = 4–6× on $5–8M deployed.</strong></p>
+        </div>
+      </div>
+
+      <div class="p-card p-tone-lead">
+        <div class="p-badge">ROADMAP · MONTHS</div>
+        <div class="p-head">
+          <p class="p-kicker">Phased execution</p>
+          <h3 class="p-title">Network → <em>VC fund</em></h3>
+        </div>
+        <div class="p-content">
+          <div class="rm">
+            <div class="rm-step s1">
+              <div class="rm-step-h"><span class="rm-month">M0–3 · Foundation</span><span class="rm-target">2 paid retainers</span></div>
+              <div class="rm-step-body">Curate first 50 India engineers (Tier 1 movers/Tier 2 open/Tier 3 passive). Cold-outreach 20 AI-hardware startups. Long-form essay: "Why every AI chip startup needs India by 2027." Legal: US LLC + India Pvt Ltd, advisor template, MSA, equity grant.</div>
+            </div>
+            <div class="rm-step s2">
+              <div class="rm-step-h"><span class="rm-month">M3–9 · First placements</span><span class="rm-target">5–8 placements at $30–40k each</span></div>
+              <div class="rm-step-body">Convert 2 Light retainers to placements. Sign 1 Standard. Speak/sponsor at Hot Chips 2026, ISSCC, Semicon India, VLSID. Network: 100 curated engineers, 30 active founder relationships.</div>
+            </div>
+            <div class="rm-step s3">
+              <div class="rm-step-h"><span class="rm-month">M9–18 · Equity portfolio</span><span class="rm-target">3–5 angel checks</span></div>
+              <div class="rm-step-body">Equity-inclusive deals on next 5 advisory mandates (precedent set). First syndicated angel SPV checks ($50–150k). Hire partner #2 (India ops/talent). First high-profile placement becomes case study.</div>
+            </div>
+            <div class="rm-step s4">
+              <div class="rm-step-h"><span class="rm-month">M18–36 · Scale</span><span class="rm-target">100+ placements/yr</span></div>
+              <div class="rm-step-body">ARR $3–5M, gross margin &gt;60%. 10–15 advisory equity + 15–20 angel positions. Co-founder matching produces 1–2 launched India-anchored AI-silicon startups. Begin LP conversations for $20–30M Fund I.</div>
+            </div>
+          </div>
+        </div>
+        <div class="p-foot">Source: PIB / NCVET 2025 · GCC Pulse · TechCrunch · Tracxn · Sutter Hill EIR model</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 CONNECT -->
+<section class="section section-alt" id="s6">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-label">06 — Connection</div>
+        <h2 class="section-title">How they <em>connect</em></h2>
+      </div>
+      <p class="section-sub">The most interesting version isn't picking one. Ventures #1 and #4 are the lowest-capital entry points — they bootstrap relationships, credibility, access, and cash flow that make ventures #2 and #3 feasible. SemiAnalysis followed this exact pattern: newsletter first, venture fund later.</p>
+    </div>
+
+    <div class="p-card p-tone-accent">
+      <div class="p-badge">SEQUENCE</div>
+      <div class="p-head">
+        <p class="p-kicker">The compounding play</p>
+        <h3 class="p-title">Information &amp; Talent first, <em>capital-heavy</em> later</h3>
+      </div>
+      <div class="p-content">
+        <div class="flow">
+          <div class="flow-row">
+            <span class="flow-num">01</span>
+            <span class="flow-text">Start with <strong>Intelligence</strong> + <strong>Talent Bridge</strong> — both bootstrappable from advisory + retainer revenue. Combined Y1 burn under $500k.</span>
+            <span class="flow-arrow">→</span>
+          </div>
+          <div class="flow-row">
+            <span class="flow-num">02</span>
+            <span class="flow-text">These build <strong>relationships, credibility, access, and cash flow</strong>. By M12 you know every fab GM in Sanand, every senior chip designer in Bengaluru, every founder of every AI hardware startup, and every PE/VC partner with India semi exposure.</span>
+            <span class="flow-arrow">→</span>
+          </div>
+          <div class="flow-row">
+            <span class="flow-num">03</span>
+            <span class="flow-text">Use that to raise capital and launch <strong>Supply Chain OS</strong>. The intelligence layer tells you exactly which fabs are picking enterprise stacks; the talent network gives you the senior engineers to build it.</span>
+            <span class="flow-arrow">→</span>
+          </div>
+          <div class="flow-row">
+            <span class="flow-num">04</span>
+            <span class="flow-text">Supply Chain OS's data layer reveals <strong>exactly which workloads are bottlenecked</strong> in agentic inference deployments — informing the architectural bets for the <strong>Chip Design Studio</strong>. Talent Bridge supplies the founding team. Intelligence layer pre-sells the first chiplets.</span>
+            <span class="flow-arrow">→</span>
+          </div>
+        </div>
+        <p style="font-size:.92rem;line-height:1.7;color:rgba(255,255,255,.85);margin-top:1.5rem;font-style:italic;border-top:1px solid rgba(255,255,255,.08);padding-top:1.25rem">
+          The <strong style="color:#fff;font-style:normal">SemiAnalysis parallel</strong> here is exact — Dylan Patel started with a Substack (information, low capital) and is now raising a venture fund (capital deployment). The intelligence layer always precedes the investment/build layer because <strong style="color:rgb(var(--accent-glow));font-style:normal">it's what tells you where to build</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div class="g2" style="gap:1rem;margin-top:1.5rem">
+      <div class="p-card p-tone-lead">
+        <div class="p-badge">YEAR 1</div>
+        <div class="p-head">
+          <p class="p-kicker">Lowest-capital starters</p>
+          <h3 class="p-title">Run #1 + #4 <em>in parallel</em></h3>
+          <p class="p-body">Both ventures share customer types (founders + funds) and travel patterns (Bangalore/Hyderabad/Sanand/SF). Combined burn ~$300–500k Year 1. Can be founded by 1 person + 1–2 analysts/operators.</p>
+        </div>
+      </div>
+      <div class="p-card p-tone-violet">
+        <div class="p-badge">YEAR 2–3</div>
+        <div class="p-head">
+          <p class="p-kicker">Capital deployment</p>
+          <h3 class="p-title">Spin out #2 <em>then #3</em></h3>
+          <p class="p-body">Supply Chain OS as separately-funded vertical SaaS (seed $3–5M). Chip Design Studio as separately-funded boutique fabless (seed $25–40M). Both inherit credibility, customers, and team from the first two ventures — making both raises easier.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>India Semicon 2.0 · Venture Concepts &amp; Roadmaps · April 2026</div>
+    <div style="display:flex;gap:1.25rem;align-items:center">
+      <span class="footer-update"><span class="dot"></span>Updated April 20</span>
+      <a href="index.html">← Main dashboard</a>
+      <a href="supply-chain.html">Supply chain &amp; bottlenecks</a>
+      <a href="https://github.com/KhushalM/india-semicon-2">Source ↗</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Card glow follows mouse
+document.querySelectorAll('.p-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  });
+});
+
+// Hero parallax
+const heroBg = document.getElementById('heroBg');
+if (heroBg) {
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    heroBg.style.transform = `translateY(${y * 0.3}px) scale(${1 + y * 0.0002})`;
+  }, { passive: true });
+}
+
+// Progress bar
+const progressBar = document.getElementById('progressBar');
+if (progressBar) {
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight);
+    progressBar.style.width = (scrolled * 100) + '%';
+  }, { passive: true });
+}
+
+// Scroll-spy
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+window.addEventListener('scroll', () => {
+  let current = sections[0]?.id;
+  sections.forEach(s => {
+    if (window.scrollY + 90 >= s.offsetTop) current = s.id;
+  });
+  navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
+}, { passive: true });
+
+// Reveal on scroll
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('v'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.p-card').forEach(el => { el.classList.add('reveal'); io.observe(el); });
+
+// Search (in-page find)
+const searchBtn = document.getElementById('searchBtn');
+searchBtn?.addEventListener('click', () => {
+  const q = prompt('Search this page (e.g. "RISC-V", "ASML", "TSMC")');
+  if (!q) return;
+  const needle = q.trim().toLowerCase();
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  let node;
+  while ((node = walker.nextNode())) {
+    if (node.nodeValue.toLowerCase().includes(needle)) {
+      const el = node.parentElement;
+      el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (el) {
+        const prev = el.style.background;
+        el.style.background = 'rgba(250,204,21,.22)';
+        setTimeout(() => { el.style.background = prev; }, 2000);
+      }
+      return;
+    }
+  }
+  alert('No match for "' + q + '"');
+});
+window.addEventListener('keydown', (e) => {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+    e.preventDefault();
+    searchBtn?.click();
+  }
+});
+</script>
+</body>
+</html>

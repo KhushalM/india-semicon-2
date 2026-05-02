@@ -242,21 +242,49 @@ document.addEventListener('DOMContentLoaded', async function() {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
   </div>
+
+  <div class="sc-card" style="margin-top:1.25rem">
+    <div>
+      <div class="sc-card-kicker">New · Venture concepts · Roadmaps</div>
+      <h2 class="sc-card-title">Where to <em>build</em>, given everything above</h2>
+      <p class="sc-card-body">Four distinct venture concepts that fall out of the supply-chain analysis: a SemiAnalysis-style India Chip Intelligence platform, a vertical-AI Supply Chain OS for fabs, an Agentic Chip Design Studio leveraging India's design-engineer talent pool, and a Talent &amp; Capital Bridge connecting Indian engineers to global AI hardware startups. Each comes with phased month-by-month roadmaps, capital requirements, and risk maps. The two lowest-capital plays bootstrap the higher-capital ones.</p>
+      <div class="sc-card-meta">
+        <span>4 venture concepts <strong>· researched in parallel</strong></span>
+        <span>Capital range <strong>· $300k → $500M</strong></span>
+        <span>Roadmaps <strong>· in months not years</strong></span>
+      </div>
+    </div>
+    <a class="sc-card-cta" href="opportunities.html">
+      Open opportunities
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
 </section>
 
 <script>
-  // Inject "Supply Chain" link into the React nav once it renders.
+  // Inject "Supply Chain" + "Opportunities" links into the React nav once it renders.
   // Uses MutationObserver to catch the moment .nav-links appears.
   (function(){
     const injectNavLink = () => {
       const navLinks = document.querySelector('.nav-links');
       if (!navLinks) return false;
-      if (navLinks.querySelector('.sc-nav-link')) return true; // already injected
-      const a = document.createElement('a');
-      a.className = 'nav-link sc-nav-link';
-      a.href = 'supply-chain.html';
-      a.textContent = 'Supply Chain';
-      navLinks.appendChild(a);
+      const haveSC = navLinks.querySelector('.sc-nav-link');
+      const haveOpp = navLinks.querySelector('.opp-nav-link');
+      if (haveSC && haveOpp) return true;
+      if (!haveSC) {
+        const a = document.createElement('a');
+        a.className = 'nav-link sc-nav-link';
+        a.href = 'supply-chain.html';
+        a.textContent = 'Supply Chain';
+        navLinks.appendChild(a);
+      }
+      if (!haveOpp) {
+        const b = document.createElement('a');
+        b.className = 'nav-link sc-nav-link opp-nav-link';
+        b.href = 'opportunities.html';
+        b.textContent = 'Opportunities';
+        navLinks.appendChild(b);
+      }
       return true;
     };
     // Try immediately

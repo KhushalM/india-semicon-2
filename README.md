@@ -6,6 +6,7 @@ Interactive research dashboard on India's semiconductor ecosystem, the $120B bui
 
 - **Main dashboard:** https://khushalm.github.io/india-semicon-2/
 - **Supply chain + bottleneck analysis:** https://khushalm.github.io/india-semicon-2/supply-chain.html
+- **Venture concepts + roadmaps:** https://khushalm.github.io/india-semicon-2/opportunities.html
 
 ## What's inside
 
